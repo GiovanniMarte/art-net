@@ -20,7 +20,7 @@ const SignIn = () => {
       <Stack align={'center'} spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
         <Stack align={'center'}>
           <Heading fontSize={'4xl'}>Iniciar sesión </Heading>
-          <Text fontSize={'lg'} color={'gray.600'} align={'center'}>
+          <Text fontSize={'lg'} color={'gray.500'} align={'center'}>
             Introduce tu dirección de correo electrónico y contraseña para acceder a tu cuenta
           </Text>
         </Stack>
@@ -59,7 +59,7 @@ const SignIn = () => {
                 Iniciar sesión
               </Button>
               <Stack>
-                <Text fontSize={'md'} color={'gray.600'} align={'center'}>
+                <Text fontSize={'md'} color={'gray.500'} align={'center'}>
                   No tienes cuenta?{' '}
                   <Link as={RouterLink} to="/signup" color={'blue.400'}>
                     Registrate!

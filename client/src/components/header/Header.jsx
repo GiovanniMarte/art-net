@@ -17,6 +17,7 @@ import {
   Stack,
 } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
+import { ColorModeSwitcher } from '../theme-toggle/ThemeToggle';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 
 const Header = () => {
@@ -27,6 +28,7 @@ const Header = () => {
       <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
         <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
           <IconButton
+            mr={3}
             size={'md'}
             icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
             aria-label={'Open Menu'}
@@ -61,6 +63,7 @@ const Header = () => {
             >
               Registrarse
             </Button>
+            <ColorModeSwitcher />
           </Stack>
           {/* <Flex alignItems={'center'}>
             <Menu>

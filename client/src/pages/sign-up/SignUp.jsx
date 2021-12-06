@@ -28,7 +28,7 @@ const SignUp = () => {
           <Heading fontSize={'4xl'} textAlign={'center'}>
             Registrarse
           </Heading>
-          <Text fontSize={'lg'} color={'gray.600'}>
+          <Text fontSize={'lg'} color={'gray.500'}>
             Forma parte de nuestra gran comunidad de arte!
           </Text>
         </Stack>
@@ -75,7 +75,7 @@ const SignUp = () => {
               </Button>
             </Stack>
             <Stack pt={6}>
-              <Text fontSize={'md'} color={'gray.600'} align={'center'}>
+              <Text fontSize={'md'} color={'gray.500'} align={'center'}>
                 Ya tienes cuenta?{' '}
                 <Link as={RouterLink} to="/signin" color={'blue.400'}>
                   Inicia sesión
