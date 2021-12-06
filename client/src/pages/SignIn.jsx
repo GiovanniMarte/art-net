@@ -13,8 +13,34 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
+import { auth } from '../firebase/firebase';
+import { useState } from 'react';
+
+const INITIAL_STATE = {
+  email: '',
+  password: '',
+};
 
 const SignIn = () => {
+  const [{ email, password }, setUserCredentials] = useState(INITIAL_STATE);
+
+  const handleSubmit = async event => {
+    event.preventDefault();
+    try {
+      await auth.signInWithEmailAndPassword(email, password);
+      clearCredentials();
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
+  const handleChange = event => {
+    const { name, value } = event.target;
+    setUserCredentials(currentCredentials => ({ ...currentCredentials, [name]: value }));
+  };
+
+  const clearCredentials = () => setUserCredentials({ ...INITIAL_STATE });
+
   return (
     <Flex align={'center'} justify={'center'}>
       <Stack align={'center'} spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
@@ -31,14 +57,14 @@ const SignIn = () => {
           boxShadow={'lg'}
           p={8}
         >
-          <Stack spacing={4}>
+          <Stack as={'form'} onSubmit={handleSubmit} spacing={4}>
             <FormControl id="email" isRequired>
               <FormLabel>Correo electrónico</FormLabel>
-              <Input type="email" />
+              <Input name="email" value={email} onChange={handleChange} type="email" />
             </FormControl>
             <FormControl id="password" isRequired>
               <FormLabel>Contraseña</FormLabel>
-              <Input type="password" />
+              <Input name="password" value={password} onChange={handleChange} type="password" />
             </FormControl>
             <Stack spacing={10}>
               <Stack
@@ -49,6 +75,7 @@ const SignIn = () => {
                 <Checkbox>Recordarme</Checkbox>
               </Stack>
               <Button
+                type={'submit'}
                 size="lg"
                 bg={'blue.400'}
                 color={'white'}

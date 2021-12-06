@@ -16,9 +16,35 @@ import {
 import { useState } from 'react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { Link as RouterLink } from 'react-router-dom';
+import { auth, createUserDocument } from '../firebase/firebase';
+
+const INITIAL_STATE = {
+  displayName: '',
+  email: '',
+  password: '',
+};
 
 const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [{ displayName, email, password }, setUserCredentials] = useState(INITIAL_STATE);
+
+  const handleSubmit = async event => {
+    event.preventDefault();
+    try {
+      const { user } = await auth.createUserWithEmailAndPassword(email, password);
+      createUserDocument(user, { displayName });
+      clearCredentials();
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
+  const handleChange = event => {
+    const { name, value } = event.target;
+    setUserCredentials(currentCredentials => ({ ...currentCredentials, [name]: value }));
+  };
+
+  const clearCredentials = () => setUserCredentials({ ...INITIAL_STATE });
 
   return (
     <Flex align={'center'} justify={'center'}>
@@ -38,19 +64,24 @@ const SignUp = () => {
           boxShadow={'lg'}
           p={8}
         >
-          <Stack spacing={4}>
-            <FormControl id="firstName" isRequired>
+          <Stack as={'form'} onSubmit={handleSubmit} spacing={4}>
+            <FormControl id="displayName" isRequired>
               <FormLabel>Nombre</FormLabel>
-              <Input type="text" />
+              <Input name="displayName" value={displayName} onChange={handleChange} type="text" />
             </FormControl>
             <FormControl id="email" isRequired>
               <FormLabel>Correo electrónico</FormLabel>
-              <Input type="email" />
+              <Input name="email" value={email} onChange={handleChange} type="email" />
             </FormControl>
             <FormControl id="password" isRequired>
               <FormLabel>Contraseña</FormLabel>
               <InputGroup>
-                <Input type={showPassword ? 'text' : 'password'} />
+                <Input
+                  name="password"
+                  value={password}
+                  onChange={handleChange}
+                  type={showPassword ? 'text' : 'password'}
+                />
                 <InputRightElement h={'full'}>
                   <Button
                     variant={'ghost'}
@@ -63,6 +94,7 @@ const SignUp = () => {
             </FormControl>
             <Stack spacing={10} pt={2}>
               <Button
+                type={'submit'}
                 size="lg"
                 bg={'blue.400'}
                 color={'white'}
