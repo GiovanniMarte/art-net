@@ -16,7 +16,7 @@ import { Link as RouterLink } from 'react-router-dom';
 
 const SignIn = () => {
   return (
-    <Flex align={'center'} justify={'center'} bg={useColorModeValue('gray.50', 'gray.800')}>
+    <Flex align={'center'} justify={'center'}>
       <Stack align={'center'} spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
         <Stack align={'center'}>
           <Heading fontSize={'4xl'}>Iniciar sesión </Heading>

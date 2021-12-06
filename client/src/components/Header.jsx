@@ -17,7 +17,7 @@ import {
   Stack,
 } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
-import { ColorModeSwitcher } from '../theme-toggle/ThemeToggle';
+import { ColorModeSwitcher } from './ThemeToggle';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 
 const Header = () => {
