@@ -1,9 +1,9 @@
 import './App.css';
 import { BrowserRouter as Router, Route, Routes, Redirect } from 'react-router-dom';
-import Header from './components/header/Header';
-import Homepage from './pages/homepage/Homepage';
-import SignIn from './pages/sign-in/SignIn';
-import SignUp from './pages/sign-up/SignUp';
+import Header from './components/Header';
+import Homepage from './pages/Homepage';
+import SignIn from './pages/SignIn';
+import SignUp from './pages/SignUp';
 
 function App() {
   return (
