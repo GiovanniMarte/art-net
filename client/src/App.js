@@ -4,10 +4,12 @@ import Header from './components/Header';
 import Homepage from './pages/Homepage';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
+import Upload from './pages/Upload';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { auth, createUserDocument } from './firebase/firebase';
 import { setCurrentUser } from './redux/user/userActions';
+import { Box } from '@chakra-ui/react';
 
 function App() {
   const currentUser = useSelector(state => state.user.currentUser);
@@ -30,17 +32,20 @@ function App() {
   return (
     <Router>
       <Header />
-      <Switch>
-        <Route exact path="/" component={Homepage} />
-        <Route
-          exact
-          path="/signin"
-          render={() => (currentUser ? <Redirect to="/" /> : <SignIn />)}
-        />
-        <Route exact path="/signup">
-          {currentUser ? <Redirect to="/" /> : <SignUp />}
-        </Route>
-      </Switch>
+      <Box margin={18}>
+        <Switch>
+          <Route exact path="/" component={Homepage} />
+          <Route path="/upload" render={() => (currentUser ? <Upload /> : <Redirect to="/" />)} />
+          <Route
+            exact
+            path="/signin"
+            render={() => (currentUser ? <Redirect to="/" /> : <SignIn />)}
+          />
+          <Route exact path="/signup">
+            {currentUser ? <Redirect to="/" /> : <SignUp />}
+          </Route>
+        </Switch>
+      </Box>
     </Router>
   );
 }

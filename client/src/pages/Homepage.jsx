@@ -3,7 +3,7 @@ import Artwork from '../components/Artwork';
 
 const Homepage = () => {
   return (
-    <Box margin={18}>
+    <Box>
       <Artwork />
     </Box>
   );

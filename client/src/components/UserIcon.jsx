@@ -9,8 +9,12 @@ import {
   MenuDivider,
 } from '@chakra-ui/react';
 import { auth } from '../firebase/firebase';
+import { Link as RouterLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const UserIcon = () => {
+  const { id } = useSelector(({ user }) => user.currentUser);
+
   return (
     <Flex alignItems={'center'}>
       <Menu>
@@ -23,9 +27,15 @@ const UserIcon = () => {
           />
         </MenuButton>
         <MenuList>
-          <MenuItem>Mi Galería</MenuItem>
-          <MenuItem>Chats</MenuItem>
-          <MenuItem>Configuración</MenuItem>
+          <MenuItem as={RouterLink} to={`/galery/${id}`}>
+            Mi Galería
+          </MenuItem>
+          <MenuItem as={RouterLink} to={`/chats/${id}`}>
+            Chats
+          </MenuItem>
+          <MenuItem as={RouterLink} to={`/config/${id}`}>
+            Configuración
+          </MenuItem>
           <MenuDivider />
           <MenuItem onClick={() => auth.signOut()}>Cerrar sesión</MenuItem>
         </MenuList>

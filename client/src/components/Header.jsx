@@ -1,20 +1,22 @@
 import {
   Heading,
+  Button,
   Box,
   Flex,
   HStack,
   IconButton,
-  Link,
   useDisclosure,
   useColorModeValue,
   Stack,
 } from '@chakra-ui/react';
-import { Link as RouterLink } from 'react-router-dom';
 import { ColorModeSwitcher } from './ThemeToggle';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
+import { FiUpload } from 'react-icons/fi';
 import { useSelector } from 'react-redux';
 import AuthButtons from './AuthButtons';
 import UserIcon from './UserIcon';
+import NavLink from './NavLink';
+import { Link as RouterLink } from 'react-router-dom';
 
 const Header = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -37,12 +39,31 @@ const Header = () => {
               Artic
             </Heading>
             <HStack as={'nav'} spacing={4} display={{ base: 'none', md: 'flex' }}>
-              {Links.map(link => (
-                <NavLink key={link}>{link}</NavLink>
-              ))}
+              <NavLink route="/">Principal</NavLink>
+              <NavLink route="/communities">Comunidades</NavLink>
+              <NavLink route="/shop">Tienda</NavLink>
             </HStack>
           </HStack>
           <Stack flex={{ base: 1, md: 0 }} justify={'flex-end'} direction={'row'} spacing={5}>
+            {currentUser ? (
+              <Button
+                as={RouterLink}
+                to="/upload"
+                display={{ base: 'none', md: 'inline-flex' }}
+                fontSize={'sm'}
+                fontWeight={600}
+                color={'white'}
+                bg={'pink.400'}
+                _hover={{
+                  bg: 'pink.300',
+                }}
+              >
+                <Box mr={1}>
+                  <FiUpload />
+                </Box>
+                Subir
+              </Button>
+            ) : null}
             {currentUser ? <UserIcon /> : <AuthButtons />}
             <ColorModeSwitcher />
           </Stack>
@@ -51,9 +72,9 @@ const Header = () => {
         {isOpen ? (
           <Box pb={4} display={{ md: 'none' }}>
             <Stack as={'nav'} spacing={4}>
-              {Links.map(link => (
-                <NavLink key={link}>{link}</NavLink>
-              ))}
+              <NavLink route="/">Principal</NavLink>
+              <NavLink route="/communities">Comunidades</NavLink>
+              <NavLink route="/shop">Tienda</NavLink>
             </Stack>
           </Box>
         ) : null}
@@ -61,23 +82,5 @@ const Header = () => {
     </>
   );
 };
-
-const Links = ['Principal', 'Comunidades', 'Tienda'];
-
-const NavLink = ({ children }) => (
-  <Link
-    as={RouterLink}
-    px={2}
-    py={1}
-    rounded={'md'}
-    _hover={{
-      textDecoration: 'none',
-      bg: useColorModeValue('gray.200', 'gray.700'),
-    }}
-    to="/"
-  >
-    {children}
-  </Link>
-);
 
 export default Header;
