@@ -6,7 +6,7 @@ import UploadForm from '../components/UploadForm';
 const Upload = () => {
   return (
     <Flex align="center" direction="column" height="80vh">
-      <Stack mb={10} align={'center'}>
+      <Stack m={2} align={'center'}>
         <Heading fontSize={'4xl'} textAlign={'center'}>
           Crear nueva obra
         </Heading>

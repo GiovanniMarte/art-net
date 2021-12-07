@@ -47,9 +47,9 @@ const Header = () => {
           <Stack flex={{ base: 1, md: 0 }} justify={'flex-end'} direction={'row'} spacing={5}>
             {currentUser ? (
               <Button
+                leftIcon={<FiUpload />}
                 as={RouterLink}
                 to="/upload"
-                display={{ base: 'none', md: 'inline-flex' }}
                 fontSize={'sm'}
                 fontWeight={600}
                 color={'white'}
@@ -58,9 +58,6 @@ const Header = () => {
                   bg: 'pink.300',
                 }}
               >
-                <Box mr={1}>
-                  <FiUpload />
-                </Box>
                 Subir
               </Button>
             ) : null}

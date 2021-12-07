@@ -1,6 +1,7 @@
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore';
 import 'firebase/compat/auth';
+import 'firebase/compat/storage';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyCHQQ7nQRW6Cse-UOvf9H90EiDKXOfqoEQ',
@@ -19,6 +20,8 @@ export default firebase;
 export const auth = firebase.auth();
 
 export const firestore = firebase.firestore();
+
+export const storage = firebase.storage();
 
 const provider = new firebase.auth.GoogleAuthProvider();
 export const signInWithGoogle = () => auth.signInWithPopup(provider);
@@ -45,4 +48,9 @@ export const createUserDocument = async (user, additionalData = {}) => {
   }
 
   return userRef;
+};
+
+export const uploadImage = async image => {
+  const fileRef = storage.ref(`artworks/${image.name}`);
+  fileRef.put(image);
 };
