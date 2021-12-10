@@ -9,23 +9,20 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 
-const Artwork = () => {
-  const property = {
-    imageUrl: 'https://bit.ly/2Z4KKcF',
-    imageAlt: 'Rear view of modern home with pool',
-    beds: 3,
-    baths: 2,
-    title: 'Modern home',
-    formattedPrice: '$1,900.00',
-    reviewCount: 34,
-    rating: 4,
-  };
-
+const Artwork = ({ artwork, currentUser }) => {
   return (
     <Box boxShadow={'md'} maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden">
-      <Image src={property.imageUrl} alt={property.imageAlt} />
-
-      <Box p="6">
+      <Box m={2}>
+        <Image
+          rounded="lg"
+          w={400}
+          h={250}
+          objectFit="cover"
+          src={artwork.imageUrl}
+          alt="image preview"
+        />
+      </Box>
+      <Box mx={4} my={3}>
         <Box mb={2} display="flex" alignItems="baseline">
           <Badge mr={2} borderRadius="full" px="2" colorScheme="teal">
             3D
@@ -35,13 +32,13 @@ const Artwork = () => {
           </Badge>
         </Box>
         <Heading color={useColorModeValue('gray.700', 'white')} fontSize={'xl'} fontFamily={'body'}>
-          Modern home
+          {artwork.title}
         </Heading>
         <Stack mt={3} direction={'row'} spacing={4} align={'center'}>
           <Avatar src={'https://avatars0.githubusercontent.com/u/1164541?v=4'} alt={'Author'} />
           <Stack direction={'column'} spacing={0} fontSize={'sm'}>
-            <Text fontWeight={600}>Achim Rolle</Text>
-            <Text color={'gray.500'}>Feb 08, 2021</Text>
+            <Text fontWeight={600}>{artwork.author || currentUser.displayName}</Text>
+            <Text color={'gray.500'}>{artwork.createdAt || 'Feb 08, 2021'}</Text>
           </Stack>
         </Stack>
       </Box>

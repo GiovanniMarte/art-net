@@ -5,6 +5,7 @@ import Homepage from './pages/Homepage';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import Upload from './pages/Upload';
+import PrivateRoute from './components/PrivateRoute';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { auth, createUserDocument } from './firebase/firebase';
@@ -35,7 +36,9 @@ function App() {
       <Box margin={18}>
         <Switch>
           <Route exact path="/" component={Homepage} />
-          <Route path="/upload" render={() => (currentUser ? <Upload /> : <Redirect to="/" />)} />
+          <PrivateRoute isAuthenticated={currentUser ? true : false} path="/upload">
+            <Upload />
+          </PrivateRoute>
           <Route
             exact
             path="/signin"

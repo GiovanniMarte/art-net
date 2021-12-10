@@ -9,18 +9,41 @@ import {
   Input,
   Stack,
   Button,
-  Progress,
+  Text,
   Textarea,
   useColorModeValue,
 } from '@chakra-ui/react';
 import { useState } from 'react';
 import { FiUpload } from 'react-icons/fi';
+import { storage, createArtworkDocument } from '../firebase/firebase';
+import { useSelector, useDispatch } from 'react-redux';
+import { setImageUrl, setTitle, setDescription } from '../redux/artwork/artworkActions';
 
 const UploadForm = () => {
   const [image, setImage] = useState(null);
+  const [selectedImage, setSelectedImage] = useState('No se ha seleccionado ninguna imagen');
+
+  const artwork = useSelector(state => state.artwork);
+  const currentUser = useSelector(state => state.user.currentUser);
+  const dispatch = useDispatch();
 
   const handleChange = event => {
+    if (!event.target.files[0]) return;
     setImage(event.target.files[0]);
+    setSelectedImage(event.target.files[0].name);
+    dispatch(setImageUrl(URL.createObjectURL(event.target.files[0])));
+  };
+
+  const handleSubmit = async event => {
+    event.preventDefault();
+    const fileRef = storage.ref(`artworks/${image.name}`);
+    try {
+      await fileRef.put(image);
+      const imageUrl = await fileRef.getDownloadURL();
+      createArtworkDocument({ ...artwork, imageUrl }, currentUser.displayName);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -33,14 +56,24 @@ const UploadForm = () => {
           boxShadow={'lg'}
           p={8}
         >
-          <Stack spacing={3} as={'form'}>
+          <Stack onSubmit={handleSubmit} spacing={3} as={'form'}>
             <FormControl id="title" isRequired>
               <FormLabel>Título</FormLabel>
-              <Input name="title" type="text" />
+              <Input
+                value={artwork.title}
+                onChange={event => dispatch(setTitle(event.target.value))}
+                name="title"
+                type="text"
+              />
             </FormControl>
             <FormControl id="description" isRequired>
               <FormLabel>Descripción</FormLabel>
-              <Textarea name="description" placeholder="Introduce la descripción de la obra" />
+              <Textarea
+                value={artwork.description}
+                onChange={event => dispatch(setDescription(event.target.value))}
+                name="description"
+                placeholder="Introduce la descripción de la obra"
+              />
             </FormControl>
             <FormControl id="visibility" isRequired>
               <FormLabel as="legend">Visibilidad</FormLabel>
@@ -53,14 +86,14 @@ const UploadForm = () => {
             </FormControl>
             <Stack>
               <Button leftIcon={<FiUpload />} cursor="pointer" as="label">
-                <input type="file" onChange={handleChange} />
+                <input required type="file" onChange={handleChange} />
                 Elegir imagen
               </Button>
-              <Progress size="xs" value={0} />
+              <Text>{selectedImage}</Text>
             </Stack>
             <Stack pt={2}>
               <Button
-                type={'submit'}
+                type="submit"
                 size="lg"
                 bg={'blue.400'}
                 color={'white'}

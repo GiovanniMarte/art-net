@@ -50,7 +50,20 @@ export const createUserDocument = async (user, additionalData = {}) => {
   return userRef;
 };
 
-export const uploadImage = async image => {
-  const fileRef = storage.ref(`artworks/${image.name}`);
-  fileRef.put(image);
+export const createArtworkDocument = async (artwork, author) => {
+  const newArtwork = {
+    ...artwork,
+    author,
+    createdAt: new Date(),
+    isPushed: false,
+    score: 0,
+    views: 0,
+  };
+  try {
+    await firestore.collection('artworks').add(newArtwork);
+    console.log('Documento creado!');
+  } catch (error) {
+    console.error(error.message);
+  }
+  return artwork;
 };
