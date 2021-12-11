@@ -44,13 +44,20 @@ const Header = () => {
               <NavLink route="/shop">Tienda</NavLink>
             </HStack>
           </HStack>
-          <Stack flex={{ base: 1, md: 0 }} justify={'flex-end'} direction={'row'} spacing={5}>
+          <Stack
+            flex={{ base: 1, md: 0 }}
+            justify="flex-end"
+            align="center"
+            direction="row"
+            spacing={5}
+          >
             {currentUser ? (
               <Button
                 leftIcon={<FiUpload />}
                 as={RouterLink}
                 to="/upload"
-                fontSize={'sm'}
+                size="sm"
+                fontSize="sm"
                 fontWeight={600}
                 color={'white'}
                 bg={'pink.400'}
@@ -68,7 +75,7 @@ const Header = () => {
 
         {isOpen ? (
           <Box pb={4} display={{ md: 'none' }}>
-            <Stack as={'nav'} spacing={4}>
+            <Stack textAlign="center" as="nav" spacing={4}>
               <NavLink route="/">Principal</NavLink>
               <NavLink route="/communities">Comunidades</NavLink>
               <NavLink route="/shop">Tienda</NavLink>

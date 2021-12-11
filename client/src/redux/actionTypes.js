@@ -9,5 +9,8 @@ export const CHANGE_VISIBILITY = 'CHANGE_VISIBILITY';
 // Artworks actions
 export const SET_ARTWORKS = 'SET_ARTWORKS';
 
+// Communities actions
+export const SET_COMMUNITIES = 'SET_COMMUNITIES';
+
 //User actions
 export const SET_CURRENT_USER = 'SET_CURRENT_USER';

@@ -12,12 +12,17 @@ import {
 const Artwork = ({ artwork, currentUser }) => {
   return (
     <Box
+      bg={useColorModeValue('white', 'gray.900')}
       className="card"
       boxShadow="lg"
       maxW="sm"
       borderWidth="1px"
       borderRadius="lg"
       overflow="hidden"
+      _hover={{
+        transform: 'translateY(-5px)',
+        boxShadow: 'xl',
+      }}
     >
       <Box m={2}>
         <Image
