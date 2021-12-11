@@ -35,7 +35,7 @@ const Artwork = ({ artwork, currentUser }) => {
           {artwork.title}
         </Heading>
         <Stack mt={3} direction={'row'} spacing={4} align={'center'}>
-          <Avatar src={'https://avatars0.githubusercontent.com/u/1164541?v=4'} alt={'Author'} />
+          <Avatar src={currentUser.profileImage || null} alt={'Author'} />
           <Stack direction={'column'} spacing={0} fontSize={'sm'}>
             <Text fontWeight={600}>{artwork.author || currentUser.displayName}</Text>
             <Text color={'gray.500'}>{'Feb 08, 2021'}</Text>

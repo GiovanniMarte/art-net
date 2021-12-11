@@ -20,6 +20,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setImageUrl, setTitle, setDescription } from '../redux/artwork/artworkActions';
 
 const UploadForm = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const [image, setImage] = useState(null);
   const [selectedImage, setSelectedImage] = useState('No se ha seleccionado ninguna imagen');
 
@@ -36,6 +37,7 @@ const UploadForm = () => {
 
   const handleSubmit = async event => {
     event.preventDefault();
+    setIsLoading(true);
     const fileRef = storage.ref(`artworks/${image.name}`);
     try {
       await fileRef.put(image);
@@ -44,6 +46,7 @@ const UploadForm = () => {
     } catch (error) {
       console.error(error);
     }
+    setIsLoading(false);
   };
 
   return (
@@ -93,6 +96,7 @@ const UploadForm = () => {
             </Stack>
             <Stack pt={2}>
               <Button
+                {...(isLoading ? { isLoading } : null)}
                 type="submit"
                 size="lg"
                 bg={'blue.400'}

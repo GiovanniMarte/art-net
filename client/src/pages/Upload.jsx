@@ -9,7 +9,7 @@ const Upload = () => {
   const currentUser = useSelector(state => state.user.currentUser);
 
   return (
-    <Flex align="center" direction="column" height="80vh">
+    <Flex align="center" justify="center" direction="column">
       <Stack m={2} align={'center'}>
         <Heading fontSize={'4xl'} textAlign={'center'}>
           Crear nueva obra

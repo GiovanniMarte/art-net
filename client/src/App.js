@@ -1,7 +1,9 @@
 import './App.css';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import Header from './components/Header';
+import Footer from './components/Footer';
 import Homepage from './pages/Homepage';
+import Communities from './pages/Communities';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import Upload from './pages/Upload';
@@ -33,10 +35,11 @@ function App() {
   return (
     <Router>
       <Header />
-      <Box margin={18}>
+      <Box flex={1} margin={18}>
         <Switch>
           <Route exact path="/" component={Homepage} />
-          <PrivateRoute isAuthenticated={currentUser ? true : false} path="/upload">
+          <Route exact path="/communities" component={Communities} />
+          <PrivateRoute exact isAuthenticated={currentUser ? true : false} path="/upload">
             <Upload />
           </PrivateRoute>
           <Route
@@ -50,6 +53,7 @@ function App() {
           <Redirect to="/" />
         </Switch>
       </Box>
+      <Footer />
     </Router>
   );
 }
