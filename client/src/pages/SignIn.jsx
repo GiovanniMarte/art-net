@@ -9,12 +9,14 @@ import {
   Link,
   Button,
   Heading,
+  Center,
   Text,
   useColorModeValue,
 } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
 import { auth } from '../firebase/firebase';
 import { useState } from 'react';
+import { FcGoogle } from 'react-icons/fc';
 
 const INITIAL_STATE = {
   email: '',
@@ -66,14 +68,14 @@ const SignIn = () => {
               <FormLabel>Contraseña</FormLabel>
               <Input name="password" value={password} onChange={handleChange} type="password" />
             </FormControl>
-            <Stack spacing={10}>
-              <Stack
-                direction={{ base: 'column', sm: 'row' }}
-                align={'start'}
-                justify={'space-between'}
-              >
-                <Checkbox>Recordarme</Checkbox>
-              </Stack>
+            <Stack
+              direction={{ base: 'column', sm: 'row' }}
+              align={'start'}
+              justify={'space-between'}
+            >
+              <Checkbox>Recordarme</Checkbox>
+            </Stack>
+            <Stack spacing={5}>
               <Button
                 type={'submit'}
                 size="lg"
@@ -85,14 +87,19 @@ const SignIn = () => {
               >
                 Iniciar sesión
               </Button>
-              <Stack>
-                <Text fontSize={'md'} color={'gray.500'} align={'center'}>
-                  No tienes cuenta?{' '}
-                  <Link as={RouterLink} to="/signup" color={'blue.400'}>
-                    Registrate!
-                  </Link>
-                </Text>
-              </Stack>
+              <Button w={'full'} maxW={'md'} variant={'outline'} leftIcon={<FcGoogle />}>
+                <Center>
+                  <Text>Iniciar sesión con Google</Text>
+                </Center>
+              </Button>
+            </Stack>
+            <Stack pt={5}>
+              <Text fontSize={'md'} color={'gray.500'} align={'center'}>
+                No tienes cuenta?
+                <Link as={RouterLink} to="/signup" color={'blue.400'}>
+                  Registrate!
+                </Link>
+              </Text>
             </Stack>
           </Stack>
         </Box>

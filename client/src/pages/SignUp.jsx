@@ -105,7 +105,7 @@ const SignUp = () => {
                 Registrarse
               </Button>
             </Stack>
-            <Stack pt={6}>
+            <Stack pt={5}>
               <Text fontSize={'md'} color={'gray.500'} align={'center'}>
                 Ya tienes cuenta?{' '}
                 <Link as={RouterLink} to="/signin" color={'blue.400'}>

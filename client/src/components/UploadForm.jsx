@@ -59,7 +59,7 @@ const UploadForm = () => {
           boxShadow={'lg'}
           p={8}
         >
-          <Stack onSubmit={handleSubmit} spacing={3} as={'form'}>
+          <Stack onSubmit={handleSubmit} spacing={4} as={'form'}>
             <FormControl id="title" isRequired>
               <FormLabel>Título</FormLabel>
               <Input

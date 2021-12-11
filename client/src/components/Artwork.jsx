@@ -11,7 +11,14 @@ import {
 
 const Artwork = ({ artwork, currentUser }) => {
   return (
-    <Box boxShadow={'md'} maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden">
+    <Box
+      className="card"
+      boxShadow="lg"
+      maxW="sm"
+      borderWidth="1px"
+      borderRadius="lg"
+      overflow="hidden"
+    >
       <Box m={2}>
         <Image
           rounded="lg"
