@@ -47,6 +47,7 @@ function App() {
           <Route exact path="/signup">
             {currentUser ? <Redirect to="/" /> : <SignUp />}
           </Route>
+          <Redirect to="/" />
         </Switch>
       </Box>
     </Router>

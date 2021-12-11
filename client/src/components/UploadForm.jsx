@@ -86,7 +86,7 @@ const UploadForm = () => {
             </FormControl>
             <Stack>
               <Button leftIcon={<FiUpload />} cursor="pointer" as="label">
-                <input required type="file" onChange={handleChange} />
+                <Input type="file" onChange={handleChange} isRequired />
                 Elegir imagen
               </Button>
               <Text>{selectedImage}</Text>
