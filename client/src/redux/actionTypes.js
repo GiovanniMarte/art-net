@@ -7,8 +7,7 @@ export const SET_DESCRIPTION = 'SET_DESCRIPTION';
 export const CHANGE_VISIBILITY = 'CHANGE_VISIBILITY';
 
 // Artworks actions
-export const ADD_ARTWORK = 'ADD_ARTWORK';
-export const REMOVE_ARTWORK = 'REMOVE_ARTWORK';
+export const SET_ARTWORKS = 'SET_ARTWORKS';
 
 //User actions
 export const SET_CURRENT_USER = 'SET_CURRENT_USER';

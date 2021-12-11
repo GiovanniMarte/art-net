@@ -6,15 +6,10 @@ const INITIAL_STATE = {
 
 const artworksReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case actions.ADD_ARTWORK:
+    case actions.SET_ARTWORKS:
       return {
         ...state,
-        list: [...state.list, action.payload],
-      };
-    case actions.REMOVE_ARTWORK:
-      return {
-        ...state,
-        list: state.list.filter(artwork => artwork !== action.payload),
+        list: action.payload,
       };
     default:
       return state;
