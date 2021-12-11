@@ -1,4 +1,4 @@
-import * as actions from './artworkActionTypes';
+import * as actions from '../actionTypes';
 
 export const setImageUrl = imageUrl => ({
   type: actions.SET_IMAGE_URL,

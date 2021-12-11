@@ -1,4 +1,4 @@
-import * as actions from './artworkActionTypes';
+import * as actions from '../actionTypes';
 
 const INITIAL_STATE = {
   imageUrl: 'https://picsum.photos/id/212/800/533',

@@ -14,7 +14,7 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
-import { auth } from '../firebase/firebase';
+import { auth, signInWithGoogle } from '../firebase/firebase';
 import { useState } from 'react';
 import { FcGoogle } from 'react-icons/fc';
 
@@ -87,7 +87,13 @@ const SignIn = () => {
               >
                 Iniciar sesión
               </Button>
-              <Button w={'full'} maxW={'md'} variant={'outline'} leftIcon={<FcGoogle />}>
+              <Button
+                onClick={signInWithGoogle}
+                w={'full'}
+                maxW={'md'}
+                variant={'outline'}
+                leftIcon={<FcGoogle />}
+              >
                 <Center>
                   <Text>Iniciar sesión con Google</Text>
                 </Center>
@@ -95,7 +101,7 @@ const SignIn = () => {
             </Stack>
             <Stack pt={5}>
               <Text fontSize={'md'} color={'gray.500'} align={'center'}>
-                No tienes cuenta?
+                No tienes cuenta?{' '}
                 <Link as={RouterLink} to="/signup" color={'blue.400'}>
                   Registrate!
                 </Link>

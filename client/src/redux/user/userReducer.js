@@ -1,7 +1,8 @@
-import * as actions from './userActionTypes';
+import * as actions from '../actionTypes';
 
 const INITIAL_STATE = {
   currentUser: null,
+  error: null,
 };
 
 const userReducer = (state = INITIAL_STATE, action) => {
