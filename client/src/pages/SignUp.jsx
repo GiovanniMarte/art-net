@@ -7,7 +7,6 @@ import {
   InputGroup,
   InputRightElement,
   Stack,
-  Button,
   Heading,
   Text,
   useColorModeValue,
@@ -17,6 +16,7 @@ import { useState } from 'react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { Link as RouterLink } from 'react-router-dom';
 import { auth, createUserDocument } from '../firebase/firebase';
+import Button from '../components/Button';
 
 const INITIAL_STATE = {
   displayName: '',
@@ -93,17 +93,7 @@ const SignUp = () => {
               </InputGroup>
             </FormControl>
             <Stack spacing={10} pt={2}>
-              <Button
-                type={'submit'}
-                size="lg"
-                bg={'blue.400'}
-                color={'white'}
-                _hover={{
-                  bg: 'blue.500',
-                }}
-              >
-                Registrarse
-              </Button>
+              <Button type={'submit'}>Registrarse</Button>
             </Stack>
             <Stack pt={5}>
               <Text fontSize={'md'} color={'gray.500'} align={'center'}>

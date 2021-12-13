@@ -7,7 +7,7 @@ import {
   Checkbox,
   Stack,
   Link,
-  Button,
+  Button as ChakraButton,
   Heading,
   Center,
   Text,
@@ -17,6 +17,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import { auth, signInWithGoogle } from '../firebase/firebase';
 import { useState } from 'react';
 import { FcGoogle } from 'react-icons/fc';
+import Button from '../components/Button';
 
 const INITIAL_STATE = {
   email: '',
@@ -76,28 +77,17 @@ const SignIn = () => {
               <Checkbox>Recordarme</Checkbox>
             </Stack>
             <Stack spacing={5}>
-              <Button
-                type={'submit'}
-                size="lg"
-                bg={'blue.400'}
-                color={'white'}
-                _hover={{
-                  bg: 'blue.500',
-                }}
-              >
-                Iniciar sesión
-              </Button>
-              <Button
+              <Button type={'submit'}>Iniciar sesión</Button>
+              <ChakraButton
                 onClick={signInWithGoogle}
                 w={'full'}
-                maxW={'md'}
                 variant={'outline'}
                 leftIcon={<FcGoogle />}
               >
                 <Center>
                   <Text>Iniciar sesión con Google</Text>
                 </Center>
-              </Button>
+              </ChakraButton>
             </Stack>
             <Stack pt={5}>
               <Text fontSize={'md'} color={'gray.500'} align={'center'}>

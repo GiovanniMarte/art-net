@@ -5,6 +5,7 @@ export const REMOVE_COMMUNITY = 'REMOVE_COMMUNITY';
 export const SET_TITLE = 'SET_TITLE';
 export const SET_DESCRIPTION = 'SET_DESCRIPTION';
 export const CHANGE_VISIBILITY = 'CHANGE_VISIBILITY';
+export const SUBMIT_ARTWORK = 'SUBMIT_ARTWORK';
 
 // Artworks actions
 export const SET_ARTWORKS = 'SET_ARTWORKS';

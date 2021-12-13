@@ -29,3 +29,7 @@ export const changeVisibility = isVisible => ({
   type: actions.CHANGE_VISIBILITY,
   payload: isVisible,
 });
+
+export const submitArtwork = () => ({
+  type: actions.SUBMIT_ARTWORK,
+});

@@ -1,4 +1,5 @@
-import { Heading, Box, Image, Text, Stack, Button, useColorModeValue } from '@chakra-ui/react';
+import { Heading, Box, Image, Text, Stack, useColorModeValue } from '@chakra-ui/react';
+import Button from './Button';
 
 const Community = ({ community }) => {
   return (
@@ -37,16 +38,7 @@ const Community = ({ community }) => {
             </Text>
           </Stack>
         </Stack>
-        <Button
-          w={'full'}
-          mt={8}
-          size="lg"
-          bg={'blue.400'}
-          color={'white'}
-          _hover={{
-            bg: 'blue.500',
-          }}
-        >
+        <Button w={'full'} mt={8}>
           Seguir
         </Button>
       </Box>

@@ -8,30 +8,22 @@ import {
   FormLabel,
   Input,
   Stack,
-  Button,
-  Text,
   Textarea,
-  Checkbox,
   useColorModeValue,
 } from '@chakra-ui/react';
 import { useState, useEffect } from 'react';
-import { FiUpload } from 'react-icons/fi';
 import { storage, createArtworkDocument } from '../firebase/firebase';
 import { useSelector, useDispatch } from 'react-redux';
 import { firestore } from '../firebase/firebase';
-import {
-  setImageUrl,
-  setTitle,
-  setDescription,
-  addCommunity,
-  removeCommunity,
-} from '../redux/artwork/artworkActions';
+import { setTitle, setDescription, submitArtwork } from '../redux/artwork/artworkActions';
 import { setCommunities } from '../redux/communities/communitiesActions';
+import CheckboxGroup from './CheckboxGroup';
+import ImagePicker from './ImagePicker';
+import Button from './Button';
 
 const UploadForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [image, setImage] = useState(null);
-  const [selectedImage, setSelectedImage] = useState('No se ha seleccionado ninguna imagen');
 
   const artwork = useSelector(state => state.artwork);
   const currentUser = useSelector(state => state.user.currentUser);
@@ -48,13 +40,6 @@ const UploadForm = () => {
     return () => unsubscribe();
   }, [dispatch, communities]);
 
-  const handleChange = event => {
-    if (!event.target.files[0]) return;
-    setImage(event.target.files[0]);
-    setSelectedImage(event.target.files[0].name);
-    dispatch(setImageUrl(URL.createObjectURL(event.target.files[0])));
-  };
-
   const handleSubmit = async event => {
     event.preventDefault();
     setIsLoading(true);
@@ -62,21 +47,12 @@ const UploadForm = () => {
     try {
       await fileRef.put(image);
       const imageUrl = await fileRef.getDownloadURL();
-      createArtworkDocument({ ...artwork, imageUrl }, currentUser.displayName);
+      await createArtworkDocument({ ...artwork, imageUrl }, currentUser.displayName);
     } catch (error) {
       console.error(error);
-    }
-    setIsLoading(false);
-  };
-
-  const handleCheckboxChange = event => {
-    const { checked, value } = event.target;
-    const { id, name, badgeColor } = communities.find(community => community.id === value);
-    const communityPreview = { id, name, badgeColor };
-    if (checked) {
-      dispatch(addCommunity(communityPreview));
-    } else {
-      dispatch(removeCommunity(communityPreview));
+    } finally {
+      dispatch(submitArtwork());
+      setIsLoading(false);
     }
   };
 
@@ -97,7 +73,6 @@ const UploadForm = () => {
                 value={artwork.title}
                 onChange={event => dispatch(setTitle(event.target.value))}
                 name="title"
-                type="text"
                 placeholder="Introduce el título de la obra"
               />
             </FormControl>
@@ -119,40 +94,10 @@ const UploadForm = () => {
                 </HStack>
               </RadioGroup>
             </FormControl>
-            <FormControl id="visibility" isRequired>
-              <FormLabel as="legend">Comunidades</FormLabel>
-              {communities.map(community => (
-                <Checkbox
-                  onChange={handleCheckboxChange}
-                  value={community.id}
-                  mr={3}
-                  key={community.id}
-                  isChecked={artwork.communities.some(
-                    communityPrev => communityPrev.id === community.id
-                  )}
-                >
-                  {community.name}
-                </Checkbox>
-              ))}
-            </FormControl>
-            <Stack>
-              <Button leftIcon={<FiUpload />} cursor="pointer" as="label">
-                <Input type="file" onChange={handleChange} isRequired />
-                Elegir imagen
-              </Button>
-              <Text>{selectedImage}</Text>
-            </Stack>
+            <CheckboxGroup />
+            <ImagePicker setImage={setImage} />
             <Stack pt={2}>
-              <Button
-                {...(isLoading ? { isLoading } : null)}
-                type="submit"
-                size="lg"
-                bg={'blue.400'}
-                color={'white'}
-                _hover={{
-                  bg: 'blue.500',
-                }}
-              >
+              <Button {...(isLoading ? { isLoading } : null)} type="submit">
                 Subir
               </Button>
             </Stack>

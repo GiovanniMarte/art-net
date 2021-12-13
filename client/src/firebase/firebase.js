@@ -62,7 +62,6 @@ export const createArtworkDocument = async (artwork, author) => {
   };
   try {
     await firestore.collection('artworks').add(newArtwork);
-    console.log('Documento creado!');
   } catch (error) {
     console.error(error.message);
   }
