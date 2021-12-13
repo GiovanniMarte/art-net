@@ -26,7 +26,7 @@ export const storage = firebase.storage();
 const provider = new firebase.auth.GoogleAuthProvider();
 export const signInWithGoogle = () => auth.signInWithPopup(provider);
 
-export const createUserDocument = async user => {
+export const createUserDocument = async (user, additionalData = {}) => {
   const userRef = firestore.doc(`/users/${user.uid}`);
   const userSnapshot = await userRef.get();
 
@@ -42,6 +42,7 @@ export const createUserDocument = async user => {
       displayName,
       email,
       createdAt,
+      ...additionalData,
     });
   } catch (err) {
     console.error(err.message);
@@ -67,3 +68,19 @@ export const createArtworkDocument = async (artwork, author) => {
   }
   return artwork;
 };
+
+// const addCommunity = async () => {
+//   const newCommunity = {
+//     name: 'Manga',
+//     description: 'Muestra tus obras relacionadas con el manga/anime.',
+//     banner: '',
+//     artworks: 0,
+//     followers: 0,
+//   };
+//   try {
+//     await firestore.collection('communities').add(newCommunity);
+//     console.log('Comunidad creada!');
+//   } catch (error) {
+//     console.error(error.message);
+//   }
+// };

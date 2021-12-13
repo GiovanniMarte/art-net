@@ -23,7 +23,7 @@ const artworkReducer = (state = INITIAL_STATE, action) => {
     case actions.REMOVE_COMMUNITY:
       return {
         ...state,
-        communities: state.communities.filter(community => community !== action.payload),
+        communities: state.communities.filter(community => community.id !== action.payload.id),
       };
     case actions.SET_TITLE:
       return {

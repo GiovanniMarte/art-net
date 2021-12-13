@@ -18,7 +18,7 @@ const Community = ({ community }) => {
           <Heading fontSize={'2xl'} fontWeight={500} fontFamily={'body'}>
             {community.name}
           </Heading>
-          <Text align="center" color={'gray.500'}>
+          <Text align="center" color={'gray.500'} noOfLines={2}>
             {community.description}
           </Text>
         </Stack>

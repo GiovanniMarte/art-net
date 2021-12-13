@@ -36,12 +36,11 @@ const Artwork = ({ artwork, currentUser }) => {
       </Box>
       <Box mx={4} my={3}>
         <Box mb={2} display="flex" alignItems="baseline">
-          <Badge mr={2} borderRadius="full" px="2" colorScheme="teal">
-            3D
-          </Badge>
-          <Badge borderRadius="full" px="2" colorScheme="red">
-            Photorealistic
-          </Badge>
+          {artwork.communities.map((community, index) => (
+            <Badge key={index} mr={2} borderRadius="full" px="2" colorScheme={community.badgeColor}>
+              {community.name}
+            </Badge>
+          ))}
         </Box>
         <Heading color={useColorModeValue('gray.700', 'white')} fontSize={'xl'} fontFamily={'body'}>
           {artwork.title}
