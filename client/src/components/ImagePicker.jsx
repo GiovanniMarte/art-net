@@ -6,7 +6,6 @@ import { setImageUrl } from '../redux/artwork/artworkActions';
 
 const ImagePicker = ({ setImage }) => {
   const [selectedImage, setSelectedImage] = useState('No se ha seleccionado ninguna imagen');
-
   const dispatch = useDispatch();
 
   const handleChange = event => {
@@ -15,6 +14,7 @@ const ImagePicker = ({ setImage }) => {
     setSelectedImage(event.target.files[0].name);
     dispatch(setImageUrl(URL.createObjectURL(event.target.files[0])));
   };
+
   return (
     <Stack>
       <Button leftIcon={<FiUpload />} cursor="pointer" as="label">

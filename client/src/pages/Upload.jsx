@@ -1,4 +1,4 @@
-import { Flex, HStack, Stack, Heading, Text } from '@chakra-ui/react';
+import { Flex, Stack, Heading, Text } from '@chakra-ui/react';
 
 import Artwork from '../components/Artwork';
 import UploadForm from '../components/UploadForm';
@@ -18,10 +18,13 @@ const Upload = () => {
           Introduce los datos de tu nueva obra para compartirla con los demás!
         </Text>
       </Stack>
-      <HStack>
+      <Stack
+        direction={{ sm: 'column', md: 'column', lg: 'row', xl: 'row', '2xl': 'row' }}
+        align="center"
+      >
         <UploadForm />
         <Artwork artwork={artwork} currentUser={currentUser} />
-      </HStack>
+      </Stack>
     </Flex>
   );
 };

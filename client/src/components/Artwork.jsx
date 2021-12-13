@@ -7,7 +7,9 @@ import {
   Text,
   Heading,
   useColorModeValue,
+  HStack,
 } from '@chakra-ui/react';
+import Score from './Score';
 
 const Artwork = ({ artwork, currentUser }) => {
   return (
@@ -19,8 +21,10 @@ const Artwork = ({ artwork, currentUser }) => {
       borderWidth="1px"
       borderRadius="lg"
       overflow="hidden"
+      transition="300ms"
+      cursor="pointer"
       _hover={{
-        transform: 'translateY(-5px)',
+        transform: 'translateY(-3px)',
         boxShadow: 'xl',
       }}
     >
@@ -45,13 +49,16 @@ const Artwork = ({ artwork, currentUser }) => {
         <Heading color={useColorModeValue('gray.700', 'white')} fontSize={'xl'} fontFamily={'body'}>
           {artwork.title}
         </Heading>
-        <Stack mt={3} direction={'row'} spacing={4} align={'center'}>
-          <Avatar src={currentUser.profileImage || null} alt={'Author'} />
-          <Stack direction={'column'} spacing={0} fontSize={'sm'}>
-            <Text fontWeight={600}>{artwork.author || currentUser.displayName}</Text>
-            <Text color={'gray.500'}>{'Feb 08, 2021'}</Text>
-          </Stack>
-        </Stack>
+        <HStack justify="space-between" mt={3} spacing={4} align={'center'}>
+          <HStack>
+            <Avatar src={currentUser.profileImage || null} alt={'Author'} />
+            <Stack direction={'column'} spacing={0} fontSize={'sm'}>
+              <Text fontWeight={600}>{artwork.author || currentUser.displayName}</Text>
+              <Text color={'gray.500'}>{'Feb 08, 2021'}</Text>
+            </Stack>
+          </HStack>
+          <Score />
+        </HStack>
       </Box>
     </Box>
   );

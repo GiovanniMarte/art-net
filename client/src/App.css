@@ -13,8 +13,3 @@ body {
   flex-direction: column;
   justify-content: space-between;
 }
-
-.card {
-  cursor: pointer;
-  transition: 0.4s ease;
-}

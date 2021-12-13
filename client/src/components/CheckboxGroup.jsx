@@ -7,7 +7,7 @@ const CheckboxGroup = () => {
   const communities = useSelector(state => state.communities.list);
   const dispatch = useDispatch();
 
-  const handleCheckboxChange = event => {
+  const handleChange = event => {
     const { checked, value } = event.target;
     const { id, name, badgeColor } = communities.find(community => community.id === value);
     const communityPreview = { id, name, badgeColor };
@@ -23,7 +23,7 @@ const CheckboxGroup = () => {
       <FormLabel as="legend">Comunidades</FormLabel>
       {communities.map(community => (
         <Checkbox
-          onChange={handleCheckboxChange}
+          onChange={handleChange}
           value={community.id}
           mr={3}
           key={community.id}
