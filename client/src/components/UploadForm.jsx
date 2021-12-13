@@ -13,7 +13,6 @@ import {
   Textarea,
   Checkbox,
   useColorModeValue,
-  CheckboxGroup,
 } from '@chakra-ui/react';
 import { useState, useEffect } from 'react';
 import { FiUpload } from 'react-icons/fi';
@@ -122,18 +121,19 @@ const UploadForm = () => {
             </FormControl>
             <FormControl id="visibility" isRequired>
               <FormLabel as="legend">Comunidades</FormLabel>
-              <CheckboxGroup>
-                {communities.map(community => (
-                  <Checkbox
-                    onChange={handleCheckboxChange}
-                    value={community.id}
-                    mr={3}
-                    key={community.id}
-                  >
-                    {community.name}
-                  </Checkbox>
-                ))}
-              </CheckboxGroup>
+              {communities.map(community => (
+                <Checkbox
+                  onChange={handleCheckboxChange}
+                  value={community.id}
+                  mr={3}
+                  key={community.id}
+                  isChecked={artwork.communities.some(
+                    communityPrev => communityPrev.id === community.id
+                  )}
+                >
+                  {community.name}
+                </Checkbox>
+              ))}
             </FormControl>
             <Stack>
               <Button leftIcon={<FiUpload />} cursor="pointer" as="label">
