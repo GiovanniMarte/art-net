@@ -11,7 +11,7 @@ import {
 } from '@chakra-ui/react';
 import Score from './Score';
 
-const Artwork = ({ artwork, currentUser }) => {
+const Artwork = ({ artwork, currentUser, hasScore }) => {
   return (
     <Box
       bg={useColorModeValue('white', 'gray.900')}
@@ -51,13 +51,13 @@ const Artwork = ({ artwork, currentUser }) => {
         </Heading>
         <HStack justify="space-between" mt={3} spacing={4} align={'center'}>
           <HStack>
-            <Avatar src={currentUser.profileImage || null} alt={'Author'} />
+            <Avatar src={artwork.author} alt={'Author'} />
             <Stack direction={'column'} spacing={0} fontSize={'sm'}>
               <Text fontWeight={600}>{artwork.author || currentUser.displayName}</Text>
               <Text color={'gray.500'}>{'Feb 08, 2021'}</Text>
             </Stack>
           </HStack>
-          <Score />
+          {hasScore ? <Score score={artwork.score} artworkId={artwork.id} /> : null}
         </HStack>
       </Box>
     </Box>

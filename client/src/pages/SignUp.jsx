@@ -1,6 +1,7 @@
 import {
   Flex,
   Box,
+  Button as ChakraButton,
   FormControl,
   FormLabel,
   Input,
@@ -83,12 +84,12 @@ const SignUp = () => {
                   type={showPassword ? 'text' : 'password'}
                 />
                 <InputRightElement h={'full'}>
-                  <Button
+                  <ChakraButton
                     variant={'ghost'}
                     onClick={() => setShowPassword(showPassword => !showPassword)}
                   >
                     {showPassword ? <ViewIcon /> : <ViewOffIcon />}
-                  </Button>
+                  </ChakraButton>
                 </InputRightElement>
               </InputGroup>
             </FormControl>

@@ -68,6 +68,28 @@ export const createArtworkDocument = async (artwork, author) => {
   return artwork;
 };
 
+export const upvoteArtworkDoc = async (artworkId, user) => {
+  try {
+    firestore
+      .collection('artworks')
+      .doc(artworkId)
+      .update('score', firebase.firestore.FieldValue.increment(1));
+  } catch (error) {
+    console.error(error.message);
+  }
+};
+
+export const downvoteArtworkDoc = async (artworkId, user) => {
+  try {
+    firestore
+      .collection('artworks')
+      .doc(artworkId)
+      .update('score', firebase.firestore.FieldValue.increment(-1));
+  } catch (error) {
+    console.error(error.message);
+  }
+};
+
 // const addCommunity = async () => {
 //   const newCommunity = {
 //     name: 'Manga',

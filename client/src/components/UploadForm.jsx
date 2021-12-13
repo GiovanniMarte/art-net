@@ -58,7 +58,7 @@ const UploadForm = () => {
 
   return (
     <Flex align={'center'} justify={'center'}>
-      <Stack mx={'auto'} maxW={'lg'} py={12} px={6}>
+      <Stack mx={'auto'} maxW={'lg'} py={10} px={6}>
         <Box
           minW={'md'}
           rounded={'lg'}

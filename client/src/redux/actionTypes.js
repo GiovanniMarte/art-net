@@ -9,6 +9,8 @@ export const SUBMIT_ARTWORK = 'SUBMIT_ARTWORK';
 
 // Artworks actions
 export const SET_ARTWORKS = 'SET_ARTWORKS';
+export const UPVOTE_ARTWORK = 'UPVOTE_ARTWORK';
+export const DOWNVOTE_ARTWORK = 'DOWNVOTE_ARTWORK';
 
 // Communities actions
 export const SET_COMMUNITIES = 'SET_COMMUNITIES';
