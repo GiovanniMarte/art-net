@@ -1,10 +1,17 @@
 import { Text, HStack } from '@chakra-ui/react';
 import { ChevronUpIcon, ChevronDownIcon } from '@chakra-ui/icons';
 import { upvoteArtworkDoc, downvoteArtworkDoc } from '../firebase/firebase';
+import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 const Score = ({ score, artworkId }) => {
-  const handleUpvote = () => upvoteArtworkDoc(artworkId);
-  const handleDownvote = () => downvoteArtworkDoc(artworkId);
+  const history = useHistory();
+  const currentUser = useSelector(state => state.user.currentUser);
+
+  const handleUpvote = () => (currentUser ? upvoteArtworkDoc(artworkId) : redirectSignIn());
+  const handleDownvote = () => (currentUser ? downvoteArtworkDoc(artworkId) : redirectSignIn());
+
+  const redirectSignIn = () => history.push('/signin');
 
   return (
     <HStack borderWidth="1px" borderRadius="lg">

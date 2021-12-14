@@ -4,7 +4,6 @@ const Button = ({ children, ...restProps }) => {
   return (
     <ChakraButton
       {...restProps}
-      size="lg"
       bg={'blue.400'}
       color={'white'}
       _hover={{

@@ -91,7 +91,7 @@ const UploadForm = () => {
             <CheckboxGroup />
             <ImagePicker setImage={setImage} />
             <Stack pt={2}>
-              <Button {...(isLoading ? { isLoading } : null)} type="submit">
+              <Button size="lg" {...(isLoading ? { isLoading } : null)} type="submit">
                 Subir
               </Button>
             </Stack>

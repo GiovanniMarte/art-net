@@ -68,7 +68,7 @@ export const createArtworkDocument = async (artwork, author) => {
   return artwork;
 };
 
-export const upvoteArtworkDoc = async (artworkId, user) => {
+export const upvoteArtworkDoc = async (artworkId, userId) => {
   try {
     firestore
       .collection('artworks')
@@ -79,7 +79,7 @@ export const upvoteArtworkDoc = async (artworkId, user) => {
   }
 };
 
-export const downvoteArtworkDoc = async (artworkId, user) => {
+export const downvoteArtworkDoc = async (artworkId, userId) => {
   try {
     firestore
       .collection('artworks')
@@ -90,11 +90,24 @@ export const downvoteArtworkDoc = async (artworkId, user) => {
   }
 };
 
+export const createCommentDoc = async (artworkId, userId, body) => {
+  const newComment = {
+    userId: userId,
+    body: body,
+    createdAt: new Date(),
+  };
+  try {
+    firestore.collection(`/artworks/${artworkId}/comments`).add(newComment);
+  } catch (error) {
+    console.error(error.message);
+  }
+};
+
 export const getDocumentById = async (collection, docId) => {
   const docRef = firestore.doc(`/${collection}/${docId}`);
   const docSnap = await docRef.get();
 
-  return docSnap.exists ? {...docSnap.data(), id: docSnap.id} : docRef;
+  return docSnap.exists ? { ...docSnap.data(), id: docSnap.id } : docRef;
 };
 
 // const addCommunity = async () => {

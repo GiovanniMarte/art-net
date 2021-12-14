@@ -94,7 +94,9 @@ const SignUp = () => {
               </InputGroup>
             </FormControl>
             <Stack spacing={10} pt={2}>
-              <Button type="submit">Registrarse</Button>
+              <Button size="lg" type="submit" isDisabled={!(displayName && email && password)}>
+                Registrarse
+              </Button>
             </Stack>
             <Stack pt={5}>
               <Text fontSize="md" color="gray.500" align="center">

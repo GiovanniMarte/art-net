@@ -13,7 +13,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 const UserIcon = () => {
-  const currentUser = useSelector(({ user }) => user.currentUser);
+  const currentUser = useSelector(state => state.user.currentUser);
 
   return (
     <Flex alignItems="center">

@@ -73,7 +73,9 @@ const SignIn = () => {
               <Checkbox>Recordarme</Checkbox>
             </Stack>
             <Stack spacing={5}>
-              <Button type={'submit'}>Iniciar sesión</Button>
+              <Button size="lg" type="submit" isDisabled={!(email && password)}>
+                Iniciar sesión
+              </Button>
               <ChakraButton
                 onClick={signInWithGoogle}
                 w="full"
