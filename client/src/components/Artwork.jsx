@@ -12,8 +12,12 @@ import Score from './Score';
 import { Link } from 'react-router-dom';
 import ConditionalWrapper from './ConditionalWrapper';
 import ImageFade from './ImageFade';
+import moment from 'moment';
+import 'moment/locale/es';
 
 const Artwork = ({ artwork, currentUser, hasScore, hasLink }) => {
+  moment.locale('es');
+
   return (
     <Box
       bg={useColorModeValue('white', 'gray.900')}
@@ -57,7 +61,11 @@ const Artwork = ({ artwork, currentUser, hasScore, hasLink }) => {
             <Avatar src={artwork.author} alt="Author" />
             <Stack direction="column" spacing={0} fontSize="sm">
               <Text fontWeight={600}>{artwork.author || currentUser.displayName}</Text>
-              <Text color="gray.500">{'Feb 08, 2021'}</Text>
+              <Text color="gray.500">
+                {artwork.createdAt
+                  ? moment(artwork.createdAt.toDate()).format('DD MMM YYYY')
+                  : moment(new Date()).format('DD MMM YYYY')}
+              </Text>
             </Stack>
           </HStack>
           {hasScore ? <Score score={artwork.score} artworkId={artwork.id} /> : null}

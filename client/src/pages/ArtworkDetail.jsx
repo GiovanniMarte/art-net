@@ -1,4 +1,4 @@
-import { Box, Stack, Avatar, HStack } from '@chakra-ui/react';
+import { Box, Stack, Avatar } from '@chakra-ui/react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
