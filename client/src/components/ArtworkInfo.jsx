@@ -49,23 +49,22 @@ const ArtworkInfo = ({ artwork }) => {
       >
         <Flex alignItems="center" color={useColorModeValue('gray.700', 'gray.200')}>
           <EditIcon />
-          <chakra.h1 px={2} fontSize="sm">
+          <chakra.h1 fontWeight="600" px={2} fontSize="sm">
             {artwork.score} puntos
           </chakra.h1>
         </Flex>
 
         <Flex alignItems="center" color={useColorModeValue('gray.700', 'gray.200')}>
           <ViewIcon />
-          <chakra.h1 px={2} fontSize="sm">
+          <chakra.h1 fontWeight="600" px={2} fontSize="sm">
             {artwork.views} visitas
           </chakra.h1>
         </Flex>
 
         <Flex alignItems="center" color={useColorModeValue('gray.700', 'gray.200')}>
           <CalendarIcon />
-          <chakra.h1 px={2} fontSize="sm">
-            {moment(artwork.createdAt.toDate()).format('DD/MM/YYYY')} (
-            {moment(artwork.createdAt.toDate()).fromNow()})
+          <chakra.h1 fontWeight="600" px={2} fontSize="sm">
+            {moment(artwork.createdAt.toDate()).format('DD MMM YYYY')}
           </chakra.h1>
         </Flex>
       </Stack>

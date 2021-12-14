@@ -63,8 +63,8 @@ const Artwork = ({ artwork, currentUser, hasScore, hasLink }) => {
               <Text fontWeight={600}>{artwork.author || currentUser.displayName}</Text>
               <Text color="gray.500">
                 {artwork.createdAt
-                  ? moment(artwork.createdAt.toDate()).format('DD MMM YYYY')
-                  : moment(new Date()).format('DD MMM YYYY')}
+                  ? moment(artwork.createdAt.toDate()).fromNow()
+                  : moment(new Date()).fromNow()}
               </Text>
             </Stack>
           </HStack>
