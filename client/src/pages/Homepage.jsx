@@ -10,14 +10,13 @@ const Homepage = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (artworks.length) return;
     const unsubscribe = firestore.collection('artworks').onSnapshot(snapshot => {
       const data = [];
       snapshot.forEach(doc => data.push({ ...doc.data(), id: doc.id }));
       dispatch(setArtworks(data));
     });
     return () => unsubscribe();
-  }, [dispatch, artworks]);
+  }, [dispatch]);
 
   return (
     <SimpleGrid

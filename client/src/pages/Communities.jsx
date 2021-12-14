@@ -10,14 +10,13 @@ const Communities = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (communities.length) return;
     const unsubscribe = firestore.collection('communities').onSnapshot(snapshot => {
       const data = [];
       snapshot.forEach(doc => data.push({ ...doc.data(), id: doc.id }));
       dispatch(setCommunities(data));
     });
     return () => unsubscribe();
-  }, [dispatch, communities]);
+  }, [dispatch]);
 
   return (
     <SimpleGrid

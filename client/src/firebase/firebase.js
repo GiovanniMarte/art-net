@@ -28,9 +28,9 @@ export const signInWithGoogle = () => auth.signInWithPopup(provider);
 
 export const createUserDocument = async (user, additionalData = {}) => {
   const userRef = firestore.doc(`/users/${user.uid}`);
-  const userSnapshot = await userRef.get();
+  const userSnap = await userRef.get();
 
-  if (userSnapshot.exists) return userRef;
+  if (userSnap.exists) return userRef;
 
   const { displayName, email, uid } = user;
   const createdAt = new Date();
@@ -88,6 +88,13 @@ export const downvoteArtworkDoc = async (artworkId, user) => {
   } catch (error) {
     console.error(error.message);
   }
+};
+
+export const getDocumentById = async (collection, docId) => {
+  const docRef = firestore.doc(`/${collection}/${docId}`);
+  const docSnap = await docRef.get();
+
+  return docSnap.exists ? {...docSnap.data(), id: docSnap.id} : docRef;
 };
 
 // const addCommunity = async () => {

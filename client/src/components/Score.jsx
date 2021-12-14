@@ -1,20 +1,10 @@
 import { Text, HStack } from '@chakra-ui/react';
 import { ChevronUpIcon, ChevronDownIcon } from '@chakra-ui/icons';
-import { useDispatch } from 'react-redux';
-import { upvoteArtwork, downvoteArtwork } from '../redux/artworks/artworksActions';
 import { upvoteArtworkDoc, downvoteArtworkDoc } from '../firebase/firebase';
 
 const Score = ({ score, artworkId }) => {
-  const dispatch = useDispatch();
-
-  const handleUpvote = () => {
-    upvoteArtworkDoc(artworkId);
-    dispatch(upvoteArtwork(artworkId));
-  };
-  const handleDownvote = () => {
-    downvoteArtworkDoc(artworkId);
-    dispatch(downvoteArtwork(artworkId));
-  };
+  const handleUpvote = () => upvoteArtworkDoc(artworkId);
+  const handleDownvote = () => downvoteArtworkDoc(artworkId);
 
   return (
     <HStack borderWidth="1px" borderRadius="lg">

@@ -11,20 +11,6 @@ const artworksReducer = (state = INITIAL_STATE, action) => {
         ...state,
         list: action.payload,
       };
-    case actions.UPVOTE_ARTWORK:
-      return {
-        ...state,
-        list: state.list.map(artwork =>
-          artwork.id === action.payload ? { ...artwork, score: artwork.score + 1 } : artwork
-        ),
-      };
-    case actions.DOWNVOTE_ARTWORK:
-      return {
-        ...state,
-        list: state.list.map(artwork =>
-          artwork.id === action.payload ? { ...artwork, score: artwork.score - 1 } : artwork
-        ),
-      };
     default:
       return state;
   }
