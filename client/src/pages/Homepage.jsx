@@ -22,7 +22,7 @@ const Homepage = () => {
   return (
     <SimpleGrid columns={{ sm: 1, md: 2, lg: 3, xl: 4, '2xl': 5 }} spacing={4}>
       {artworks.map(artwork => (
-        <Artwork key={artwork.id} artwork={artwork} hasScore />
+        <Artwork key={artwork.id} artwork={artwork} hasScore hasLink />
       ))}
     </SimpleGrid>
   );

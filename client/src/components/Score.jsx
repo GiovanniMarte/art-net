@@ -19,21 +19,26 @@ const Score = ({ score, artworkId }) => {
   return (
     <HStack borderWidth="1px" borderRadius="lg">
       <ChevronUpIcon
+        userSelect="none"
         onClick={handleUpvote}
         boxSize={6}
+        cursor="pointer"
+        transition="300ms"
         _hover={{
-          color: 'green.500',
+          color: 'green.400',
         }}
       />
       <Text fontSize="md" fontWeight={500}>
         {score}
       </Text>
       <ChevronDownIcon
+        userSelect="none"
         onClick={handleDownvote}
         boxSize={6}
+        cursor="pointer"
         transition="300ms"
         _hover={{
-          color: 'red.500',
+          color: 'red.400',
         }}
       />
     </HStack>

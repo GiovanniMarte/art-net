@@ -10,34 +10,40 @@ import {
   HStack,
 } from '@chakra-ui/react';
 import Score from './Score';
+import { Link } from 'react-router-dom';
+import ConditionalWrapper from './ConditionalWrapper';
 
-const Artwork = ({ artwork, currentUser, hasScore }) => {
+const Artwork = ({ artwork, currentUser, hasScore, hasLink }) => {
   return (
     <Box
       bg={useColorModeValue('white', 'gray.900')}
-      className="card"
       boxShadow="lg"
       maxW="sm"
       borderWidth="1px"
       borderRadius="lg"
       overflow="hidden"
       transition="300ms"
-      cursor="pointer"
       _hover={{
         transform: 'translateY(-3px)',
         boxShadow: 'xl',
       }}
     >
-      <Box m={2}>
-        <Image
-          rounded="lg"
-          w={400}
-          h={250}
-          objectFit="cover"
-          src={artwork.imageUrl}
-          alt="image preview"
-        />
-      </Box>
+      <ConditionalWrapper
+        condition={hasLink}
+        wrapper={children => <Link to={`/artwork/${artwork.id}`}>{children}</Link>}
+      >
+        <Box m={2}>
+          <Image
+            cursor="pointer"
+            rounded="lg"
+            w={400}
+            h={250}
+            objectFit="cover"
+            src={artwork.imageUrl}
+            alt="image preview"
+          />
+        </Box>
+      </ConditionalWrapper>
       <Box mx={4} my={3}>
         <Box mb={2} display="flex" alignItems="baseline">
           {artwork.communities.map((community, index) => (
