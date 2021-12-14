@@ -20,7 +20,11 @@ const Communities = () => {
   }, [dispatch, communities]);
 
   return (
-    <SimpleGrid columns={{ sm: 2, md: 3, lg: 4, xl: 5, '2xl': 6 }} spacing={4}>
+    <SimpleGrid
+      justifyItems="center"
+      columns={{ sm: 2, md: 3, lg: 4, xl: 5, '2xl': 6 }}
+      spacing={4}
+    >
       {communities.map(community => (
         <Community key={community.id} community={community} />
       ))}

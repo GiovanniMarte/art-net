@@ -4,6 +4,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Homepage from './pages/Homepage';
 import Communities from './pages/Communities';
+import ArtworkDetail from './pages/ArtworkDetail';
 import SignIn from './pages/SignIn';
 import SignUp from './pages/SignUp';
 import Upload from './pages/Upload';
@@ -39,6 +40,7 @@ function App() {
         <Switch>
           <Route exact path="/" component={Homepage} />
           <Route exact path="/communities" component={Communities} />
+          <Route exact path="/artwork/:artworkId" component={ArtworkDetail} />
           <PrivateRoute exact isAuthenticated={currentUser ? true : false} path="/upload">
             <Upload />
           </PrivateRoute>

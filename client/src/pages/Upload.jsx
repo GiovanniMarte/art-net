@@ -19,7 +19,7 @@ const Upload = () => {
         </Text>
       </Stack>
       <Stack
-        direction={{ sm: 'column', md: 'column', lg: 'row', xl: 'row', '2xl': 'row' }}
+        direction={{ base: 'column', md: 'column', lg: 'row', xl: 'row', '2xl': 'row' }}
         align="center"
       >
         <UploadForm />
