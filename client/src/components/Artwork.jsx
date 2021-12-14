@@ -56,15 +56,15 @@ const Artwork = ({ artwork, currentUser, hasScore, hasLink }) => {
             </Badge>
           ))}
         </Box>
-        <Heading color={useColorModeValue('gray.700', 'white')} fontSize={'xl'} fontFamily={'body'}>
+        <Heading color={useColorModeValue('gray.700', 'white')} fontSize="xl" fontFamily="body">
           {artwork.title}
         </Heading>
-        <HStack justify="space-between" mt={3} spacing={4} align={'center'}>
+        <HStack justify="space-between" mt={3} spacing={4} align="center">
           <HStack>
-            <Avatar src={artwork.author} alt={'Author'} />
-            <Stack direction={'column'} spacing={0} fontSize={'sm'}>
+            <Avatar src={artwork.author} alt="Author" />
+            <Stack direction="column" spacing={0} fontSize="sm">
               <Text fontWeight={600}>{artwork.author || currentUser.displayName}</Text>
-              <Text color={'gray.500'}>{'Feb 08, 2021'}</Text>
+              <Text color="gray.500">{'Feb 08, 2021'}</Text>
             </Stack>
           </HStack>
           {hasScore ? <Score score={artwork.score} artworkId={artwork.id} /> : null}

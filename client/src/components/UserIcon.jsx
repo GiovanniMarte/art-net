@@ -16,10 +16,10 @@ const UserIcon = () => {
   const currentUser = useSelector(({ user }) => user.currentUser);
 
   return (
-    <Flex alignItems={'center'}>
+    <Flex alignItems="center">
       <Menu>
-        <MenuButton as={Button} rounded={'full'} variant={'link'} cursor={'pointer'} minW={0}>
-          <Avatar size={'sm'} src={currentUser.profileImage || null} />
+        <MenuButton as={Button} rounded="full" variant="link" cursor="pointer" minW={0}>
+          <Avatar size="sm" src={currentUser.profileImage || null} />
         </MenuButton>
         <MenuList>
           <MenuItem as={RouterLink} to={`/galery/${currentUser.id}`}>

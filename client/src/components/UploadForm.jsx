@@ -57,10 +57,10 @@ const UploadForm = () => {
   };
 
   return (
-    <Flex align={'center'} justify={'center'}>
-      <Stack mx={'auto'} maxW={'lg'} py={10} px={6}>
-        <Box rounded={'lg'} bg={useColorModeValue('white', 'gray.700')} boxShadow={'lg'} p={8}>
-          <Stack onSubmit={handleSubmit} spacing={4} as={'form'}>
+    <Flex align="center" justify="center">
+      <Stack mx="auto" maxW="lg" py={10} px={6}>
+        <Box rounded="lg" bg={useColorModeValue('white', 'gray.700')} boxShadow="lg" p={8}>
+          <Stack onSubmit={handleSubmit} spacing={4} as="form">
             <FormControl id="title" isRequired>
               <FormLabel>Título</FormLabel>
               <Input

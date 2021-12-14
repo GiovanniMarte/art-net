@@ -25,20 +25,20 @@ const Header = () => {
   return (
     <>
       <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
-        <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
+        <Flex h={16} alignItems="center" justifyContent="space-between">
           <IconButton
             mr={3}
-            size={'md'}
+            size="md"
             icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
-            aria-label={'Open Menu'}
+            aria-label="Open Menu"
             display={{ md: 'none' }}
             onClick={isOpen ? onClose : onOpen}
           />
-          <HStack spacing={8} alignItems={'center'}>
-            <Heading as="h1" size="lg" letterSpacing={'tighter'}>
+          <HStack spacing={8} alignItems="center">
+            <Heading as="h1" size="lg" letterSpacing="tighter">
               Artic
             </Heading>
-            <HStack as={'nav'} spacing={4} display={{ base: 'none', md: 'flex' }}>
+            <HStack as="nav" spacing={4} display={{ base: 'none', md: 'flex' }}>
               <NavLink route="/">Principal</NavLink>
               <NavLink route="/communities">Comunidades</NavLink>
               <NavLink route="/shop">Tienda</NavLink>

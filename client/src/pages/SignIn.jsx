@@ -45,22 +45,22 @@ const SignIn = () => {
   const clearCredentials = () => setUserCredentials({ ...INITIAL_STATE });
 
   return (
-    <Flex align={'center'} justify={'center'}>
-      <Stack align={'center'} spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
-        <Stack align={'center'}>
-          <Heading fontSize={'4xl'}>Iniciar sesión </Heading>
-          <Text fontSize={'lg'} color={'gray.500'} align={'center'}>
+    <Flex align="center" justify="center">
+      <Stack align="center" spacing={8} mx="auto" maxW="lg" py={12} px={6}>
+        <Stack align="center">
+          <Heading fontSize="4xl">Iniciar sesión </Heading>
+          <Text fontSize="lg" color="gray.500" align="center">
             Introduce tu dirección de correo electrónico y contraseña para acceder a tu cuenta
           </Text>
         </Stack>
         <Box
-          minW={'md'}
-          rounded={'lg'}
+          minW="md"
+          rounded="lg"
           bg={useColorModeValue('white', 'gray.700')}
-          boxShadow={'lg'}
+          boxShadow="lg"
           p={8}
         >
-          <Stack as={'form'} onSubmit={handleSubmit} spacing={4}>
+          <Stack as="form" onSubmit={handleSubmit} spacing={4}>
             <FormControl id="email" isRequired>
               <FormLabel>Correo electrónico</FormLabel>
               <Input name="email" value={email} onChange={handleChange} type="email" />
@@ -69,19 +69,15 @@ const SignIn = () => {
               <FormLabel>Contraseña</FormLabel>
               <Input name="password" value={password} onChange={handleChange} type="password" />
             </FormControl>
-            <Stack
-              direction={{ base: 'column', sm: 'row' }}
-              align={'start'}
-              justify={'space-between'}
-            >
+            <Stack direction={{ base: 'column', sm: 'row' }} align="start" justify="space-between">
               <Checkbox>Recordarme</Checkbox>
             </Stack>
             <Stack spacing={5}>
               <Button type={'submit'}>Iniciar sesión</Button>
               <ChakraButton
                 onClick={signInWithGoogle}
-                w={'full'}
-                variant={'outline'}
+                w="full"
+                variant="outline"
                 leftIcon={<FcGoogle />}
               >
                 <Center>
@@ -90,9 +86,9 @@ const SignIn = () => {
               </ChakraButton>
             </Stack>
             <Stack pt={5}>
-              <Text fontSize={'md'} color={'gray.500'} align={'center'}>
+              <Text fontSize="md" color="gray.500" align="center">
                 No tienes cuenta?{' '}
-                <Link as={RouterLink} to="/signup" color={'blue.400'}>
+                <Link as={RouterLink} to="/signup" color="blue.400">
                   Registrate!
                 </Link>
               </Text>

@@ -10,11 +10,11 @@ const Upload = () => {
 
   return (
     <Flex align="center" justify="center" direction="column">
-      <Stack m={2} align={'center'}>
-        <Heading fontSize={'4xl'} textAlign={'center'}>
+      <Stack m={2} align="center">
+        <Heading fontSize="4xl" textAlign="center">
           Crear nueva obra
         </Heading>
-        <Text fontSize={'lg'} color={'gray.500'}>
+        <Text fontSize="lg" color="gray.500">
           Introduce los datos de tu nueva obra para compartirla con los demás!
         </Text>
       </Stack>

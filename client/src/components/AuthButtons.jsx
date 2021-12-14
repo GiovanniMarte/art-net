@@ -11,10 +11,10 @@ const AuthButtons = () => {
         as={RouterLink}
         to="/signup"
         display={{ base: 'none', md: 'inline-flex' }}
-        fontSize={'sm'}
+        fontSize="sm"
         fontWeight={600}
-        color={'white'}
-        bg={'pink.400'}
+        color="white"
+        bg="pink.400"
         _hover={{
           bg: 'pink.300',
         }}

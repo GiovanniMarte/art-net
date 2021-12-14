@@ -48,24 +48,24 @@ const SignUp = () => {
   const clearCredentials = () => setUserCredentials({ ...INITIAL_STATE });
 
   return (
-    <Flex align={'center'} justify={'center'}>
-      <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
-        <Stack align={'center'}>
-          <Heading fontSize={'4xl'} textAlign={'center'}>
+    <Flex align="center" justify="center">
+      <Stack spacing={8} mx="auto" maxW="lg" py={12} px={6}>
+        <Stack align="center">
+          <Heading fontSize="4xl" textAlign="center">
             Registrarse
           </Heading>
-          <Text fontSize={'lg'} color={'gray.500'}>
+          <Text fontSize="lg" color="gray.500">
             Forma parte de nuestra gran comunidad de arte!
           </Text>
         </Stack>
         <Box
-          minW={'md'}
-          rounded={'lg'}
+          minW="md"
+          rounded="lg"
           bg={useColorModeValue('white', 'gray.700')}
-          boxShadow={'lg'}
+          boxShadow="lg"
           p={8}
         >
-          <Stack as={'form'} onSubmit={handleSubmit} spacing={4}>
+          <Stack as="form" onSubmit={handleSubmit} spacing={4}>
             <FormControl id="displayName" isRequired>
               <FormLabel>Nombre</FormLabel>
               <Input name="displayName" value={displayName} onChange={handleChange} type="text" />
@@ -83,9 +83,9 @@ const SignUp = () => {
                   onChange={handleChange}
                   type={showPassword ? 'text' : 'password'}
                 />
-                <InputRightElement h={'full'}>
+                <InputRightElement h="full">
                   <ChakraButton
-                    variant={'ghost'}
+                    variant="ghost"
                     onClick={() => setShowPassword(showPassword => !showPassword)}
                   >
                     {showPassword ? <ViewIcon /> : <ViewOffIcon />}
@@ -94,12 +94,12 @@ const SignUp = () => {
               </InputGroup>
             </FormControl>
             <Stack spacing={10} pt={2}>
-              <Button type={'submit'}>Registrarse</Button>
+              <Button type="submit">Registrarse</Button>
             </Stack>
             <Stack pt={5}>
-              <Text fontSize={'md'} color={'gray.500'} align={'center'}>
+              <Text fontSize="md" color="gray.500" align="center">
                 Ya tienes cuenta?{' '}
-                <Link as={RouterLink} to="/signin" color={'blue.400'}>
+                <Link as={RouterLink} to="/signin" color="blue.400">
                   Inicia sesión
                 </Link>
               </Text>
