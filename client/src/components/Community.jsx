@@ -1,7 +1,18 @@
-import { Heading, Box, Image, Text, Stack, useColorModeValue } from '@chakra-ui/react';
+import {
+  Heading,
+  Box,
+  Image,
+  Text,
+  Stack,
+  Fade,
+  useColorModeValue,
+  useDisclosure,
+} from '@chakra-ui/react';
 import Button from './Button';
 
 const Community = ({ community }) => {
+  const { isOpen, onToggle } = useDisclosure();
+
   return (
     <Box
       bg={useColorModeValue('white', 'gray.900')}
@@ -12,7 +23,9 @@ const Community = ({ community }) => {
       rounded="md"
       overflow="hidden"
     >
-      <Image h="120px" w="full" src={community.banner} objectFit="cover" />
+      <Fade in={isOpen}>
+        <Image onLoad={onToggle} h="120px" w="full" src={community.banner} objectFit="cover" />
+      </Fade>
 
       <Box p={6}>
         <Stack spacing={0} align={'center'} mb={5}>

@@ -7,6 +7,8 @@ import {
   Text,
   Heading,
   useColorModeValue,
+  useDisclosure,
+  Fade,
   HStack,
 } from '@chakra-ui/react';
 import Score from './Score';
@@ -14,6 +16,8 @@ import { Link } from 'react-router-dom';
 import ConditionalWrapper from './ConditionalWrapper';
 
 const Artwork = ({ artwork, currentUser, hasScore, hasLink }) => {
+  const { isOpen, onToggle } = useDisclosure();
+
   return (
     <Box
       bg={useColorModeValue('white', 'gray.900')}
@@ -32,17 +36,17 @@ const Artwork = ({ artwork, currentUser, hasScore, hasLink }) => {
         condition={hasLink}
         wrapper={children => <Link to={`/artwork/${artwork.id}`}>{children}</Link>}
       >
-        <Box m={2}>
+        <Fade in={isOpen}>
           <Image
+            onLoad={onToggle}
             cursor="pointer"
-            rounded="lg"
             w={400}
             h={250}
             objectFit="cover"
             src={artwork.imageUrl}
             alt="image preview"
           />
-        </Box>
+        </Fade>
       </ConditionalWrapper>
       <Box mx={4} my={3}>
         <Box mb={2} display="flex" alignItems="baseline">
