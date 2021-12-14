@@ -1,14 +1,17 @@
 import { Box, Stack, chakra, Flex, Image, Link, useColorModeValue } from '@chakra-ui/react';
-import { ChatIcon, CalendarIcon, EditIcon } from '@chakra-ui/icons';
+import { CalendarIcon, EditIcon, ViewIcon } from '@chakra-ui/icons';
+import moment from 'moment';
+import 'moment/locale/es';
 
 const ArtworkInfo = ({ artwork }) => {
+  moment.locale('es');
+
   return (
     <Box
       width={{ base: 'full', md: 'full', lg: 'full', xl: 'md', '2xl': 'md' }}
       py={4}
       px={8}
       bg={useColorModeValue('white', 'gray.800')}
-      shadow="lg"
     >
       <Flex justifyContent={{ base: 'center', md: 'end' }} mt={-16}>
         <Image
@@ -39,7 +42,7 @@ const ArtworkInfo = ({ artwork }) => {
       </chakra.p>
 
       <Stack
-        mt={4}
+        my={4}
         spacing={5}
         align="start"
         direction={{ base: 'row', md: 'row', lg: 'row', xl: 'column', '2xl': 'column' }}
@@ -52,16 +55,17 @@ const ArtworkInfo = ({ artwork }) => {
         </Flex>
 
         <Flex alignItems="center" color={useColorModeValue('gray.700', 'gray.200')}>
-          <CalendarIcon />
+          <ViewIcon />
           <chakra.h1 px={2} fontSize="sm">
             {artwork.views} visitas
           </chakra.h1>
         </Flex>
 
         <Flex alignItems="center" color={useColorModeValue('gray.700', 'gray.200')}>
-          <ChatIcon />
+          <CalendarIcon />
           <chakra.h1 px={2} fontSize="sm">
-            {artwork.score} comentarios
+            {moment(artwork.createdAt.toDate()).format('DD/MM/YYYY')} (
+            {moment(artwork.createdAt.toDate()).fromNow()})
           </chakra.h1>
         </Flex>
       </Stack>
