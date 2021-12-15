@@ -3,10 +3,12 @@ import userReducer from './user/userReducer';
 import artworkReducer from './artwork/artworkReducer';
 import artworksReducer from './artworks/artworksReducer';
 import communitiesReducer from './communities/communitiesReducer';
+import artworkDetailReducer from './artwork-detail/artworkDetailReducer';
 
 const rootReducer = combineReducers({
   user: userReducer,
   artwork: artworkReducer,
+  artworkDetail: artworkDetailReducer,
   artworks: artworksReducer,
   communities: communitiesReducer,
 });

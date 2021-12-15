@@ -2,30 +2,34 @@ import { Box, Stack } from '@chakra-ui/react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import { setArtworks, updateArtwork } from '../redux/artworks/artworksActions';
 import ImageFade from '../components/ImageFade';
 import Comments from '../components/Comments';
 import ArtworkInfo from '../components/ArtworkInfo';
 import { firestore } from '../firebase/firebase';
+import {
+  setArtworkDetail,
+  removeArtworkDetail,
+} from '../redux/artwork-detail/artworkDetailActions';
 
 const ArtworkDetail = () => {
   const { artworkId } = useParams();
-  const artwork = useSelector(state =>
-    state.artworks.list.find(artwork => artwork.id === artworkId)
-  );
+  const { currentArtworkDetail: artwork, hasData } = useSelector(state => state.artworkDetail);
   const dispatch = useDispatch();
 
   useEffect(() => {
     const unsubscribe = firestore.doc(`/artworks/${artworkId}`).onSnapshot(snapshot => {
       const newArtwork = { ...snapshot.data(), id: snapshot.id };
-      artwork ? dispatch(updateArtwork(newArtwork)) : dispatch(setArtworks([newArtwork]));
+      dispatch(setArtworkDetail(newArtwork));
     });
-    return () => unsubscribe();
+    return () => {
+      dispatch(removeArtworkDetail());
+      unsubscribe();
+    };
   }, [dispatch, artworkId]);
 
   return (
     <Box>
-      {artwork ? (
+      {hasData ? (
         <Stack>
           <Stack
             align="center"

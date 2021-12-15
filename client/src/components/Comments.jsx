@@ -4,7 +4,7 @@ import Comment from './Comment';
 import { useEffect } from 'react';
 import { firestore } from '../firebase/firebase';
 import { useDispatch } from 'react-redux';
-import { setArtworkComments } from '../redux/artworks/artworksActions';
+import { setArtworkDetailComments } from '../redux/artwork-detail/artworkDetailActions';
 
 const Comments = ({ artwork }) => {
   const dispatch = useDispatch();
@@ -15,7 +15,7 @@ const Comments = ({ artwork }) => {
       .onSnapshot(snapshot => {
         const data = [];
         snapshot.forEach(doc => data.push({ ...doc.data(), id: doc.id }));
-        dispatch(setArtworkComments(artwork.id, data));
+        dispatch(setArtworkDetailComments(data));
       });
     return () => unsubscribe();
   }, [dispatch, artwork.id]);
