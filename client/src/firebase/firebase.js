@@ -76,20 +76,19 @@ export const updateScore = async (artworkId, userId, value) => {
       .where('artworkId', '==', artworkId)
       .get();
 
+    if (value === 0) {
+      response.docs[0].ref.delete();
+      return;
+    }
+
     if (response.empty) {
       await firestore.collection('scores').add({ artworkId, userId, value });
       return;
     }
 
-    const batch = firestore.batch();
-
     const scoreId = response.docs[0].id;
 
-    const scoreRef = firestore.collection('scores').doc(scoreId);
-
-    batch.update(scoreRef, 'value', value);
-
-    await batch.commit();
+    await firestore.collection('scores').doc(scoreId).update({ value });
   } catch (error) {
     console.error(error.message);
   }
