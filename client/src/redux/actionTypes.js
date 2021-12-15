@@ -9,9 +9,11 @@ export const SUBMIT_ARTWORK = 'SUBMIT_ARTWORK';
 
 // Artworks actions
 export const SET_ARTWORKS = 'SET_ARTWORKS';
+export const UPDATE_ARTWORK = 'UPDATE_ARTWORK';
+export const SET_ARTWORK_COMMENTS = 'SET_ARTWORK_COMMENTS';
 
 // Communities actions
 export const SET_COMMUNITIES = 'SET_COMMUNITIES';
 
-//User actions
+// User actions
 export const SET_CURRENT_USER = 'SET_CURRENT_USER';

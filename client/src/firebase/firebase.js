@@ -90,10 +90,10 @@ export const downvoteArtworkDoc = async (artworkId, userId) => {
   }
 };
 
-export const createCommentDoc = async (artworkId, userId, body) => {
+export const createCommentDoc = async (artworkId, user, body) => {
   const newComment = {
-    userId: userId,
-    body: body,
+    user,
+    body,
     createdAt: new Date(),
   };
   try {
@@ -101,13 +101,6 @@ export const createCommentDoc = async (artworkId, userId, body) => {
   } catch (error) {
     console.error(error.message);
   }
-};
-
-export const getDocumentById = async (collection, docId) => {
-  const docRef = firestore.doc(`/${collection}/${docId}`);
-  const docSnap = await docRef.get();
-
-  return docSnap.exists ? { ...docSnap.data(), id: docSnap.id } : docRef;
 };
 
 // const addCommunity = async () => {

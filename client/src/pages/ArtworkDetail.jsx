@@ -2,11 +2,11 @@ import { Box, Stack } from '@chakra-ui/react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import { setArtworks } from '../redux/artworks/artworksActions';
+import { setArtworks, updateArtwork } from '../redux/artworks/artworksActions';
 import ImageFade from '../components/ImageFade';
-import { getDocumentById } from '../firebase/firebase';
 import Comments from '../components/Comments';
 import ArtworkInfo from '../components/ArtworkInfo';
+import { firestore } from '../firebase/firebase';
 
 const ArtworkDetail = () => {
   const { artworkId } = useParams();
@@ -16,13 +16,12 @@ const ArtworkDetail = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (artwork) return;
-    const getArtwork = async () => {
-      const artwork = await getDocumentById('artworks', artworkId);
-      dispatch(setArtworks([artwork]));
-    };
-    getArtwork();
-  }, [dispatch, artworkId, artwork]);
+    const unsubscribe = firestore.doc(`/artworks/${artworkId}`).onSnapshot(snapshot => {
+      const newArtwork = { ...snapshot.data(), id: snapshot.id };
+      artwork ? dispatch(updateArtwork(newArtwork)) : dispatch(setArtworks([newArtwork]));
+    });
+    return () => unsubscribe();
+  }, [dispatch, artworkId]);
 
   return (
     <Box>

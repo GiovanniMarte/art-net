@@ -17,7 +17,7 @@ const CommentForm = ({ artworkId }) => {
       return;
     }
     try {
-      await createCommentDoc(artworkId, currentUser.id, body);
+      await createCommentDoc(artworkId, currentUser.displayName, body);
       setBody('');
     } catch (error) {
       console.error(error.message);
