@@ -4,18 +4,29 @@ import { useEffect } from 'react';
 import { firestore } from '../firebase/firebase';
 import { useSelector, useDispatch } from 'react-redux';
 import { setArtworks } from '../redux/artworks/artworksActions';
+import { setScores } from '../redux/scores/scoresActions';
 
 const Homepage = () => {
   const artworks = useSelector(state => state.artworks.list);
   const dispatch = useDispatch();
 
+  // Subscribirse a la colección de artworks y puntuación
   useEffect(() => {
-    const unsubscribe = firestore.collection('artworks').onSnapshot(snapshot => {
+    const unsubscribeArtworks = firestore.collection('artworks').onSnapshot(snapshot => {
       const data = [];
       snapshot.forEach(doc => data.push({ ...doc.data(), id: doc.id }));
       dispatch(setArtworks(data));
     });
-    return () => unsubscribe();
+
+    const unsubscribeScores = firestore.collection('scores').onSnapshot(snapshot => {
+      const data = [];
+      snapshot.forEach(doc => data.push({ ...doc.data() }));
+      dispatch(setScores(data));
+    });
+    return () => {
+      unsubscribeArtworks();
+      unsubscribeScores();
+    };
   }, [dispatch]);
 
   return (

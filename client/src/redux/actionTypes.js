@@ -22,3 +22,6 @@ export const SET_COMMUNITIES = 'SET_COMMUNITIES';
 
 // User actions
 export const SET_CURRENT_USER = 'SET_CURRENT_USER';
+
+// Scores actions
+export const SET_SCORES = 'SET_SCORES';

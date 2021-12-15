@@ -68,23 +68,28 @@ export const createArtworkDocument = async (artwork, author) => {
   return artwork;
 };
 
-export const upvoteArtworkDoc = async (artworkId, userId) => {
+export const updateScore = async (artworkId, userId, value) => {
   try {
-    firestore
-      .collection('artworks')
-      .doc(artworkId)
-      .update('score', firebase.firestore.FieldValue.increment(1));
-  } catch (error) {
-    console.error(error.message);
-  }
-};
+    const response = await firestore
+      .collection('scores')
+      .where('userId', '==', userId)
+      .where('artworkId', '==', artworkId)
+      .get();
 
-export const downvoteArtworkDoc = async (artworkId, userId) => {
-  try {
-    firestore
-      .collection('artworks')
-      .doc(artworkId)
-      .update('score', firebase.firestore.FieldValue.increment(-1));
+    if (response.empty) {
+      await firestore.collection('scores').add({ artworkId, userId, value });
+      return;
+    }
+
+    const batch = firestore.batch();
+
+    const scoreId = response.docs[0].id;
+
+    const scoreRef = firestore.collection('scores').doc(scoreId);
+
+    batch.update(scoreRef, 'value', value);
+
+    await batch.commit();
   } catch (error) {
     console.error(error.message);
   }
@@ -97,7 +102,7 @@ export const createCommentDoc = async (artworkId, user, body) => {
     createdAt: new Date(),
   };
   try {
-    firestore.collection(`/artworks/${artworkId}/comments`).add(newComment);
+    await firestore.collection(`/artworks/${artworkId}/comments`).add(newComment);
   } catch (error) {
     console.error(error.message);
   }

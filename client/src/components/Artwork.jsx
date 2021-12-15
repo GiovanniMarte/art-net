@@ -68,7 +68,7 @@ const Artwork = ({ artwork, currentUser, hasScore, hasLink }) => {
               </Text>
             </Stack>
           </HStack>
-          {hasScore ? <Score score={artwork.score} artworkId={artwork.id} /> : null}
+          {hasScore ? <Score artwork={artwork} /> : null}
         </HStack>
       </Box>
     </Box>
