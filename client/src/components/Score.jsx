@@ -46,7 +46,7 @@ const Score = ({ artwork }) => {
         boxSize={6}
         cursor="pointer"
         transition="300ms"
-        color={currentUser ? (getUserScore() === 1 ? 'green.400' : 'white') : 'white'}
+        color={currentUser ? (getUserScore() === 1 ? 'green.400' : null) : null}
         _hover={{
           color: 'green.400',
         }}
@@ -60,7 +60,7 @@ const Score = ({ artwork }) => {
         boxSize={6}
         cursor="pointer"
         transition="300ms"
-        color={currentUser ? (getUserScore() === -1 ? 'red.400' : 'white') : 'white'}
+        color={currentUser ? (getUserScore() === -1 ? 'red.400' : null) : null}
         _hover={{
           color: 'red.400',
         }}

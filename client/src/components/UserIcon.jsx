@@ -11,6 +11,7 @@ import {
 import { auth } from '../firebase/firebase';
 import { Link as RouterLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { SettingsIcon, ChatIcon, InfoIcon } from '@chakra-ui/icons';
 
 const UserIcon = () => {
   const currentUser = useSelector(state => state.user.currentUser);
@@ -22,13 +23,13 @@ const UserIcon = () => {
           <Avatar size="sm" src={currentUser.profileImage || null} />
         </MenuButton>
         <MenuList>
-          <MenuItem as={RouterLink} to={`/galery/${currentUser.id}`}>
+          <MenuItem icon={<InfoIcon />} as={RouterLink} to={`/gallery/${currentUser.id}`}>
             Mi Galería
           </MenuItem>
-          <MenuItem as={RouterLink} to={`/chats/${currentUser.id}`}>
+          <MenuItem icon={<ChatIcon />} as={RouterLink} to={`/chats/${currentUser.id}`}>
             Chats
           </MenuItem>
-          <MenuItem as={RouterLink} to={`/config/${currentUser.id}`}>
+          <MenuItem icon={<SettingsIcon />} as={RouterLink} to={`/settings/${currentUser.id}`}>
             Configuración
           </MenuItem>
           <MenuDivider />

@@ -1,10 +1,25 @@
 import store from '../redux/store';
-import { firestore } from './firebase';
+import { firestore, auth } from './firebase';
+import { createUserDocument } from './firebase';
 import { setArtworks } from '../redux/artworks/artworksActions';
 import { setScores } from '../redux/scores/scoresActions';
 import { setCommunities } from '../redux/communities/communitiesActions';
 import { setArtworkDetail } from '../redux/artwork-detail/artworkDetailActions';
 import { setArtworkDetailComments } from '../redux/artwork-detail/artworkDetailActions';
+import { setCurrentUser } from '../redux/user/userActions';
+
+export const listenUser = () => {
+  return auth.onAuthStateChanged(async user => {
+    if (user) {
+      const userRef = await createUserDocument(user);
+      userRef.onSnapshot(snapshot => {
+        store.dispatch(setCurrentUser({ id: snapshot.id, ...snapshot.data() }));
+      });
+    } else {
+      store.dispatch(setCurrentUser(user));
+    }
+  });
+};
 
 export const listenArtworks = () => {
   return firestore.collection('artworks').onSnapshot(snapshot => {

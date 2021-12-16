@@ -40,7 +40,7 @@ const Artwork = ({ artwork, currentUser, hasScore, hasLink }) => {
           cursor="pointer"
           w={400}
           h={250}
-          objectFit="cover"
+          objectFit="fill"
           src={artwork.imageUrl}
           alt="image preview"
         />

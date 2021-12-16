@@ -1,4 +1,4 @@
-import { SimpleGrid } from '@chakra-ui/layout';
+import { SimpleGrid } from '@chakra-ui/react';
 import Artwork from '../components/Artwork';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
