@@ -12,7 +12,7 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 import { useState, useEffect } from 'react';
-import { storage, createArtworkDocument } from '../firebase/firebase';
+import { createArtworkDocument, uploadImage } from '../firebase/firebase';
 import { useSelector, useDispatch } from 'react-redux';
 import { setTitle, setDescription, submitArtwork } from '../redux/artwork/artworkActions';
 import CheckboxGroup from './CheckboxGroup';
@@ -36,17 +36,14 @@ const UploadForm = () => {
   const handleSubmit = async event => {
     event.preventDefault();
     setIsLoading(true);
-    const fileRef = storage.ref(`artworks/${image.name}`);
     try {
-      await fileRef.put(image);
-      const imageUrl = await fileRef.getDownloadURL();
-      await createArtworkDocument({ ...artwork, imageUrl }, currentUser.displayName);
-    } catch (error) {
-      console.error(error);
-    } finally {
+      const imageUrl = await uploadImage('artworks', image);
+      await createArtworkDocument({ ...artwork, imageUrl }, currentUser);
       dispatch(submitArtwork());
-      setIsLoading(false);
+    } catch (error) {
+      console.log(error);
     }
+    setIsLoading(false);
   };
 
   return (

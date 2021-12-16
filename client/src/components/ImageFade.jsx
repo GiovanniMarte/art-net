@@ -1,11 +1,12 @@
-import { Fade, Image, useDisclosure } from '@chakra-ui/react';
+import { Fade, Image } from '@chakra-ui/react';
+import { useState } from 'react';
 
 const ImageFade = ({ ...restProps }) => {
-  const { isOpen, onToggle } = useDisclosure();
+  const [isLoaded, setIsLoaded] = useState(false);
 
   return (
-    <Fade in={isOpen}>
-      <Image {...restProps} onLoad={onToggle} />
+    <Fade in={isLoaded}>
+      <Image {...restProps} onLoad={() => setIsLoaded(true)} />
     </Fade>
   );
 };

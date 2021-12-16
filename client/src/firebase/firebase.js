@@ -2,6 +2,7 @@ import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore';
 import 'firebase/compat/auth';
 import 'firebase/compat/storage';
+import { v4 as uuidv4 } from 'uuid';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyCHQQ7nQRW6Cse-UOvf9H90EiDKXOfqoEQ',
@@ -26,18 +27,19 @@ export const storage = firebase.storage();
 const provider = new firebase.auth.GoogleAuthProvider();
 export const signInWithGoogle = () => auth.signInWithPopup(provider);
 
+// Funciones de firebase
+
 export const createUserDocument = async (user, additionalData = {}) => {
   const userRef = firestore.doc(`/users/${user.uid}`);
   const userSnap = await userRef.get();
 
   if (userSnap.exists) return userRef;
 
-  const { displayName, email, uid } = user;
+  const { displayName, email } = user;
   const createdAt = new Date();
 
   try {
     await userRef.set({
-      id: uid,
       profileImage: '',
       displayName,
       email,
@@ -51,10 +53,14 @@ export const createUserDocument = async (user, additionalData = {}) => {
   return userRef;
 };
 
-export const createArtworkDocument = async (artwork, author) => {
+export const createArtworkDocument = async (artwork, user) => {
   const newArtwork = {
     ...artwork,
-    author,
+    author: {
+      id: user.id,
+      displayName: user.displayName,
+      profileImage: user.profileImage,
+    },
     createdAt: new Date(),
     isPushed: false,
     score: 0,
@@ -66,6 +72,16 @@ export const createArtworkDocument = async (artwork, author) => {
     console.error(error.message);
   }
   return artwork;
+};
+
+export const uploadImage = async (route, image, name = uuidv4()) => {
+  const imageRef = storage.ref(`${route}/${name}`);
+  try {
+    await imageRef.put(image);
+    return await imageRef.getDownloadURL();
+  } catch (error) {
+    console.error(error.message);
+  }
 };
 
 export const updateScore = async (artworkId, userId, value) => {
@@ -96,7 +112,11 @@ export const updateScore = async (artworkId, userId, value) => {
 
 export const createCommentDoc = async (artworkId, user, body) => {
   const newComment = {
-    user,
+    author: {
+      id: user.id,
+      displayName: user.displayName,
+      profileImage: user.profileImage,
+    },
     body,
     createdAt: new Date(),
   };

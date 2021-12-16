@@ -4,12 +4,12 @@ import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { updateScore } from '../firebase/firebase';
 
-const Score = ({ artwork }) => {
+const Score = ({ artworkId }) => {
   const history = useHistory();
   const currentUser = useSelector(state => state.user.currentUser);
   const scores = useSelector(state => state.scores.list);
 
-  const getCurrentScores = () => scores.filter(score => score.artworkId === artwork.id);
+  const getCurrentScores = () => scores.filter(score => score.artworkId === artworkId);
 
   const getArtworkScore = () => getCurrentScores().reduce((accum, score) => accum + score.value, 0);
 
@@ -24,7 +24,7 @@ const Score = ({ artwork }) => {
       return;
     }
     const vote = getUserScore() === 1 ? 0 : 1;
-    updateScore(artwork.id, currentUser.id, vote);
+    updateScore(artworkId, currentUser.id, vote);
   };
 
   const handleDownvote = () => {
@@ -33,7 +33,7 @@ const Score = ({ artwork }) => {
       return;
     }
     const vote = getUserScore() === -1 ? 0 : -1;
-    updateScore(artwork.id, currentUser.id, vote);
+    updateScore(artworkId, currentUser.id, vote);
   };
 
   const redirectSignIn = () => history.push('/signin');

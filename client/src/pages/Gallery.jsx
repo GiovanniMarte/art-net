@@ -5,8 +5,10 @@ import UserProfile from '../components/UserProfile';
 import GallerySection from '../components/GallerySection';
 import { useSelector } from 'react-redux';
 import Carousel from '../components/Carousel';
+import { useParams } from 'react-router-dom';
 
 const Gallery = () => {
+  const { userId } = useParams();
   const artworks = useSelector(state => state.artworks.list);
 
   useEffect(() => {
@@ -20,10 +22,10 @@ const Gallery = () => {
 
   return (
     <Flex justifyContent="center">
-      <Stack maxW={1500} spacing={5}>
-        <Stack spacing={5} align="center" direction="row">
-          <UserProfile flex={1} />
-          <Box flex={2}>
+      <Stack maxW={1500} align="center" spacing={5}>
+        <Stack spacing={10} align="center" direction="row">
+          <UserProfile flex={2} />
+          <Box flex={3}>
             <Carousel artworks={artworks} />
           </Box>
         </Stack>

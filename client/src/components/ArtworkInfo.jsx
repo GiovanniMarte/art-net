@@ -1,5 +1,6 @@
-import { Box, Stack, chakra, Flex, Image, Link, useColorModeValue } from '@chakra-ui/react';
+import { Box, Stack, chakra, Flex, Avatar, Link, useColorModeValue } from '@chakra-ui/react';
 import { CalendarIcon, EditIcon, ViewIcon } from '@chakra-ui/icons';
+import { Link as RouterLink } from 'react-router-dom';
 import moment from 'moment';
 import 'moment/locale/es';
 
@@ -14,17 +15,7 @@ const ArtworkInfo = ({ artwork }) => {
       bg={useColorModeValue('white', 'gray.800')}
     >
       <Flex justifyContent={{ base: 'center', md: 'end' }} mt={-16}>
-        <Image
-          w={20}
-          h={20}
-          fit="cover"
-          rounded="full"
-          borderStyle="solid"
-          borderWidth={2}
-          borderColor={useColorModeValue('brand.500', 'brand.400')}
-          alt="Testimonial avatar"
-          src="https://images.unsplash.com/photo-1499714608240-22fc6ad53fb2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=76&q=80"
-        />
+        <Avatar size="lg" src={artwork.author.profileImage} />
       </Flex>
 
       <chakra.h2
@@ -70,8 +61,13 @@ const ArtworkInfo = ({ artwork }) => {
       </Stack>
 
       <Flex justifyContent="end">
-        <Link fontSize="xl" color={useColorModeValue('brand.500', 'brand.300')}>
-          {artwork.author}
+        <Link
+          as={RouterLink}
+          to={`/gallery/${artwork.author.id}`}
+          fontSize="xl"
+          color={useColorModeValue('brand.500', 'brand.300')}
+        >
+          {artwork.author.displayName}
         </Link>
       </Flex>
     </Box>

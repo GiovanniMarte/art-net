@@ -14,20 +14,20 @@ import Artwork from './Artwork';
 
 const GallerySection = ({ artworks, name, hasMenu, gridColumns, ...restProps }) => {
   return (
-    <Stack {...restProps}>
+    <Stack spacing={3} {...restProps}>
       <Stack spacing={3} align="center" direction="row">
         <Heading as="h2" size="xl">
           {name}
         </Heading>
         {hasMenu ? (
           <Menu>
-            <MenuButton as={ChakraButton} rightIcon={<ChevronDownIcon />}>
-              Todas
+            <MenuButton size="sm" as={ChakraButton} rightIcon={<ChevronDownIcon />}>
+              Mostrar
             </MenuButton>
             <MenuList>
-              <MenuItem>Mi Galería</MenuItem>
-              <MenuItem>Chats</MenuItem>
-              <MenuItem>Configuración</MenuItem>
+              <MenuItem>Todas</MenuItem>
+              <MenuItem>Privadas</MenuItem>
+              <MenuItem>En venta</MenuItem>
             </MenuList>
           </Menu>
         ) : null}

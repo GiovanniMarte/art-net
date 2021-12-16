@@ -8,16 +8,23 @@ import { setArtworkDetail } from '../redux/artwork-detail/artworkDetailActions';
 import { setArtworkDetailComments } from '../redux/artwork-detail/artworkDetailActions';
 import { setCurrentUser } from '../redux/user/userActions';
 
-export const listenUser = () => {
+export const listenCurrentUser = () => {
   return auth.onAuthStateChanged(async user => {
     if (user) {
       const userRef = await createUserDocument(user);
       userRef.onSnapshot(snapshot => {
-        store.dispatch(setCurrentUser({ id: snapshot.id, ...snapshot.data() }));
+        store.dispatch(setCurrentUser({ ...snapshot.data(), id: snapshot.id }));
       });
     } else {
       store.dispatch(setCurrentUser(user));
     }
+  });
+};
+
+export const listenUser = userId => {
+  return firestore.doc(`/users/${userId}`).onSnapshot(snapshot => {
+    const newArtwork = { ...snapshot.data(), id: snapshot.id };
+    store.dispatch(setArtworkDetail(newArtwork));
   });
 };
 
@@ -53,9 +60,12 @@ export const listenCommunities = () => {
 };
 
 export const listenComments = artworkId => {
-  return firestore.collection(`/artworks/${artworkId}/comments`).onSnapshot(snapshot => {
-    const data = [];
-    snapshot.forEach(doc => data.push({ ...doc.data(), id: doc.id }));
-    store.dispatch(setArtworkDetailComments(data));
-  });
+  return firestore
+    .collection(`/artworks/${artworkId}/comments`)
+    .orderBy('createdAt', 'desc')
+    .onSnapshot(snapshot => {
+      const data = [];
+      snapshot.forEach(doc => data.push({ ...doc.data(), id: doc.id }));
+      store.dispatch(setArtworkDetailComments(data));
+    });
 };

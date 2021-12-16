@@ -15,7 +15,7 @@ import ImageFade from './ImageFade';
 import moment from 'moment';
 import 'moment/locale/es';
 
-const Artwork = ({ artwork, currentUser, hasScore, hasLink }) => {
+const Artwork = ({ artwork, currentUser, isPreview }) => {
   moment.locale('es');
 
   return (
@@ -33,7 +33,7 @@ const Artwork = ({ artwork, currentUser, hasScore, hasLink }) => {
       }}
     >
       <ConditionalWrapper
-        condition={hasLink}
+        condition={!isPreview}
         wrapper={children => <Link to={`/artwork/${artwork.id}`}>{children}</Link>}
       >
         <ImageFade
@@ -58,9 +58,14 @@ const Artwork = ({ artwork, currentUser, hasScore, hasLink }) => {
         </Heading>
         <HStack justify="space-between" mt={3} spacing={4} align="center">
           <HStack>
-            <Avatar src={artwork.author} alt="Author" />
+            <Avatar
+              src={isPreview ? currentUser.profileImg : artwork.author.profileImage}
+              alt="Autor"
+            />
             <Stack direction="column" spacing={0} fontSize="sm">
-              <Text fontWeight={600}>{artwork.author || currentUser.displayName}</Text>
+              <Text fontWeight={600}>
+                {isPreview ? currentUser.displayName : artwork.author.displayName}
+              </Text>
               <Text color="gray.500">
                 {artwork.createdAt
                   ? moment(artwork.createdAt.toDate()).fromNow()
@@ -68,7 +73,7 @@ const Artwork = ({ artwork, currentUser, hasScore, hasLink }) => {
               </Text>
             </Stack>
           </HStack>
-          {hasScore ? <Score artwork={artwork} /> : null}
+          {isPreview ? null : <Score artworkId={artwork.id} />}
         </HStack>
       </Box>
     </Box>

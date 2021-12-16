@@ -23,7 +23,7 @@ const Upload = () => {
         align="center"
       >
         <UploadForm />
-        <Artwork artwork={artwork} currentUser={currentUser} />
+        <Artwork isPreview artwork={artwork} currentUser={currentUser} />
       </Stack>
     </Flex>
   );

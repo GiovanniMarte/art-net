@@ -11,7 +11,7 @@ import Upload from './pages/Upload';
 import PrivateRoute from './components/PrivateRoute';
 import { useEffect } from 'react';
 import { Box } from '@chakra-ui/react';
-import { listenUser } from './firebase/listeners';
+import { listenCurrentUser } from './firebase/listeners';
 import { useSelector } from 'react-redux';
 import Gallery from './pages/Gallery';
 import Settings from './pages/Settings';
@@ -20,7 +20,7 @@ function App() {
   const currentUser = useSelector(state => state.user.currentUser);
 
   useEffect(() => {
-    const unsubscribe = listenUser();
+    const unsubscribe = listenCurrentUser();
     return () => unsubscribe();
   }, []);
 
