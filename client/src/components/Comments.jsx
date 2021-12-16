@@ -2,29 +2,19 @@ import { Stack, Box, Divider, Text, useColorModeValue } from '@chakra-ui/react';
 import CommentsForm from './CommentsForm';
 import Comment from './Comment';
 import { useEffect } from 'react';
-import { firestore } from '../firebase/firebase';
-import { useDispatch } from 'react-redux';
-import { setArtworkDetailComments } from '../redux/artwork-detail/artworkDetailActions';
+import { listenComments } from '../firebase/listeners';
 
 const Comments = ({ artwork }) => {
-  const dispatch = useDispatch();
-
   useEffect(() => {
-    const unsubscribe = firestore
-      .collection(`/artworks/${artwork.id}/comments`)
-      .onSnapshot(snapshot => {
-        const data = [];
-        snapshot.forEach(doc => data.push({ ...doc.data(), id: doc.id }));
-        dispatch(setArtworkDetailComments(data));
-      });
+    const unsubscribe = listenComments(artwork.id);
     return () => unsubscribe();
-  }, [dispatch, artwork.id]);
+  }, [artwork.id]);
 
   return (
     <Stack spacing={8} bg={useColorModeValue('white', 'gray.700')} p={5}>
       <CommentsForm artworkId={artwork.id} />
       <Stack spacing={4}>
-        {artwork.comments ? (
+        {artwork.comments.length ? (
           artwork.comments.map(comment => (
             <Box key={comment.id}>
               <Comment comment={comment} />

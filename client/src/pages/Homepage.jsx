@@ -1,33 +1,20 @@
 import { SimpleGrid } from '@chakra-ui/layout';
 import Artwork from '../components/Artwork';
 import { useEffect } from 'react';
-import { firestore } from '../firebase/firebase';
-import { useSelector, useDispatch } from 'react-redux';
-import { setArtworks } from '../redux/artworks/artworksActions';
-import { setScores } from '../redux/scores/scoresActions';
+import { useSelector } from 'react-redux';
+import { listenArtworks, listenScore } from '../firebase/listeners';
 
 const Homepage = () => {
   const artworks = useSelector(state => state.artworks.list);
-  const dispatch = useDispatch();
 
-  // Subscribirse a la colección de artworks y puntuación
   useEffect(() => {
-    const unsubscribeArtworks = firestore.collection('artworks').onSnapshot(snapshot => {
-      const data = [];
-      snapshot.forEach(doc => data.push({ ...doc.data(), id: doc.id }));
-      dispatch(setArtworks(data));
-    });
-
-    const unsubscribeScores = firestore.collection('scores').onSnapshot(snapshot => {
-      const data = [];
-      snapshot.forEach(doc => data.push({ ...doc.data() }));
-      dispatch(setScores(data));
-    });
+    const unsubscribeArtworks = listenArtworks();
+    const unsubscribeScores = listenScore();
     return () => {
       unsubscribeArtworks();
       unsubscribeScores();
     };
-  }, [dispatch]);
+  }, []);
 
   return (
     <SimpleGrid

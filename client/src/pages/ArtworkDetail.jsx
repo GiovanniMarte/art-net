@@ -5,11 +5,8 @@ import { useEffect } from 'react';
 import ImageFade from '../components/ImageFade';
 import Comments from '../components/Comments';
 import ArtworkInfo from '../components/ArtworkInfo';
-import { firestore } from '../firebase/firebase';
-import {
-  setArtworkDetail,
-  removeArtworkDetail,
-} from '../redux/artwork-detail/artworkDetailActions';
+import { removeArtworkDetail } from '../redux/artwork-detail/artworkDetailActions';
+import { listenArtwork } from '../firebase/listeners';
 
 const ArtworkDetail = () => {
   const { artworkId } = useParams();
@@ -17,10 +14,7 @@ const ArtworkDetail = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const unsubscribe = firestore.doc(`/artworks/${artworkId}`).onSnapshot(snapshot => {
-      const newArtwork = { ...snapshot.data(), id: snapshot.id };
-      dispatch(setArtworkDetail(newArtwork));
-    });
+    const unsubscribe = listenArtwork(artworkId);
     return () => {
       dispatch(removeArtworkDetail());
       unsubscribe();

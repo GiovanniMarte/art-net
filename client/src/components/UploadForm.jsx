@@ -14,12 +14,11 @@ import {
 import { useState, useEffect } from 'react';
 import { storage, createArtworkDocument } from '../firebase/firebase';
 import { useSelector, useDispatch } from 'react-redux';
-import { firestore } from '../firebase/firebase';
 import { setTitle, setDescription, submitArtwork } from '../redux/artwork/artworkActions';
-import { setCommunities } from '../redux/communities/communitiesActions';
 import CheckboxGroup from './CheckboxGroup';
 import ImagePicker from './ImagePicker';
 import Button from './Button';
+import { listenCommunities } from '../firebase/listeners';
 
 const UploadForm = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -27,18 +26,12 @@ const UploadForm = () => {
 
   const artwork = useSelector(state => state.artwork);
   const currentUser = useSelector(state => state.user.currentUser);
-  const communities = useSelector(state => state.communities.list);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (communities.length) return;
-    const unsubscribe = firestore.collection('communities').onSnapshot(snapshot => {
-      const data = [];
-      snapshot.forEach(doc => data.push({ ...doc.data(), id: doc.id }));
-      dispatch(setCommunities(data));
-    });
+    const unsubscribe = listenCommunities();
     return () => unsubscribe();
-  }, [dispatch, communities]);
+  }, []);
 
   const handleSubmit = async event => {
     event.preventDefault();
