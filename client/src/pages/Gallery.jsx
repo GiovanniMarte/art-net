@@ -1,23 +1,23 @@
 import { Stack, Box, Flex } from '@chakra-ui/react';
 import { useEffect } from 'react';
-import { listenUserArtworks, listenUser, listenScoresByIds } from '../firebase/listeners';
+import { listenUserArtworks, listenGalleryUser, listenScoresByIds } from '../firebase/listeners';
 import UserProfile from '../components/UserProfile';
 import GallerySection from '../components/GallerySection';
 import { useDispatch, useSelector } from 'react-redux';
 import Carousel from '../components/Carousel';
 import { useParams } from 'react-router-dom';
-import { setGalleryUser, removeGalleryUser } from '../redux/galleryUser/galleryUserActions';
+import { removeGalleryUser } from '../redux/galleryUser/galleryUserActions';
 import { removeArtworks } from '../redux/artworks/artworksActions';
 
 const Gallery = () => {
   const { userId } = useParams();
   const artworks = useSelector(state => state.artworks.list);
-  const user = useSelector(state => state.galleryUser.user);
+  const galleryUser = useSelector(state => state.galleryUser);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(removeArtworks());
-    const unsubscribeUser = listenUser(userId, setGalleryUser);
+    const unsubscribeUser = listenGalleryUser(userId);
     const unsubscribeUserArtworks = listenUserArtworks(userId);
     return () => {
       dispatch(removeGalleryUser());
@@ -38,8 +38,8 @@ const Gallery = () => {
       {artworks.length ? (
         <Stack maxW={1500} align="center" spacing={5}>
           <Stack spacing={10} align="center" direction="row">
-            {user ? <UserProfile user={user} flex={2} /> : null}
-            <Box flex={3}>
+            {galleryUser.user ? <UserProfile galleryUser={galleryUser} flex={1} /> : null}
+            <Box flex={1}>
               <Carousel artworks={artworks} />
             </Box>
           </Stack>

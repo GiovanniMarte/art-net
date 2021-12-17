@@ -7,12 +7,22 @@ import {
   Text,
   useColorModeValue,
 } from '@chakra-ui/react';
-import Button from './Button';
 import moment from 'moment';
+import FollowButton from './FollowButton';
 import 'moment/locale/es';
+import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { listenFollowersById } from '../firebase/listeners';
 
-const UserProfile = ({ user, ...restProps }) => {
+const UserProfile = ({ galleryUser, ...restProps }) => {
+  const { user, followers } = galleryUser;
+  const currentUser = useSelector(state => state.user.currentUser);
   moment.locale('es');
+
+  useEffect(() => {
+    const unsubscribe = listenFollowersById(user.id);
+    return () => unsubscribe();
+  }, [user.id]);
 
   return (
     <Stack
@@ -52,14 +62,24 @@ const UserProfile = ({ user, ...restProps }) => {
           </Text>
         </Stack>
 
-        <Stack width={'100%'} mt={'2rem'} direction={'row'} padding={2} alignItems={'center'}>
-          <ChakraButton flex={1} fontSize={'sm'}>
-            Chatear
-          </ChakraButton>
-          <Button fontSize="sm" flex={1}>
-            Seguir
-          </Button>
-        </Stack>
+        {currentUser ? (
+          currentUser.id !== user.id ? (
+            <Stack width={'100%'} mt={'2rem'} direction={'row'} padding={2} alignItems={'center'}>
+              <ChakraButton flex={1} fontSize={'sm'}>
+                Chatear
+              </ChakraButton>
+              <FollowButton
+                isFollowing={followers.some(follower => follower.id === currentUser.id)}
+                followerId={currentUser.id}
+                followedId={user.id}
+                fontSize="sm"
+                flex={1}
+              >
+                Seguir
+              </FollowButton>
+            </Stack>
+          ) : null
+        ) : null}
       </Stack>
     </Stack>
   );

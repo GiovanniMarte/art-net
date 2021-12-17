@@ -28,6 +28,7 @@ export const SET_CURRENT_USER = 'SET_CURRENT_USER';
 
 // Gallery User actions
 export const SET_GALLERY_USER = 'SET_GALLERY_USER';
+export const SET_GALLERY_USER_FOLLOWERS = 'SET_GALLERY_USER_FOLLOWERS';
 export const REMOVE_GALLERY_USER = 'REMOVE_GALLERY_USER';
 
 // Scores actions

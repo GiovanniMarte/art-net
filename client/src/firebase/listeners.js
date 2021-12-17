@@ -10,6 +10,7 @@ import {
 } from '../redux/artwork-detail/artworkDetailActions';
 import { setArtworkDetailComments } from '../redux/artwork-detail/artworkDetailActions';
 import { setCurrentUser } from '../redux/user/userActions';
+import { setGalleryUser, setGalleryUserFollowers } from '../redux/galleryUser/galleryUserActions';
 
 export const listenCurrentUser = () => {
   return auth.onAuthStateChanged(async user => {
@@ -24,10 +25,10 @@ export const listenCurrentUser = () => {
   });
 };
 
-export const listenUser = (userId, actionCallback) => {
+export const listenGalleryUser = userId => {
   return firestore.doc(`/users/${userId}`).onSnapshot(snapshot => {
     const user = { ...snapshot.data(), id: snapshot.id };
-    store.dispatch(actionCallback(user));
+    store.dispatch(setGalleryUser(user));
   });
 };
 
@@ -72,7 +73,6 @@ export const listenScoresByIds = artworkIds => {
     .onSnapshot(snapshot => {
       const data = [];
       snapshot.forEach(doc => data.push({ ...doc.data() }));
-      console.log(data);
       store.dispatch(setScores(data));
     });
 };
@@ -105,4 +105,12 @@ export const listenComments = artworkId => {
       snapshot.forEach(doc => data.push({ ...doc.data(), id: doc.id }));
       store.dispatch(setArtworkDetailComments(data));
     });
+};
+
+export const listenFollowersById = userId => {
+  return firestore.collection(`users/${userId}/followers`).onSnapshot(snapshot => {
+    const data = [];
+    snapshot.forEach(doc => data.push({ ...doc.data() }));
+    store.dispatch(setGalleryUserFollowers(data));
+  });
 };

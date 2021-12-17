@@ -8,8 +8,6 @@ import { useSelector } from 'react-redux';
 
 const ArtworkInfo = ({ artwork }) => {
   const scores = useSelector(state => state.artworkDetail.currentScores);
-  console.log(scores);
-
   moment.locale('es');
 
   return (

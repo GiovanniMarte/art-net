@@ -44,6 +44,7 @@ export const createUserDocument = async (user, additionalData = {}) => {
       displayName,
       email,
       createdAt,
+      followers: [],
       ...additionalData,
     });
   } catch (err) {
@@ -63,7 +64,6 @@ export const createArtworkDocument = async (artwork, user) => {
     },
     createdAt: new Date(),
     isPushed: false,
-    score: 0,
     views: 0,
   };
   try {
@@ -106,6 +106,27 @@ export const updateScore = async (artworkId, userId, value) => {
     const scoreId = response.docs[0].id;
 
     await firestore.collection('scores').doc(scoreId).update({ value });
+  } catch (error) {
+    console.error(error.message);
+  }
+};
+
+export const updateFollow = async (followerId, followedId, isCommunity) => {
+  try {
+    const response = await firestore
+      .collection((isCommunity ? 'communities' : 'users') + `/${followedId}/followers`)
+      .get();
+
+    const following = response.docs.find(snapshot => snapshot.data().id === followerId);
+
+    if (following) {
+      following.ref.delete();
+      return;
+    }
+
+    firestore
+      .collection((isCommunity ? 'communities' : 'users') + `/${followedId}/followers`)
+      .add({ id: followerId });
   } catch (error) {
     console.error(error.message);
   }
