@@ -27,9 +27,7 @@ const ArtworkInfo = ({ artwork }) => {
         {artwork.title}
       </chakra.h2>
       <chakra.p mt={2} color={useColorModeValue('gray.600', 'gray.200')}>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae dolores deserunt ea doloremque
-        natus error, rerum quas odio quaerat nam ex commodi hic, suscipit in a veritatis pariatur
-        minus consequuntur!
+        {artwork.description}
       </chakra.p>
 
       <Stack

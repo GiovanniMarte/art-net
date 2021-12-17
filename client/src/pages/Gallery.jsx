@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Carousel from '../components/Carousel';
 import { useParams } from 'react-router-dom';
 import { setGalleryUser, removeGalleryUser } from '../redux/galleryUser/galleryUserActions';
+import { removeArtworks } from '../redux/artworks/artworksActions';
 
 const Gallery = () => {
   const { userId } = useParams();
@@ -15,6 +16,7 @@ const Gallery = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(removeArtworks());
     const unsubscribeUser = listenUser(userId, setGalleryUser);
     const unsubscribeUserArtworks = listenUserArtworks(userId);
     const unsubscribeScores = listenScore();
@@ -28,7 +30,7 @@ const Gallery = () => {
 
   return (
     <Flex justifyContent="center">
-      {artworks.length === 1 ? (
+      {artworks.length ? (
         <Stack maxW={1500} align="center" spacing={5}>
           <Stack spacing={10} align="center" direction="row">
             {user ? <UserProfile user={user} flex={2} /> : null}

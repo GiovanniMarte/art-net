@@ -12,6 +12,8 @@ const artworksReducer = (state = INITIAL_STATE, action) => {
         ...state,
         list: action.payload,
       };
+    case actions.REMOVE_ARTWORKS:
+      return INITIAL_STATE;
     default:
       return state;
   }

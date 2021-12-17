@@ -5,6 +5,10 @@ export const setArtworks = artworks => ({
   payload: artworks,
 });
 
+export const removeArtworks = () => ({
+  type: actions.REMOVE_ARTWORKS,
+});
+
 export const setUserArtworks = artworks => ({
   type: actions.SET_USER_ARTWORKS,
   payload: artworks,

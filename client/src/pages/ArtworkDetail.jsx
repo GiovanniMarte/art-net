@@ -31,13 +31,7 @@ const ArtworkDetail = () => {
             direction={{ base: 'column', md: 'column', lg: 'column', xl: 'row', '2xl': 'row' }}
           >
             <Box>
-              <ImageFade
-                maxH={800}
-                cursor="zoom-in"
-                shadow="xl"
-                src={artwork.imageUrl}
-                alt={artwork.title}
-              />
+              <ImageFade maxH={800} shadow="xl" src={artwork.imageUrl} alt={artwork.title} />
             </Box>
             <ArtworkInfo artwork={artwork} />
           </Stack>
