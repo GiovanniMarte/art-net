@@ -8,8 +8,12 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 import Button from './Button';
+import moment from 'moment';
+import 'moment/locale/es';
 
 const UserProfile = ({ user, ...restProps }) => {
+  moment.locale('es');
+
   return (
     <Stack
       {...restProps}
@@ -20,27 +24,31 @@ const UserProfile = ({ user, ...restProps }) => {
       direction={{ base: 'column', md: 'row' }}
       bg={useColorModeValue('white', 'gray.900')}
       boxShadow="xl"
-      padding={4}
     >
-      <Box flex={1} bg="blue.200">
-        <Image
-          objectFit="cover"
-          boxSize="100%"
-          src={
-            'https://images.unsplash.com/photo-1520810627419-35e362c5dc07?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ'
-          }
-        />
-      </Box>
-      <Stack flex={1} justify="space-evenly" align="center" p={1} pt={2}>
+      {user.profileImage ? (
+        <Box flex={1}>
+          <Image
+            roundedLeft="lg"
+            objectFit="cover"
+            boxSize="100%"
+            src={
+              user.profileImage ||
+              'https://firebasestorage.googleapis.com/v0/b/art-net.appspot.com/o/profileImages%2Fdefault.png?alt=media&token=5c62a4a6-4e2c-43f5-8ca6-4bceaeb7f021'
+            }
+          />
+        </Box>
+      ) : null}
+
+      <Stack flex={1} justify="space-evenly" align="center" p={4} pl={1}>
         <Stack justify="center" align="center">
           <Heading fontSize={'2xl'} fontFamily={'body'}>
-            Lindsey James
+            {user.displayName}
           </Heading>
-          <Text fontWeight={600} color={'gray.500'} size="sm" mb={4}>
-            @lindsey_jam3s
+          <Text fontWeight={600} color={'gray.600'} size="sm" mb={4}>
+            Registrado desde {moment(user.createdAt.toDate()).fromNow()}
           </Text>
           <Text textAlign={'center'} color={useColorModeValue('gray.700', 'gray.400')} px={3}>
-            Actress, musician, songwriter and artist. PM for work inquires or tag me in your posts
+            Actress, musician, songwriter and artist. PM for work inquires or tag me in your posts.
           </Text>
         </Stack>
 

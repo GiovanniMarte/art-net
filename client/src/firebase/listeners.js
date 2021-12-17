@@ -1,7 +1,7 @@
 import store from '../redux/store';
 import { firestore, auth } from './firebase';
 import { createUserDocument } from './firebase';
-import { setArtworks } from '../redux/artworks/artworksActions';
+import { setArtworks, setUserArtworks } from '../redux/artworks/artworksActions';
 import { setScores } from '../redux/scores/scoresActions';
 import { setCommunities } from '../redux/communities/communitiesActions';
 import { setArtworkDetail } from '../redux/artwork-detail/artworkDetailActions';
@@ -21,10 +21,10 @@ export const listenCurrentUser = () => {
   });
 };
 
-export const listenUser = userId => {
+export const listenUser = (userId, actionCallback) => {
   return firestore.doc(`/users/${userId}`).onSnapshot(snapshot => {
-    const newArtwork = { ...snapshot.data(), id: snapshot.id };
-    store.dispatch(setArtworkDetail(newArtwork));
+    const user = { ...snapshot.data(), id: snapshot.id };
+    store.dispatch(actionCallback(user));
   });
 };
 
@@ -34,6 +34,17 @@ export const listenArtworks = () => {
     snapshot.forEach(doc => data.push({ ...doc.data(), id: doc.id }));
     store.dispatch(setArtworks(data));
   });
+};
+
+export const listenUserArtworks = userId => {
+  return firestore
+    .collection('artworks')
+    .where('author.id', '==', userId)
+    .onSnapshot(snapshot => {
+      const data = [];
+      snapshot.forEach(doc => data.push({ ...doc.data(), id: doc.id }));
+      store.dispatch(setUserArtworks(data));
+    });
 };
 
 export const listenArtwork = artworkId => {

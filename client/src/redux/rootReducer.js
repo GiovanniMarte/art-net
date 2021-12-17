@@ -5,9 +5,11 @@ import artworksReducer from './artworks/artworksReducer';
 import communitiesReducer from './communities/communitiesReducer';
 import artworkDetailReducer from './artwork-detail/artworkDetailReducer';
 import scoresReducer from './scores/scoresReducer';
+import galleryUserReducer from './galleryUser/galleryUserReducer';
 
 const rootReducer = combineReducers({
   user: userReducer,
+  galleryUser: galleryUserReducer,
   artwork: artworkReducer,
   artworkDetail: artworkDetailReducer,
   artworks: artworksReducer,

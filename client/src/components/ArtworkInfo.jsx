@@ -15,7 +15,7 @@ const ArtworkInfo = ({ artwork }) => {
       bg={useColorModeValue('white', 'gray.800')}
     >
       <Flex justifyContent={{ base: 'center', md: 'end' }} mt={-16}>
-        <Avatar size="lg" src={artwork.author.profileImage} />
+        <Avatar size="lg" src={artwork.author.profileImage || null} />
       </Flex>
 
       <chakra.h2

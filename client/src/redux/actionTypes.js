@@ -9,6 +9,7 @@ export const SUBMIT_ARTWORK = 'SUBMIT_ARTWORK';
 
 // Artworks actions
 export const SET_ARTWORKS = 'SET_ARTWORKS';
+export const SET_USER_ARTWORKS = 'SET_USER_ARTWORKS';
 export const UPDATE_ARTWORK = 'UPDATE_ARTWORK';
 export const SET_ARTWORK_COMMENTS = 'SET_ARTWORK_COMMENTS';
 
@@ -22,6 +23,10 @@ export const SET_COMMUNITIES = 'SET_COMMUNITIES';
 
 // User actions
 export const SET_CURRENT_USER = 'SET_CURRENT_USER';
+
+// Gallery User actions
+export const SET_GALLERY_USER = 'SET_GALLERY_USER';
+export const REMOVE_GALLERY_USER = 'REMOVE_GALLERY_USER';
 
 // Scores actions
 export const SET_SCORES = 'SET_SCORES';
