@@ -111,11 +111,9 @@ export const updateScore = async (artworkId, userId, value) => {
   }
 };
 
-export const updateFollow = async (followerId, followedId, isCommunity) => {
+export const updateFollow = async (followerId, followedId) => {
   try {
-    const response = await firestore
-      .collection((isCommunity ? 'communities' : 'users') + `/${followedId}/followers`)
-      .get();
+    const response = await firestore.collection(`/users/${followedId}/followers`).get();
 
     const following = response.docs.find(snapshot => snapshot.data().id === followerId);
 
@@ -124,9 +122,7 @@ export const updateFollow = async (followerId, followedId, isCommunity) => {
       return;
     }
 
-    firestore
-      .collection((isCommunity ? 'communities' : 'users') + `/${followedId}/followers`)
-      .add({ id: followerId });
+    firestore.collection(`/users/${followedId}/followers`).add({ id: followerId });
   } catch (error) {
     console.error(error.message);
   }

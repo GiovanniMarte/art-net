@@ -1,12 +1,6 @@
-import {
-  Heading,
-  Box,
-  Text,
-  Stack,
-  useColorModeValue,
-} from '@chakra-ui/react';
-import Button from './Button';
+import { Heading, Box, Text, Stack, useColorModeValue } from '@chakra-ui/react';
 import ImageFade from './ImageFade';
+import { Link } from 'react-router-dom';
 
 const Community = ({ community }) => {
   return (
@@ -18,8 +12,15 @@ const Community = ({ community }) => {
       boxShadow="lg"
       rounded="md"
       overflow="hidden"
+      transition="300ms"
+      _hover={{
+        transform: 'translateY(-3px)',
+        boxShadow: 'xl',
+      }}
     >
-      <ImageFade h={120} w="full" src={community.banner} objectFit="cover" />
+      <Link to={`/community/${community.id}`}>
+        <ImageFade h={120} w="full" src={community.banner} objectFit="cover" />
+      </Link>
       <Box p={6}>
         <Stack spacing={0} align="center" mb={5}>
           <Heading fontSize="2xl" fontWeight={500} fontFamily="body">
@@ -32,21 +33,12 @@ const Community = ({ community }) => {
 
         <Stack direction="row" justify="center" spacing={6}>
           <Stack spacing={0} align="center">
-            <Text fontWeight={600}>{community.followers}</Text>
-            <Text fontSize="sm" color={'gray.500'}>
-              Seguidores
-            </Text>
-          </Stack>
-          <Stack spacing={0} align="center">
             <Text fontWeight={600}>{community.artworks}</Text>
             <Text fontSize="sm" color="gray.500">
               Obras
             </Text>
           </Stack>
         </Stack>
-        <Button w="full" mt={8}>
-          Seguir
-        </Button>
       </Box>
     </Box>
   );

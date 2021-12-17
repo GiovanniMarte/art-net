@@ -38,9 +38,15 @@ const Carousel = ({ artworks }) => {
     transition: 'all .5s',
     ml: `-${currentSlide * 100}%`,
   };
-
   return (
-    <Flex borderRadius="lg" boxShadow="lg" w={700} pos="relative" overflow="hidden">
+    <Flex
+      display={{ sm: 'none', md: 'flex' }}
+      borderRadius="lg"
+      boxShadow="lg"
+      w={700}
+      pos="relative"
+      overflow="hidden"
+    >
       <Flex h="400px" w="full" {...carouselStyle}>
         {artworks.map((artwork, index) => (
           <Box key={`slide-${index}`} boxSize="full" shadow="md" flex="none">

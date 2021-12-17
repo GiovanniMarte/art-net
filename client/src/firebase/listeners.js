@@ -107,8 +107,8 @@ export const listenComments = artworkId => {
     });
 };
 
-export const listenFollowersById = userId => {
-  return firestore.collection(`users/${userId}/followers`).onSnapshot(snapshot => {
+export const listenFollowersById = id => {
+  return firestore.collection(`users/${id}/followers`).onSnapshot(snapshot => {
     const data = [];
     snapshot.forEach(doc => data.push({ ...doc.data() }));
     store.dispatch(setGalleryUserFollowers(data));

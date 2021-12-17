@@ -29,8 +29,8 @@ const UserProfile = ({ galleryUser, ...restProps }) => {
       {...restProps}
       borderWidth="1px"
       borderRadius="lg"
-      w={{ sm: '100%', md: '540px' }}
-      height={{ sm: '476px', md: '20rem' }}
+      w={{ sm: '400px', md: '540px' }}
+      height={{ sm: '100%', md: '20rem' }}
       direction={{ base: 'column', md: 'row' }}
       bg={useColorModeValue('white', 'gray.900')}
       boxShadow="xl"

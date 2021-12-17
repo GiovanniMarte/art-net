@@ -1,7 +1,7 @@
 import { Link, useColorModeValue } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
 
-const NavLink = ({ children, route, isActive }) => {
+const NavLink = ({ children, route }) => {
   return (
     <Link
       as={RouterLink}

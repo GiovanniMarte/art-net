@@ -15,6 +15,7 @@ import { listenCurrentUser } from './firebase/listeners';
 import { useSelector } from 'react-redux';
 import Gallery from './pages/Gallery';
 import Settings from './pages/Settings';
+import CommunityDetail from './pages/CommunityDetail';
 
 function App() {
   const currentUser = useSelector(state => state.user.currentUser);
@@ -32,6 +33,7 @@ function App() {
           <Route exact path="/" component={Homepage} />
           <Route exact path="/communities" component={Communities} />
           <Route exact path="/artwork/:artworkId" component={ArtworkDetail} />
+          <Route exact path="/community/:communityId" component={CommunityDetail} />
           <Route exact path="/gallery/:userId" component={Gallery} />
           <PrivateRoute
             exact

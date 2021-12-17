@@ -41,7 +41,6 @@ const Header = () => {
             <HStack as="nav" spacing={4} display={{ base: 'none', md: 'flex' }}>
               <NavLink route="/">Principal</NavLink>
               <NavLink route="/communities">Comunidades</NavLink>
-              <NavLink route="/shop">Tienda</NavLink>
             </HStack>
           </HStack>
           <Stack
@@ -78,7 +77,6 @@ const Header = () => {
             <Stack textAlign="center" as="nav" spacing={4}>
               <NavLink route="/">Principal</NavLink>
               <NavLink route="/communities">Comunidades</NavLink>
-              <NavLink route="/shop">Tienda</NavLink>
             </Stack>
           </Box>
         ) : null}

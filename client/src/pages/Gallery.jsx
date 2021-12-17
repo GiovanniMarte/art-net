@@ -37,7 +37,11 @@ const Gallery = () => {
     <Flex justifyContent="center">
       {artworks.length ? (
         <Stack maxW={1500} align="center" spacing={5}>
-          <Stack spacing={10} align="center" direction="row">
+          <Stack
+            direction={{ sm: 'column', md: 'column', lg: 'column', xl: 'row', '2xl': 'row' }}
+            spacing={10}
+            align="center"
+          >
             {galleryUser.user ? <UserProfile galleryUser={galleryUser} flex={1} /> : null}
             <Box flex={1}>
               <Carousel artworks={artworks} />
