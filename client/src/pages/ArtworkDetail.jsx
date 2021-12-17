@@ -7,6 +7,7 @@ import Comments from '../components/Comments';
 import ArtworkInfo from '../components/ArtworkInfo';
 import { removeArtworkDetail } from '../redux/artwork-detail/artworkDetailActions';
 import { listenArtwork } from '../firebase/listeners';
+import { increaseViewCounter } from '../firebase/firebase';
 
 const ArtworkDetail = () => {
   const { artworkId } = useParams();
@@ -14,6 +15,7 @@ const ArtworkDetail = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    increaseViewCounter(artworkId);
     const unsubscribe = listenArtwork(artworkId);
     return () => {
       dispatch(removeArtworkDetail());

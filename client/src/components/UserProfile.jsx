@@ -39,13 +39,13 @@ const UserProfile = ({ user, ...restProps }) => {
         </Box>
       ) : null}
 
-      <Stack flex={1} justify="space-evenly" align="center" p={4} pl={1}>
+      <Stack textAlign="center" flex={1} justify="space-evenly" align="center" p={4} pl={1}>
         <Stack justify="center" align="center">
           <Heading fontSize={'2xl'} fontFamily={'body'}>
             {user.displayName}
           </Heading>
           <Text fontWeight={600} color={'gray.600'} size="sm" mb={4}>
-            Registrado desde {moment(user.createdAt.toDate()).fromNow()}
+            Registrad@ desde {moment(user.createdAt.toDate()).fromNow()}
           </Text>
           <Text textAlign={'center'} color={useColorModeValue('gray.700', 'gray.400')} px={3}>
             Actress, musician, songwriter and artist. PM for work inquires or tag me in your posts.

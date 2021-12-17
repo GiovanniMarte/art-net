@@ -12,9 +12,15 @@ import { auth } from '../firebase/firebase';
 import { Link as RouterLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { SettingsIcon, ChatIcon, InfoIcon } from '@chakra-ui/icons';
+import { handleSignOutSuccess } from '../auth-handler/successHandler';
 
 const UserIcon = () => {
   const currentUser = useSelector(state => state.user.currentUser);
+
+  const handleSignOut = () => {
+    auth.signOut();
+    handleSignOutSuccess();
+  };
 
   return (
     <Flex alignItems="center">
@@ -33,7 +39,7 @@ const UserIcon = () => {
             Configuración
           </MenuItem>
           <MenuDivider />
-          <MenuItem onClick={() => auth.signOut()}>Cerrar sesión</MenuItem>
+          <MenuItem onClick={handleSignOut}>Cerrar sesión</MenuItem>
         </MenuList>
       </Menu>
     </Flex>

@@ -30,6 +30,6 @@ export const changeVisibility = isVisible => ({
   payload: isVisible,
 });
 
-export const submitArtwork = () => ({
-  type: actions.SUBMIT_ARTWORK,
+export const clearArtwork = () => ({
+  type: actions.CLEAR_ARTWORK,
 });

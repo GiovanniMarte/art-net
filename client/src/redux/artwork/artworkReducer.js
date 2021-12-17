@@ -40,7 +40,7 @@ const artworkReducer = (state = INITIAL_STATE, action) => {
         ...state,
         isVisible: action.payload,
       };
-    case actions.SUBMIT_ARTWORK:
+    case actions.CLEAR_ARTWORK:
       return INITIAL_STATE;
     default:
       return state;

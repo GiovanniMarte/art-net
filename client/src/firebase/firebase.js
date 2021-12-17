@@ -67,7 +67,8 @@ export const createArtworkDocument = async (artwork, user) => {
     views: 0,
   };
   try {
-    await firestore.collection('artworks').add(newArtwork);
+    const artworkRef = await firestore.collection('artworks').add(newArtwork);
+    return artworkRef;
   } catch (error) {
     console.error(error.message);
   }
@@ -122,6 +123,17 @@ export const createCommentDoc = async (artworkId, user, body) => {
   };
   try {
     await firestore.collection(`/artworks/${artworkId}/comments`).add(newComment);
+  } catch (error) {
+    console.error(error.message);
+  }
+};
+
+export const increaseViewCounter = async artworkId => {
+  try {
+    firestore
+      .collection('artworks')
+      .doc(artworkId)
+      .update('views', firebase.firestore.FieldValue.increment(1));
   } catch (error) {
     console.error(error.message);
   }

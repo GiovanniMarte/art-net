@@ -18,6 +18,8 @@ import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { Link as RouterLink } from 'react-router-dom';
 import { auth, createUserDocument } from '../firebase/firebase';
 import Button from '../components/Button';
+import { handleSignUpError } from '../auth-handler/errorHandler';
+import { handleSignUpSuccess } from '../auth-handler/successHandler';
 
 const INITIAL_STATE = {
   displayName: '',
@@ -26,18 +28,22 @@ const INITIAL_STATE = {
 };
 
 const SignUp = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [{ displayName, email, password }, setUserCredentials] = useState(INITIAL_STATE);
 
   const handleSubmit = async event => {
     event.preventDefault();
+    setIsLoading(true);
     try {
       const { user } = await auth.createUserWithEmailAndPassword(email, password);
       createUserDocument(user, { displayName });
       clearCredentials();
-    } catch (err) {
-      console.error(err.message);
+      handleSignUpSuccess()
+    } catch (error) {
+      handleSignUpError(error)();
     }
+    setIsLoading(false);
   };
 
   const handleChange = event => {
@@ -94,7 +100,12 @@ const SignUp = () => {
               </InputGroup>
             </FormControl>
             <Stack spacing={10} pt={2}>
-              <Button size="lg" type="submit" isDisabled={!(displayName && email && password)}>
+              <Button
+                {...(isLoading ? { isLoading } : null)}
+                size="lg"
+                type="submit"
+                isDisabled={!(displayName && email && password)}
+              >
                 Registrarse
               </Button>
             </Stack>

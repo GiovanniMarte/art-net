@@ -18,6 +18,7 @@ import { auth, signInWithGoogle } from '../firebase/firebase';
 import { useState } from 'react';
 import { FcGoogle } from 'react-icons/fc';
 import Button from '../components/Button';
+import { handleSignInError } from '../auth-handler/errorHandler';
 
 const INITIAL_STATE = {
   email: '',
@@ -25,16 +26,19 @@ const INITIAL_STATE = {
 };
 
 const SignIn = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const [{ email, password }, setUserCredentials] = useState(INITIAL_STATE);
 
   const handleSubmit = async event => {
     event.preventDefault();
+    setIsLoading(true);
     try {
       await auth.signInWithEmailAndPassword(email, password);
       clearCredentials();
-    } catch (err) {
-      console.error(err.message);
+    } catch (error) {
+      handleSignInError(error)();
     }
+    setIsLoading(false);
   };
 
   const handleChange = event => {
@@ -73,7 +77,12 @@ const SignIn = () => {
               <Checkbox>Recordarme</Checkbox>
             </Stack>
             <Stack spacing={5}>
-              <Button size="lg" type="submit" isDisabled={!(email && password)}>
+              <Button
+                {...(isLoading ? { isLoading } : null)}
+                size="lg"
+                type="submit"
+                isDisabled={!(email && password)}
+              >
                 Iniciar sesión
               </Button>
               <ChakraButton

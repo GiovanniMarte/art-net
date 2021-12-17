@@ -14,13 +14,16 @@ import {
 import { useState, useEffect } from 'react';
 import { createArtworkDocument, uploadImage } from '../firebase/firebase';
 import { useSelector, useDispatch } from 'react-redux';
-import { setTitle, setDescription, submitArtwork } from '../redux/artwork/artworkActions';
+import { setTitle, setDescription, clearArtwork } from '../redux/artwork/artworkActions';
 import CheckboxGroup from './CheckboxGroup';
 import ImagePicker from './ImagePicker';
 import Button from './Button';
 import { listenCommunities } from '../firebase/listeners';
+import { useHistory } from 'react-router-dom';
+import { handleArtworkSubmitError } from '../auth-handler/errorHandler';
 
 const UploadForm = () => {
+  const history = useHistory();
   const [isLoading, setIsLoading] = useState(false);
   const [image, setImage] = useState(null);
 
@@ -38,13 +41,16 @@ const UploadForm = () => {
     setIsLoading(true);
     try {
       const imageUrl = await uploadImage('artworks', image);
-      await createArtworkDocument({ ...artwork, imageUrl }, currentUser);
-      dispatch(submitArtwork());
+      const artworkRef = await createArtworkDocument({ ...artwork, imageUrl }, currentUser);
+      redirectArtwork(artworkRef.id);
+      dispatch(clearArtwork());
     } catch (error) {
-      console.log(error);
+      handleArtworkSubmitError();
     }
     setIsLoading(false);
   };
+
+  const redirectArtwork = artworkId => history.push(`/artwork/${artworkId}`);
 
   return (
     <Flex align="center" justify="center">
