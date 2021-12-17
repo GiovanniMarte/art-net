@@ -1,6 +1,6 @@
 import { Stack, Box, Flex } from '@chakra-ui/react';
 import { useEffect } from 'react';
-import { listenUserArtworks, listenScore, listenUser } from '../firebase/listeners';
+import { listenUserArtworks, listenUser, listenScoresByIds } from '../firebase/listeners';
 import UserProfile from '../components/UserProfile';
 import GallerySection from '../components/GallerySection';
 import { useDispatch, useSelector } from 'react-redux';
@@ -19,14 +19,19 @@ const Gallery = () => {
     dispatch(removeArtworks());
     const unsubscribeUser = listenUser(userId, setGalleryUser);
     const unsubscribeUserArtworks = listenUserArtworks(userId);
-    const unsubscribeScores = listenScore();
     return () => {
       dispatch(removeGalleryUser());
       unsubscribeUser();
       unsubscribeUserArtworks();
-      unsubscribeScores();
     };
   }, [dispatch, userId]);
+
+  useEffect(() => {
+    const artworkIds = artworks.map(artwork => artwork.id);
+    if (!artworkIds.length) return;
+    const usubscribeScores = listenScoresByIds(artworkIds);
+    return () => usubscribeScores();
+  }, [artworks]);
 
   return (
     <Flex justifyContent="center">

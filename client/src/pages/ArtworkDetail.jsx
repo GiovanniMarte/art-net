@@ -6,7 +6,7 @@ import ImageFade from '../components/ImageFade';
 import Comments from '../components/Comments';
 import ArtworkInfo from '../components/ArtworkInfo';
 import { removeArtworkDetail } from '../redux/artwork-detail/artworkDetailActions';
-import { listenArtwork } from '../firebase/listeners';
+import { listenArtwork, listenScoresById } from '../firebase/listeners';
 import { increaseViewCounter } from '../firebase/firebase';
 
 const ArtworkDetail = () => {
@@ -16,10 +16,12 @@ const ArtworkDetail = () => {
 
   useEffect(() => {
     increaseViewCounter(artworkId);
-    const unsubscribe = listenArtwork(artworkId);
+    const unsubscribeArtwork = listenArtwork(artworkId);
+    const unsubscribeScore = listenScoresById(artworkId);
     return () => {
       dispatch(removeArtworkDetail());
-      unsubscribe();
+      unsubscribeArtwork();
+      unsubscribeScore();
     };
   }, [dispatch, artworkId]);
 

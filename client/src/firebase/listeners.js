@@ -4,7 +4,10 @@ import { createUserDocument } from './firebase';
 import { setArtworks, setUserArtworks } from '../redux/artworks/artworksActions';
 import { setScores } from '../redux/scores/scoresActions';
 import { setCommunities } from '../redux/communities/communitiesActions';
-import { setArtworkDetail } from '../redux/artwork-detail/artworkDetailActions';
+import {
+  setArtworkDetail,
+  setArtworkDetailScores,
+} from '../redux/artwork-detail/artworkDetailActions';
 import { setArtworkDetailComments } from '../redux/artwork-detail/artworkDetailActions';
 import { setCurrentUser } from '../redux/user/userActions';
 
@@ -54,12 +57,35 @@ export const listenArtwork = artworkId => {
   });
 };
 
-export const listenScore = () => {
+export const listenScores = () => {
   return firestore.collection('scores').onSnapshot(snapshot => {
     const data = [];
     snapshot.forEach(doc => data.push({ ...doc.data() }));
     store.dispatch(setScores(data));
   });
+};
+
+export const listenScoresByIds = artworkIds => {
+  return firestore
+    .collection('scores')
+    .where('artworkId', 'in', artworkIds)
+    .onSnapshot(snapshot => {
+      const data = [];
+      snapshot.forEach(doc => data.push({ ...doc.data() }));
+      console.log(data);
+      store.dispatch(setScores(data));
+    });
+};
+
+export const listenScoresById = artworkId => {
+  return firestore
+    .collection('scores')
+    .where('artworkId', '==', artworkId)
+    .onSnapshot(snapshot => {
+      const data = [];
+      snapshot.forEach(doc => data.push({ ...doc.data() }));
+      store.dispatch(setArtworkDetailScores(data));
+    });
 };
 
 export const listenCommunities = () => {

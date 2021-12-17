@@ -15,7 +15,7 @@ import ImageFade from './ImageFade';
 import moment from 'moment';
 import 'moment/locale/es';
 
-const Artwork = ({ artwork, currentUser, isPreview }) => {
+const Artwork = ({ artwork, currentUser, scores, isPreview }) => {
   moment.locale('es');
 
   return (
@@ -73,7 +73,7 @@ const Artwork = ({ artwork, currentUser, isPreview }) => {
               </Text>
             </Stack>
           </HStack>
-          {isPreview ? null : <Score artworkId={artwork.id} />}
+          {isPreview ? null : <Score artworkId={artwork.id} scores={scores} />}
         </HStack>
       </Box>
     </Box>

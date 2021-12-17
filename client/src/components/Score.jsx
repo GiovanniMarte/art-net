@@ -4,10 +4,9 @@ import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { updateScore } from '../firebase/firebase';
 
-const Score = ({ artworkId }) => {
+const Score = ({ artworkId, scores = [] }) => {
   const history = useHistory();
   const currentUser = useSelector(state => state.user.currentUser);
-  const scores = useSelector(state => state.scores.list);
 
   const getCurrentScores = () => scores.filter(score => score.artworkId === artworkId);
 

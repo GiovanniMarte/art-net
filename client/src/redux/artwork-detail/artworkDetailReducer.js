@@ -5,6 +5,7 @@ const INITIAL_STATE = {
   currentArtworkDetail: {
     comments: [],
   },
+  currentScores: [],
 };
 
 const artworkDetailReducer = (state = INITIAL_STATE, action) => {
@@ -19,6 +20,11 @@ const artworkDetailReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         currentArtworkDetail: { ...state.currentArtworkDetail, comments: action.payload },
+      };
+    case actions.SET_ARTWORK_DETAIL_SCORES:
+      return {
+        ...state,
+        currentScores: action.payload,
       };
     case actions.REMOVE_ARTWORK_DETAIL:
       return INITIAL_STATE;

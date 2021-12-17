@@ -11,8 +11,11 @@ import {
 } from '@chakra-ui/react';
 import { ChevronDownIcon } from '@chakra-ui/icons';
 import Artwork from './Artwork';
+import { useSelector } from 'react-redux';
 
 const GallerySection = ({ artworks, name, hasMenu, gridColumns, ...restProps }) => {
+  const scores = useSelector(state => state.scores.list);
+
   return (
     <Stack spacing={3} {...restProps}>
       <Stack spacing={3} align="center" direction="row">
@@ -35,7 +38,7 @@ const GallerySection = ({ artworks, name, hasMenu, gridColumns, ...restProps }) 
       <Divider />
       <SimpleGrid justifyItems="center" columns={gridColumns} spacing={4}>
         {artworks.map(artwork => (
-          <Artwork key={artwork.id} artwork={artwork} hasScore hasLink />
+          <Artwork key={artwork.id} artwork={artwork} scores={scores} hasScore hasLink />
         ))}
       </SimpleGrid>
     </Stack>

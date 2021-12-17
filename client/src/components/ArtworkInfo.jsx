@@ -1,10 +1,15 @@
 import { Box, Stack, chakra, Flex, Avatar, Link, useColorModeValue } from '@chakra-ui/react';
-import { CalendarIcon, EditIcon, ViewIcon } from '@chakra-ui/icons';
+import { CalendarIcon, ViewIcon } from '@chakra-ui/icons';
 import { Link as RouterLink } from 'react-router-dom';
+import Score from './Score';
 import moment from 'moment';
 import 'moment/locale/es';
+import { useSelector } from 'react-redux';
 
 const ArtworkInfo = ({ artwork }) => {
+  const scores = useSelector(state => state.artworkDetail.currentScores);
+  console.log(scores);
+
   moment.locale('es');
 
   return (
@@ -31,18 +36,11 @@ const ArtworkInfo = ({ artwork }) => {
       </chakra.p>
 
       <Stack
-        my={4}
+        my={5}
         spacing={5}
         align="start"
         direction={{ base: 'row', md: 'row', lg: 'row', xl: 'column', '2xl': 'column' }}
       >
-        <Flex alignItems="center" color={useColorModeValue('gray.700', 'gray.200')}>
-          <EditIcon />
-          <chakra.h1 fontWeight="600" px={2} fontSize="sm">
-            {artwork.score} puntos
-          </chakra.h1>
-        </Flex>
-
         <Flex alignItems="center" color={useColorModeValue('gray.700', 'gray.200')}>
           <ViewIcon />
           <chakra.h1 fontWeight="600" px={2} fontSize="sm">
@@ -58,7 +56,8 @@ const ArtworkInfo = ({ artwork }) => {
         </Flex>
       </Stack>
 
-      <Flex justifyContent="end">
+      <Flex justifyContent="space-between">
+        <Score artworkId={artwork.id} scores={scores} />
         <Link
           as={RouterLink}
           to={`/gallery/${artwork.author.id}`}

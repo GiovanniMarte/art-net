@@ -2,14 +2,15 @@ import { SimpleGrid } from '@chakra-ui/react';
 import Artwork from '../components/Artwork';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { listenArtworks, listenScore } from '../firebase/listeners';
+import { listenArtworks, listenScores } from '../firebase/listeners';
 
 const Homepage = () => {
   const artworks = useSelector(state => state.artworks.list);
+  const scores = useSelector(state => state.scores.list);
 
   useEffect(() => {
     const unsubscribeArtworks = listenArtworks();
-    const unsubscribeScores = listenScore();
+    const unsubscribeScores = listenScores();
     return () => {
       unsubscribeArtworks();
       unsubscribeScores();
@@ -23,7 +24,7 @@ const Homepage = () => {
       spacing={4}
     >
       {artworks.map(artwork => (
-        <Artwork key={artwork.id} artwork={artwork} hasScore hasLink />
+        <Artwork key={artwork.id} artwork={artwork} scores={scores} hasScore hasLink />
       ))}
     </SimpleGrid>
   );

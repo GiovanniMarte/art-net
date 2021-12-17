@@ -13,3 +13,8 @@ export const setArtworkDetailComments = comments => ({
   type: actions.SET_ARTWORK_DETAIL_COMMENTS,
   payload: comments,
 });
+
+export const setArtworkDetailScores = scores => ({
+  type: actions.SET_ARTWORK_DETAIL_SCORES,
+  payload: scores,
+});
