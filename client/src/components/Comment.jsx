@@ -1,4 +1,5 @@
-import { Stack, Text, Avatar, Badge } from '@chakra-ui/react';
+import { Stack, Text, Avatar, Badge, Link } from '@chakra-ui/react';
+import { Link as RouterLink } from 'react-router-dom';
 import moment from 'moment';
 import 'moment/locale/es';
 
@@ -10,7 +11,9 @@ const Comment = ({ artworkAuthor, comment }) => {
       <Avatar src={comment.author.profileImage} alt="Autor" />
       <Stack>
         <Stack align="center" direction="row">
-          <Text fontWeight="600">{comment.author.displayName}</Text>
+          <Link as={RouterLink} to={`/gallery/${comment.author.id}`} fontWeight="600">
+            {comment.author.displayName}
+          </Link>
           {artworkAuthor === comment.author.displayName ? (
             <Badge colorScheme="red">Autor</Badge>
           ) : null}
