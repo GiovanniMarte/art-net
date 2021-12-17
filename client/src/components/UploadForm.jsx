@@ -12,7 +12,11 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 import { useState, useEffect } from 'react';
-import { createArtworkDocument, uploadImage } from '../firebase/firebase';
+import {
+  createArtworkDocument,
+  increaseCommunityArtworksCounter,
+  uploadImage,
+} from '../firebase/firebase';
 import { useSelector, useDispatch } from 'react-redux';
 import { setTitle, setDescription, clearArtwork } from '../redux/artwork/artworkActions';
 import CheckboxGroup from './CheckboxGroup';
@@ -42,6 +46,7 @@ const UploadForm = () => {
     try {
       const imageUrl = await uploadImage('artworks', image);
       const artworkRef = await createArtworkDocument({ ...artwork, imageUrl }, currentUser);
+      increaseCommunityArtworksCounter(artwork.communities.map(artwork => artwork.id));
       redirectArtwork(artworkRef.id);
       dispatch(clearArtwork());
     } catch (error) {

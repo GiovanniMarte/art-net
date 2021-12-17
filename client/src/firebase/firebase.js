@@ -156,6 +156,25 @@ export const increaseViewCounter = async artworkId => {
   }
 };
 
+export const increaseCommunityArtworksCounter = async communities => {
+  try {
+    const response = await firestore
+      .collection('communities')
+      .where(firebase.firestore.FieldPath.documentId(), 'in', communities)
+      .get();
+
+    const batch = firestore.batch();
+
+    response.forEach(snapshot =>
+      batch.update(snapshot.ref, 'artworkCount', firebase.firestore.FieldValue.increment(1))
+    );
+
+    batch.commit();
+  } catch (error) {
+    console.error(error.message);
+  }
+};
+
 // const addCommunity = async () => {
 //   const newCommunity = {
 //     name: 'Manga',

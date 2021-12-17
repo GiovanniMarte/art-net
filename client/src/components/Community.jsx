@@ -33,7 +33,7 @@ const Community = ({ community }) => {
 
         <Stack direction="row" justify="center" spacing={6}>
           <Stack spacing={0} align="center">
-            <Text fontWeight={600}>{community.artworks}</Text>
+            <Text fontWeight={600}>{community.artworkCount}</Text>
             <Text fontSize="sm" color="gray.500">
               Obras
             </Text>

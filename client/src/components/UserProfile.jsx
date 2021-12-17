@@ -58,7 +58,8 @@ const UserProfile = ({ galleryUser, ...restProps }) => {
             Registrad@ desde {moment(user.createdAt.toDate()).fromNow()}
           </Text>
           <Text textAlign={'center'} color={useColorModeValue('gray.700', 'gray.400')} px={3}>
-            Actress, musician, songwriter and artist. PM for work inquires or tag me in your posts.
+            Artista, músico y escritor. Si te gusta mi galería no te ovides de seguirme y votar mis
+            obras!
           </Text>
         </Stack>
 
