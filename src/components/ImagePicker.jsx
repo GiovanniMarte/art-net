@@ -4,7 +4,7 @@ import { FiUpload } from 'react-icons/fi';
 import { useDispatch } from 'react-redux';
 import { setImageUrl } from '../redux/artwork/artworkActions';
 
-const ImagePicker = ({ setImage }) => {
+const ImagePicker = ({ setImage, buttonText }) => {
   const [selectedImage, setSelectedImage] = useState('No se ha seleccionado ninguna imagen');
   const dispatch = useDispatch();
 
@@ -19,7 +19,7 @@ const ImagePicker = ({ setImage }) => {
     <Stack>
       <Button leftIcon={<FiUpload />} cursor="pointer" as="label">
         <Input type="file" accept="image/*" onChange={handleChange} isRequired />
-        Elegir imagen
+        {buttonText}
       </Button>
       <Text>{selectedImage}</Text>
     </Stack>

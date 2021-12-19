@@ -15,7 +15,7 @@ const FollowButton = ({ followerId, followedId, isCommunity, isFollowing, ...res
       {...restProps}
       onClick={handleClick}
       bg={!isFollowing ? 'blue.400' : 'red.400'}
-      color={!isFollowing ? 'white' : null}
+      color="white"
       _hover={
         !isFollowing
           ? {

@@ -56,8 +56,7 @@ const UserProfile = ({ galleryUser, ...restProps }) => {
           </Text>
 
           <Text textAlign="center" color={useColorModeValue('gray.700', 'gray.400')} px={3}>
-            Artista, músico y escritor. Si te gusta mi galería no te ovides de seguirme y votar mis
-            obras!
+            {user.bio}
           </Text>
         </Stack>
 

@@ -36,13 +36,16 @@ export const createUserDocument = async (user, additionalData = {}) => {
 
   const { displayName, email } = user;
   const createdAt = new Date();
+  const bio =
+    'Bienvenido a mi galería. Si te gustan mis obras puedes seguirme y votar por las que más te gusten!';
 
   try {
     await userRef.set({
-      profileImage: '',
       displayName,
       email,
+      bio,
       createdAt,
+      profileImage: '',
       followers: [],
       ...additionalData,
     });

@@ -36,11 +36,10 @@ const CommunityDetail = () => {
     <>
       {community ? (
         <Stack spacing={3}>
-          <Stack align="center" direction="row">
+          <Stack spacing={3} align="center" direction="row">
             <IconButton
               as={RouterLink}
               to="/communities"
-              mr={3}
               size="md"
               icon={<ArrowBackIcon />}
               aria-label="Back to communities"

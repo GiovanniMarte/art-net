@@ -90,7 +90,7 @@ const UploadForm = () => {
               </RadioGroup>
             </FormControl>
             <CheckboxGroup />
-            <ImagePicker setImage={setImage} />
+            <ImagePicker buttonText="Elegir imagen" setImage={setImage} />
             <Stack pt={2}>
               <Button size="lg" {...(isLoading ? { isLoading } : null)} type="submit">
                 Subir
