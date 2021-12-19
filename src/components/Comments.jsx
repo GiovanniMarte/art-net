@@ -11,7 +11,7 @@ const Comments = ({ artwork }) => {
   }, [artwork.id]);
 
   return (
-    <Stack spacing={8} bg={useColorModeValue('white', 'gray.700')} p={5}>
+    <Stack borderRadius="md" spacing={8} bg={useColorModeValue('white', 'gray.700')} p={5}>
       <CommentsForm artworkId={artwork.id} />
       <Stack spacing={4}>
         {artwork.comments.length ? (

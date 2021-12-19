@@ -1,4 +1,4 @@
-import { Box, Stack, chakra, Flex, Avatar, Link } from '@chakra-ui/react';
+import { Box, Stack, chakra, Flex, Avatar, Link, Badge } from '@chakra-ui/react';
 import { CalendarIcon, ViewIcon } from '@chakra-ui/icons';
 import { Link as RouterLink } from 'react-router-dom';
 import Score from './Score';
@@ -15,12 +15,19 @@ const ArtworkInfo = ({ artwork }) => {
       <Flex justify={{ base: 'center', md: 'end' }} mt={-16}>
         <Avatar size="lg" src={artwork.author.profileImage || null} />
       </Flex>
-
-      <chakra.h2 fontSize={{ base: '2xl', md: '3xl' }} mt={{ base: 2, md: 0 }} fontWeight="bold">
-        {artwork.title}
-      </chakra.h2>
-      <chakra.p mt={2}>{artwork.description}</chakra.p>
-
+      <Stack>
+        <chakra.h2 fontSize={{ base: '2xl', md: '3xl' }} mt={{ base: 2, md: 0 }} fontWeight="bold">
+          {artwork.title}
+        </chakra.h2>
+        <Flex mb={2} align="start">
+          {artwork.communities.map((community, index) => (
+            <Badge key={index} mr={2} borderRadius="full" px="2" colorScheme={community.badgeColor}>
+              {community.name}
+            </Badge>
+          ))}
+        </Flex>
+        <chakra.p mt={2}>{artwork.description}</chakra.p>
+      </Stack>
       <Stack
         my={5}
         spacing={5}
@@ -33,7 +40,6 @@ const ArtworkInfo = ({ artwork }) => {
             {artwork.views} visitas
           </chakra.h1>
         </Flex>
-
         <Flex align="center">
           <CalendarIcon />
           <chakra.h1 fontWeight="600" px={2} fontSize="sm">
@@ -41,7 +47,6 @@ const ArtworkInfo = ({ artwork }) => {
           </chakra.h1>
         </Flex>
       </Stack>
-
       <Flex justify="space-between">
         <Score artworkId={artwork.id} scores={scores} />
         <Link as={RouterLink} to={`/gallery/${artwork.author.id}`} fontSize="xl">
