@@ -41,12 +41,18 @@ const UserProfile = ({ currentUser, galleryUser, ...restProps }) => {
 
       <Stack textAlign="center" flex={1} justify="space-evenly" align="center" p={4} pl={1}>
         <Stack justify="center" align="center">
-          <Heading fontSize="2xl" fontFamily="body">
-            {user.displayName}
-          </Heading>
+          <Stack direction="row">
+            <Heading fontSize="2xl" fontFamily="body">
+              {user.displayName}
+            </Heading>
+            <Text fontWeight={600} color="gray.600" fontSize="sm" mb={4}>
+              {followers.length}
+            </Text>
+          </Stack>
           <Text fontWeight={600} color="gray.600" size="sm" mb={4}>
             Registrad@ desde {moment(user.createdAt.toDate()).fromNow()}
           </Text>
+
           <Text textAlign="center" color={useColorModeValue('gray.700', 'gray.400')} px={3}>
             Artista, músico y escritor. Si te gusta mi galería no te ovides de seguirme y votar mis
             obras!
