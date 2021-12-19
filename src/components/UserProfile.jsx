@@ -10,13 +10,11 @@ import {
 import moment from 'moment';
 import FollowButton from './FollowButton';
 import 'moment/locale/es';
-import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { listenFollowersById } from '../firebase/listeners';
 
-const UserProfile = ({ galleryUser, ...restProps }) => {
+const UserProfile = ({ currentUser, galleryUser, ...restProps }) => {
   const { user, followers } = galleryUser;
-  const currentUser = useSelector(state => state.user.currentUser);
   moment.locale('es');
 
   useEffect(() => {
@@ -29,7 +27,7 @@ const UserProfile = ({ galleryUser, ...restProps }) => {
       {...restProps}
       borderWidth="1px"
       borderRadius="lg"
-      w={{ sm: '400px', md: '540px' }}
+      w={{ sm: '400px', md: '600px', lg: '600px', xl: '440px', '2xl': '540px' }}
       height={{ sm: '100%', md: '20rem' }}
       direction={{ base: 'column', md: 'row' }}
       bg={useColorModeValue('white', 'gray.900')}

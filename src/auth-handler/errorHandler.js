@@ -26,6 +26,9 @@ export const handleSignInError = error => {
             'Estás inentando acceder demasiadas veces en un periodo corto de tiempo. Inténtalo más tarde'
           )
         );
+    case 'auth/popup-closed-by-user':
+      return () =>
+        toast(errorConfig('Has cerrado la ventana emergente antes de finalizar la operación'));
     default:
       return () =>
         toast(

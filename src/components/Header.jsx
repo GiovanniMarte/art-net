@@ -79,9 +79,13 @@ const Header = () => {
 
       {isOpen ? (
         <Box pb={4} display={{ md: 'none' }}>
-          <Stack textAlign="center" as="nav" spacing={4}>
-            <NavLink route="/">Principal</NavLink>
-            <NavLink route="/communities">Comunidades</NavLink>
+          <Stack as="nav" spacing={4}>
+            <NavLink leftIcon={<AiFillHome />} route="/">
+              Principal
+            </NavLink>
+            <NavLink leftIcon={<FaUsers />} route="/communities">
+              Comunidades
+            </NavLink>
           </Stack>
         </Box>
       ) : null}

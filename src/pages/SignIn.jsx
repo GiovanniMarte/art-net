@@ -14,7 +14,7 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
-import { auth, signInWithGoogle } from '../firebase/firebase';
+import { auth, provider } from '../firebase/firebase';
 import { useState } from 'react';
 import { FcGoogle } from 'react-icons/fc';
 import Button from '../components/Button';
@@ -27,6 +27,7 @@ const INITIAL_STATE = {
 
 const SignIn = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [isGoogleLoading, setIsGoogleLoading] = useState(false);
   const [{ email, password }, setUserCredentials] = useState(INITIAL_STATE);
 
   const handleSubmit = async event => {
@@ -39,6 +40,16 @@ const SignIn = () => {
       handleSignInError(error)();
     }
     setIsLoading(false);
+  };
+
+  const handleGoogle = async () => {
+    setIsGoogleLoading(true);
+    try {
+      await auth.signInWithPopup(provider);
+    } catch (error) {
+      handleSignInError(error)();
+    }
+    setIsGoogleLoading(false);
   };
 
   const handleChange = event => {
@@ -78,16 +89,17 @@ const SignIn = () => {
             </Stack>
             <Stack spacing={5}>
               <Button
-                {...(isLoading ? { isLoading } : null)}
+                isLoading={isLoading}
+                disabled={isLoading || isGoogleLoading || !(email && password)}
                 size="lg"
                 type="submit"
-                isDisabled={!(email && password)}
               >
                 Iniciar sesión
               </Button>
               <ChakraButton
-                onClick={signInWithGoogle}
-                disabled={isLoading}
+                onClick={handleGoogle}
+                isLoading={isGoogleLoading}
+                disabled={isGoogleLoading || isLoading}
                 w="full"
                 variant="outline"
                 leftIcon={<FcGoogle />}

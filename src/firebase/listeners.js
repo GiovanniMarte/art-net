@@ -27,6 +27,7 @@ export const listenCurrentUser = () => {
 
 export const listenGalleryUser = userId => {
   return firestore.doc(`/users/${userId}`).onSnapshot(snapshot => {
+    if (!snapshot.exists) return;
     const user = { ...snapshot.data(), id: snapshot.id };
     store.dispatch(setGalleryUser(user));
   });

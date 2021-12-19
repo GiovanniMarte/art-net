@@ -24,8 +24,7 @@ export const firestore = firebase.firestore();
 
 export const storage = firebase.storage();
 
-const provider = new firebase.auth.GoogleAuthProvider();
-export const signInWithGoogle = () => auth.signInWithPopup(provider);
+export const provider = new firebase.auth.GoogleAuthProvider();
 
 // Funciones de firebase
 

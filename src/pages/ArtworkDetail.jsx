@@ -26,7 +26,7 @@ const ArtworkDetail = () => {
   }, [dispatch, artworkId]);
 
   return (
-    <Box>
+    <>
       {hasData ? (
         <Stack>
           <Stack
@@ -42,7 +42,7 @@ const ArtworkDetail = () => {
           <Comments artwork={artwork} />
         </Stack>
       ) : null}
-    </Box>
+    </>
   );
 };
 

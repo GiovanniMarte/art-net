@@ -1,4 +1,4 @@
-import { Stack, Box, Flex } from '@chakra-ui/react';
+import { Stack, Box, Text, Flex } from '@chakra-ui/react';
 import { useEffect } from 'react';
 import { listenUserArtworks, listenGalleryUser, listenScoresByIds } from '../firebase/listeners';
 import UserProfile from '../components/UserProfile';
@@ -11,9 +11,10 @@ import { removeArtworks } from '../redux/artworks/artworksActions';
 
 const Gallery = () => {
   const { userId } = useParams();
-  const artworks = useSelector(state => state.artworks.list);
-  const galleryUser = useSelector(state => state.galleryUser);
   const dispatch = useDispatch();
+  const artworks = useSelector(state => state.artworks.list);
+  const currentUser = useSelector(state => state.user.currentUser);
+  const galleryUser = useSelector(state => state.galleryUser);
 
   useEffect(() => {
     dispatch(removeArtworks());
@@ -34,8 +35,8 @@ const Gallery = () => {
   }, [artworks]);
 
   return (
-    <Flex justifyContent="center">
-      {artworks.length ? (
+    <Flex justify="center">
+      {galleryUser.user ? (
         <Stack maxW={1500} align="center" spacing={5}>
           <Stack
             direction={{
@@ -49,12 +50,18 @@ const Gallery = () => {
             spacing={10}
             align="center"
           >
-            {galleryUser.user ? <UserProfile galleryUser={galleryUser} flex={1} /> : null}
-            <Box flex={1}>
-              <Carousel artworks={artworks} />
-            </Box>
+            <UserProfile
+              currentUser={currentUser ? currentUser : null}
+              galleryUser={galleryUser}
+              flex={1}
+            />
+            {artworks.length ? (
+              <Box flex={1}>
+                <Carousel artworks={artworks} />
+              </Box>
+            ) : null}
           </Stack>
-          <Stack spacing={3}>
+          {artworks.length ? (
             <GallerySection
               artworks={artworks}
               gridColumns={{ sm: 1, md: 2, lg: 2, xl: 3, '2xl': 4 }}
@@ -62,7 +69,11 @@ const Gallery = () => {
               hasMenu
               flex={1}
             />
-          </Stack>
+          ) : (
+            <Text pt={3} as="i" color="gray.500">
+              Este usuario no ha publicado ninguna obra todavía
+            </Text>
+          )}
         </Stack>
       ) : null}
     </Flex>
