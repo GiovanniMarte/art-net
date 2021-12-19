@@ -98,6 +98,14 @@ export const listenCommunities = () => {
   });
 };
 
+export const listenCommunity = communityId => {
+  return firestore.doc(`/communities/${communityId}`).onSnapshot(snapshot => {
+    if (!snapshot.exists) return;
+    const newCommunity = { ...snapshot.data(), id: snapshot.id };
+    store.dispatch(setCommunities([newCommunity]));
+  });
+};
+
 export const listenComments = artworkId => {
   return firestore
     .collection(`/artworks/${artworkId}/comments`)

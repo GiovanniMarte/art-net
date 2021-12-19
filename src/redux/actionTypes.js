@@ -22,6 +22,7 @@ export const REMOVE_ARTWORK_DETAIL = 'REMOVE_ARTWORK_DETAIL';
 
 // Communities actions
 export const SET_COMMUNITIES = 'SET_COMMUNITIES';
+export const REMOVE_COMMUNITIES = 'REMOVE_COMMUNITIES';
 
 // User actions
 export const SET_CURRENT_USER = 'SET_CURRENT_USER';
