@@ -87,6 +87,7 @@ const SignIn = () => {
               </Button>
               <ChakraButton
                 onClick={signInWithGoogle}
+                disabled={isLoading}
                 w="full"
                 variant="outline"
                 leftIcon={<FcGoogle />}
