@@ -11,9 +11,11 @@ import moment from 'moment';
 import FollowButton from './FollowButton';
 import 'moment/locale/es';
 import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { listenFollowersById } from '../firebase/listeners';
 
-const UserProfile = ({ currentUser, galleryUser, ...restProps }) => {
+const UserProfile = ({ galleryUser, ...restProps }) => {
+  const currentUser = useSelector(state => state.user.currentUser);
   const { user, followers } = galleryUser;
   moment.locale('es');
 

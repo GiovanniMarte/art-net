@@ -13,7 +13,6 @@ const Gallery = () => {
   const { userId } = useParams();
   const dispatch = useDispatch();
   const artworks = useSelector(state => state.artworks.list);
-  const currentUser = useSelector(state => state.user.currentUser);
   const galleryUser = useSelector(state => state.galleryUser);
 
   useEffect(() => {
@@ -50,11 +49,7 @@ const Gallery = () => {
             spacing={10}
             align="center"
           >
-            <UserProfile
-              currentUser={currentUser ? currentUser : null}
-              galleryUser={galleryUser}
-              flex={1}
-            />
+            <UserProfile galleryUser={galleryUser} flex={1} />
             {artworks.length ? (
               <Box flex={1}>
                 <Carousel artworks={artworks} />
