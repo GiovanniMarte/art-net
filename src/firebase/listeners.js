@@ -54,6 +54,7 @@ export const listenUserArtworks = userId => {
 
 export const listenArtwork = artworkId => {
   return firestore.doc(`/artworks/${artworkId}`).onSnapshot(snapshot => {
+    if (!snapshot.exists) return;
     const newArtwork = { ...snapshot.data(), id: snapshot.id };
     store.dispatch(setArtworkDetail(newArtwork));
   });
