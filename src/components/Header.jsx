@@ -14,7 +14,7 @@ import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import { FiUpload } from 'react-icons/fi';
 import { useSelector } from 'react-redux';
 import AuthButtons from './AuthButtons';
-import UserIcon from './UserIcon';
+import UserMenu from './UserMenu';
 import NavLink from './NavLink';
 import { Link as RouterLink } from 'react-router-dom';
 import { AiFillHome } from 'react-icons/ai';
@@ -72,7 +72,7 @@ const Header = () => {
               Subir
             </Button>
           ) : null}
-          {currentUser ? <UserIcon /> : <AuthButtons />}
+          {currentUser ? <UserMenu /> : <AuthButtons />}
           <ColorModeSwitcher />
         </Stack>
       </Flex>

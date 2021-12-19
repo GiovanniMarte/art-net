@@ -59,7 +59,7 @@ const Artwork = ({ artwork, currentUser, scores, isPreview }) => {
         <HStack justify="space-between" mt={3} spacing={4} align="center">
           <HStack>
             <Avatar
-              src={isPreview ? currentUser.profileImg : artwork.author.profileImage}
+              src={isPreview ? currentUser.profileImage : artwork.author.profileImage}
               alt="Autor"
             />
             <Stack direction="column" spacing={0} fontSize="sm">

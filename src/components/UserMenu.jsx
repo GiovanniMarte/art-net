@@ -14,7 +14,7 @@ import { useSelector } from 'react-redux';
 import { SettingsIcon, ChatIcon, InfoIcon } from '@chakra-ui/icons';
 import { handleSignOutSuccess } from '../auth-handler/successHandler';
 
-const UserIcon = () => {
+const UserMenu = () => {
   const currentUser = useSelector(state => state.user.currentUser);
 
   const handleSignOut = () => {
@@ -46,4 +46,4 @@ const UserIcon = () => {
   );
 };
 
-export default UserIcon;
+export default UserMenu;
