@@ -39,16 +39,18 @@ const Settings = () => {
           <FormLabel>Foto de perfil</FormLabel>
           <Stack direction={['column', 'row']} spacing={6}>
             <Center>
-              <Avatar size="xl">
-                <AvatarBadge
-                  as={IconButton}
-                  size="sm"
-                  rounded="full"
-                  top="-10px"
-                  colorScheme="red"
-                  aria-label="remove Image"
-                  icon={<SmallCloseIcon />}
-                />
+              <Avatar size="xl" src={currentUser.profileImage}>
+                {currentUser.profileImage ? (
+                  <AvatarBadge
+                    as={IconButton}
+                    size="sm"
+                    rounded="full"
+                    top="-10px"
+                    colorScheme="red"
+                    aria-label="remove Image"
+                    icon={<SmallCloseIcon />}
+                  />
+                ) : null}
               </Avatar>
             </Center>
             <Center w="full">
