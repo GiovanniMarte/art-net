@@ -63,7 +63,6 @@ export const createArtworkDocument = async (artwork, user) => {
       profileImage: user.profileImage,
     },
     createdAt: new Date(),
-    isPushed: false,
     views: 0,
   };
   try {

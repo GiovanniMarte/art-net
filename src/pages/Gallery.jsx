@@ -38,7 +38,14 @@ const Gallery = () => {
       {artworks.length ? (
         <Stack maxW={1500} align="center" spacing={5}>
           <Stack
-            direction={{ sm: 'column', md: 'column', lg: 'column', xl: 'row', '2xl': 'row' }}
+            direction={{
+              base: 'column',
+              sm: 'column',
+              md: 'column',
+              lg: 'column',
+              xl: 'row',
+              '2xl': 'row',
+            }}
             spacing={10}
             align="center"
           >

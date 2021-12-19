@@ -40,7 +40,7 @@ const Carousel = ({ artworks }) => {
   };
   return (
     <Flex
-      display={{ sm: 'none', md: 'flex' }}
+      display={{ base: 'none', sm: 'none', md: 'flex' }}
       borderRadius="lg"
       boxShadow="lg"
       w={700}
