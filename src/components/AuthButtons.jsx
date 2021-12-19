@@ -3,7 +3,7 @@ import { Link as RouterLink } from 'react-router-dom';
 
 const AuthButtons = () => {
   return (
-    <Stack flex={{ base: 1, md: 0 }} direction={'row'} justify={'flex-end'} spacing={5}>
+    <Stack flex={{ base: 1, md: 0 }} direction="row" justify="flex-end" spacing={5}>
       <ChakraButton as={RouterLink} to="/signin" fontSize="sm" fontWeight={400} variant="link">
         Iniciar sesión
       </ChakraButton>

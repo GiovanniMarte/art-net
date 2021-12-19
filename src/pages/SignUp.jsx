@@ -39,7 +39,7 @@ const SignUp = () => {
       const { user } = await auth.createUserWithEmailAndPassword(email, password);
       createUserDocument(user, { displayName });
       clearCredentials();
-      handleSignUpSuccess()
+      handleSignUpSuccess();
     } catch (error) {
       handleSignUpError(error)();
     }
@@ -57,9 +57,7 @@ const SignUp = () => {
     <Flex align="center" justify="center">
       <Stack spacing={8} mx="auto" maxW="lg" py={12} px={6}>
         <Stack align="center">
-          <Heading fontSize="4xl" textAlign="center">
-            Registrarse
-          </Heading>
+          <Heading fontSize="4xl">Registrarse</Heading>
           <Text fontSize="lg" color="gray.500">
             Forma parte de nuestra gran comunidad de arte!
           </Text>

@@ -12,7 +12,7 @@ const Carousel = ({ artworks }) => {
     color: 'white',
     fontWeight: 'bold',
     fontSize: '18px',
-    transition: '0.6s ease',
+    transition: '0.3s ease',
     borderRadius: '0 3px 3px 0',
     userSelect: 'none',
     _hover: {
@@ -28,16 +28,20 @@ const Carousel = ({ artworks }) => {
   const prevSlide = () => {
     setCurrentSlide(s => (s === 0 ? slidesCount - 1 : s - 1));
   };
+
   const nextSlide = () => {
     setCurrentSlide(s => (s === slidesCount - 1 ? 0 : s + 1));
   };
+
   const setSlide = slide => {
     setCurrentSlide(slide);
   };
+
   const carouselStyle = {
     transition: 'all .5s',
     ml: `-${currentSlide * 100}%`,
   };
+
   return (
     <Flex
       display={{ base: 'none', sm: 'none', md: 'flex' }}
@@ -63,7 +67,7 @@ const Carousel = ({ artworks }) => {
               mb={3}
               color="white"
             >
-              <Heading fontSize={'2xl'} fontFamily={'body'}>
+              <Heading opacity={0.9} fontSize="2xl" fontFamily="body">
                 {artwork.title}
               </Heading>
             </Stack>

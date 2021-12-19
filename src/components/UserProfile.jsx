@@ -37,27 +37,19 @@ const UserProfile = ({ galleryUser, ...restProps }) => {
     >
       {user.profileImage ? (
         <Box flex={1}>
-          <Image
-            roundedLeft="lg"
-            objectFit="cover"
-            boxSize="100%"
-            src={
-              user.profileImage ||
-              'https://firebasestorage.googleapis.com/v0/b/art-net.appspot.com/o/profileImages%2Fdefault.png?alt=media&token=5c62a4a6-4e2c-43f5-8ca6-4bceaeb7f021'
-            }
-          />
+          <Image roundedLeft="lg" objectFit="cover" boxSize="100%" src={user.profileImage} />
         </Box>
       ) : null}
 
       <Stack textAlign="center" flex={1} justify="space-evenly" align="center" p={4} pl={1}>
         <Stack justify="center" align="center">
-          <Heading fontSize={'2xl'} fontFamily={'body'}>
+          <Heading fontSize="2xl" fontFamily="body">
             {user.displayName}
           </Heading>
-          <Text fontWeight={600} color={'gray.600'} size="sm" mb={4}>
+          <Text fontWeight={600} color="gray.600" size="sm" mb={4}>
             Registrad@ desde {moment(user.createdAt.toDate()).fromNow()}
           </Text>
-          <Text textAlign={'center'} color={useColorModeValue('gray.700', 'gray.400')} px={3}>
+          <Text textAlign="center" color={useColorModeValue('gray.700', 'gray.400')} px={3}>
             Artista, músico y escritor. Si te gusta mi galería no te ovides de seguirme y votar mis
             obras!
           </Text>
@@ -65,8 +57,8 @@ const UserProfile = ({ galleryUser, ...restProps }) => {
 
         {currentUser ? (
           currentUser.id !== user.id ? (
-            <Stack width={'100%'} mt={'2rem'} direction={'row'} padding={2} alignItems={'center'}>
-              <ChakraButton flex={1} fontSize={'sm'}>
+            <Stack width="100%" mt="2rem" direction="row" padding={2} alignItems="center">
+              <ChakraButton flex={1} fontSize="sm">
                 Chatear
               </ChakraButton>
               <FollowButton

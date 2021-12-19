@@ -14,7 +14,7 @@ const Upload = () => {
         <Heading fontSize="4xl" textAlign="center">
           Crear nueva obra
         </Heading>
-        <Text fontSize="lg" color="gray.500">
+        <Text align="center" fontSize="lg" color="gray.500">
           Introduce los datos de tu nueva obra para compartirla con los demás!
         </Text>
       </Stack>
