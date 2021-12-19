@@ -24,7 +24,7 @@ const DeleteButton = ({ title, body, deleteHandler }) => {
   return (
     <>
       <IconButton onClick={onOpen} size="xs" aria-label="Search database" icon={<DeleteIcon />} />
-      <ChakraModal blockScrollOnMount={false} isOpen={isOpen} onClose={onClose}>
+      <ChakraModal isCentered blockScrollOnMount={false} isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>{title}</ModalHeader>

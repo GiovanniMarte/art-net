@@ -18,7 +18,7 @@ const ImagePicker = ({ setImage }) => {
   return (
     <Stack>
       <Button leftIcon={<FiUpload />} cursor="pointer" as="label">
-        <Input type="file" onChange={handleChange} isRequired />
+        <Input type="file" accept="image/*" onChange={handleChange} isRequired />
         Elegir imagen
       </Button>
       <Text>{selectedImage}</Text>

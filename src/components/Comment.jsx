@@ -15,10 +15,10 @@ const Comment = ({ artworkAuthor, artworkId, comment }) => {
   const deleteArtworkComment = async () => {
     try {
       await deleteComment(artworkId, comment.id);
+      handleDeleteCommentSuccess();
     } catch (error) {
       handleDeleteCommentError();
     }
-    handleDeleteCommentSuccess();
   };
 
   return (
@@ -39,7 +39,7 @@ const Comment = ({ artworkAuthor, artworkId, comment }) => {
             currentUser.id === comment.author.id ? (
               <DeleteButton
                 deleteHandler={deleteArtworkComment}
-                title="Estas seguro?"
+                title="Estas segur@?"
                 body={`Si pulsas Aceptar se eliminará el comentario para siempre`}
               />
             ) : null
