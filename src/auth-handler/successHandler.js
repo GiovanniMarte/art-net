@@ -17,3 +17,5 @@ export const handleSignOutSuccess = () => toast(successConfig('Has cerrado sesiÃ
 
 export const handleSignUpSuccess = () =>
   toast(successConfig('Has podido registrar tu cuenta satisfactoriamente'));
+
+export const handleDeleteCommentSuccess = () => toast(successConfig('Has eliminado tu comentario'));

@@ -143,6 +143,14 @@ export const createCommentDoc = async (artworkId, user, body) => {
   }
 };
 
+export const deleteComment = async (artworkId, commentId) => {
+  try {
+    firestore.doc(`/artworks/${artworkId}/comments/${commentId}`).delete();
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 export const increaseViewCounter = async artworkId => {
   try {
     firestore

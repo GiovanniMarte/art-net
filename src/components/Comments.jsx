@@ -17,7 +17,11 @@ const Comments = ({ artwork }) => {
         {artwork.comments.length ? (
           artwork.comments.map(comment => (
             <Box key={comment.id}>
-              <Comment artworkAuthor={artwork.author.displayName} comment={comment} />
+              <Comment
+                artworkAuthor={artwork.author.displayName}
+                artworkId={artwork.id}
+                comment={comment}
+              />
               <Divider mt={4} />
             </Box>
           ))

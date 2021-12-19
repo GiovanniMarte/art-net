@@ -34,17 +34,21 @@ export const listenGalleryUser = userId => {
 };
 
 export const listenArtworks = () => {
-  return firestore.collection('artworks').onSnapshot(snapshot => {
-    const data = [];
-    snapshot.forEach(doc => data.push({ ...doc.data(), id: doc.id }));
-    store.dispatch(setArtworks(data));
-  });
+  return firestore
+    .collection('artworks')
+    .orderBy('createdAt', 'desc')
+    .onSnapshot(snapshot => {
+      const data = [];
+      snapshot.forEach(doc => data.push({ ...doc.data(), id: doc.id }));
+      store.dispatch(setArtworks(data));
+    });
 };
 
 export const listenUserArtworks = userId => {
   return firestore
     .collection('artworks')
     .where('author.id', '==', userId)
+    .orderBy('createdAt', 'desc')
     .onSnapshot(snapshot => {
       const data = [];
       snapshot.forEach(doc => data.push({ ...doc.data(), id: doc.id }));

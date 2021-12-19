@@ -55,3 +55,8 @@ export const handleSignUpError = error => {
 
 export const handleArtworkSubmitError = () =>
   toast(errorConfig('Se ha producido un error en la publicación. Por favor inténtalo más tarde'));
+
+export const handleDeleteCommentError = () =>
+  toast(
+    errorConfig('Se ha producido un error al eliminar tu comentario. Por favor inténtalo más tarde')
+  );
