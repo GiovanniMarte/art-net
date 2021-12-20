@@ -194,7 +194,7 @@ export const removeProfileImage = async userId => {
 
     batch.update(userRef, 'profileImage', '');
 
-    await updateUserImageEverywhere(userId, batch, '');
+    await updateUserDataInArtworks(batch, userId, 'author.profileImage', '');
 
     batch.commit();
   } catch (error) {
@@ -215,20 +215,12 @@ export const updateProfileImage = async (userId, image) => {
 
     batch.update(userRef, 'profileImage', imageUrl);
 
-    await updateUserImageEverywhere(userId, batch, imageUrl);
+    await updateUserDataInArtworks(batch, userId, 'author.profileImage', imageUrl);
 
     batch.commit();
   } catch (error) {
     console.error(error);
   }
-};
-
-const updateUserImageEverywhere = async (userId, batch, imageUrl) => {
-  const artworksRef = await firestore.collection('artworks').where('author.id', '==', userId).get();
-
-  artworksRef.forEach(async artworkSnap => {
-    batch.update(artworkSnap.ref, 'author.profileImage', imageUrl);
-  });
 };
 
 export const updateUserData = async (userId, settings) => {
@@ -238,15 +230,7 @@ export const updateUserData = async (userId, settings) => {
 
     if (settings.displayName) {
       batch.update(userRef, 'displayName', settings.displayName);
-
-      const artworksRef = await firestore
-        .collection('artworks')
-        .where('author.id', '==', userId)
-        .get();
-
-      artworksRef.forEach(snapshot =>
-        batch.update(snapshot.ref, 'author.displayName', settings.displayName)
-      );
+      await updateUserDataInArtworks(batch, userId, 'author.displayName', settings.displayName);
     }
 
     if (settings.bio) {
@@ -257,6 +241,23 @@ export const updateUserData = async (userId, settings) => {
   } catch (error) {
     console.error(error);
   }
+};
+
+const updateUserDataInArtworks = async (batch, userId, field, data) => {
+  const artworksRef = await firestore.collection('artworks').where('author.id', '==', userId).get();
+
+  artworksRef.forEach(async artworkSnap => {
+    batch.update(artworkSnap.ref, field, data);
+  });
+
+  const commentsRef = await firestore
+    .collectionGroup('comments')
+    .where('author.id', '==', userId)
+    .get();
+
+  commentsRef.forEach(async commentSnap => {
+    batch.update(commentSnap.ref, field, data);
+  });
 };
 
 // const addCommunity = async () => {
