@@ -185,24 +185,49 @@ export const increaseCommunityArtworksCounter = async communities => {
 };
 
 export const removeProfileImage = async userId => {
-  const imageRef = storage.ref(`profileImage/${userId}`);
+  const imageRef = storage.ref(`profileImages/${userId}`);
   try {
     await imageRef.delete();
-    await firestore.doc(`/users/${userId}`).update('profileImage', '');
+
+    const batch = firestore.batch();
+
+    const userRef = firestore.doc(`/users/${userId}`);
+
+    batch.update(userRef, 'profileImage', '');
+
+    await updateUserImageInArtworks(userId, batch, '');
+
+    batch.commit();
   } catch (error) {
     console.error(error);
   }
 };
 
-export const updateProfileImage = async (image, userId) => {
-  const imageRef = storage.ref(`profileImage/${userId}`);
+export const updateProfileImage = async (userId, image) => {
+  const imageRef = storage.ref(`profileImages/${userId}`);
   try {
     await imageRef.put(image);
+
     const imageUrl = await imageRef.getDownloadURL();
-    await firestore.doc(`/users/${userId}`).update('profileImage', imageUrl);
+
+    const batch = firestore.batch();
+
+    const userRef = firestore.doc(`/users/${userId}`);
+
+    batch.update(userRef, 'profileImage', imageUrl);
+
+    await updateUserImageInArtworks(userId, batch, imageUrl);
+
+    batch.commit();
   } catch (error) {
     console.error(error);
   }
+};
+
+const updateUserImageInArtworks = async (userId, batch, imageUrl) => {
+  const artworksRef = await firestore.collection('artworks').where('author.id', '==', userId).get();
+
+  artworksRef.forEach(snapshot => batch.update(snapshot.ref, 'author.profileImage', imageUrl));
 };
 
 export const updateUserData = async (userId, settings) => {
@@ -212,15 +237,24 @@ export const updateUserData = async (userId, settings) => {
 
     if (settings.displayName) {
       batch.update(userRef, 'displayName', settings.displayName);
+
+      const artworksRef = await firestore
+        .collection('artworks')
+        .where('author.id', '==', userId)
+        .get();
+
+      artworksRef.forEach(snapshot =>
+        batch.update(snapshot.ref, 'author.displayName', settings.displayName)
+      );
     }
 
     if (settings.bio) {
       batch.update(userRef, 'bio', settings.bio);
     }
-  
+
     batch.commit();
   } catch (error) {
-    console.error(error)
+    console.error(error);
   }
 };
 

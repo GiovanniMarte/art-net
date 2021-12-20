@@ -63,3 +63,11 @@ export const handleDeleteCommentError = () =>
 
 export const handleUpdateUserDataError = () =>
   toast(errorConfig('No se han podido actualizar tus datos. Por favor inténtalo más tarde'));
+
+export const handleUpdateImageError = () =>
+  toast(
+    errorConfig('No se han podido actualizar tu foto de perfil. Por favor inténtalo más tarde')
+  );
+
+export const handleRemoveImageError = () =>
+  toast(errorConfig('No se han podido eliminar tu foto de perfil. Por favor inténtalo más tarde'));

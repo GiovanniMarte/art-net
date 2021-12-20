@@ -1,18 +1,12 @@
 import * as actions from '../actionTypes';
 
 const INITIAL_STATE = {
-  profileImage: '',
   displayName: '',
   bio: '',
 };
 
 const settingsReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case actions.SET_SETTINGS_IMAGE_URL:
-      return {
-        ...state,
-        profileImage: action.payload,
-      };
     case actions.SET_SETTINGS_NAME:
       return {
         ...state,

@@ -22,3 +22,9 @@ export const handleDeleteCommentSuccess = () => toast(successConfig('Has elimina
 
 export const handleUpdateUserDataSuccess = () =>
   toast(successConfig('Tus datos se han actualizado correctamente'));
+
+export const handleUpdateImageSuccess = () =>
+  toast(successConfig('Tu foto de perfil se ha actualizado correctamente'));
+
+export const handleRemoveImageSuccess = () =>
+  toast(successConfig('Tu foto de perfil se ha eliminado correctamente'));

@@ -1,10 +1,5 @@
 import * as actions from '../actionTypes';
 
-export const setSettingsImageUrl = imageUrl => ({
-  type: actions.SET_IMAGE_URL,
-  payload: imageUrl,
-});
-
 export const setSettingsName = name => ({
   type: actions.SET_SETTINGS_NAME,
   payload: name,

@@ -6,6 +6,7 @@ import {
   FormLabel,
   Heading,
   Input,
+  Divider,
   Stack,
   useColorModeValue,
 } from '@chakra-ui/react';
@@ -43,6 +44,7 @@ const Settings = () => {
         as="form"
         onSubmit={handleSubmit}
         spacing={4}
+        w="full"
         maxW="md"
         bg={useColorModeValue('white', 'gray.700')}
         rounded="xl"
@@ -53,6 +55,7 @@ const Settings = () => {
         <Heading lineHeight={1.1} fontSize={{ base: '2xl', sm: '3xl' }}>
           Editar perfil
         </Heading>
+        <Divider />
         <FormControl id="profileImage">
           <FormLabel>Foto de perfil</FormLabel>
           <ImageSettings />
@@ -79,6 +82,7 @@ const Settings = () => {
         </FormControl>
         <Stack spacing={6} direction={['column', 'row']}>
           <Button
+            isDisabled={!(settings.displayName || settings.bio)}
             isLoading={isLoading}
             type="submit"
             bg={'blue.400'}

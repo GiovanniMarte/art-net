@@ -25,6 +25,7 @@ import Button from './Button';
 import { listenCommunities } from '../firebase/listeners';
 import { useHistory } from 'react-router-dom';
 import { handleArtworkSubmitError } from '../auth-handler/errorHandler';
+import { setImageUrl } from '../redux/artwork/artworkActions';
 
 const UploadForm = () => {
   const history = useHistory();
@@ -54,6 +55,8 @@ const UploadForm = () => {
     }
     setIsLoading(false);
   };
+
+  const setImageState = image => dispatch(setImageUrl(URL.createObjectURL(image)));
 
   const redirectArtwork = artworkId => history.push(`/artwork/${artworkId}`);
 
@@ -90,7 +93,13 @@ const UploadForm = () => {
               </RadioGroup>
             </FormControl>
             <CheckboxGroup />
-            <ImagePicker buttonText="Elegir imagen" setImage={setImage} isRequired />
+            <ImagePicker
+              hasFileLabel
+              setImageState={setImageState}
+              buttonText="Elegir imagen"
+              setImage={setImage}
+              isRequired
+            />
             <Stack pt={2}>
               <Button size="lg" {...(isLoading ? { isLoading } : null)} type="submit">
                 Subir
