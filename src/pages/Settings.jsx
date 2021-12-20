@@ -8,66 +8,79 @@ import {
   Input,
   Stack,
   useColorModeValue,
-  Avatar,
-  AvatarBadge,
-  IconButton,
-  Center,
 } from '@chakra-ui/react';
-import { SmallCloseIcon } from '@chakra-ui/icons';
-import ImagePicker from '../components/ImagePicker';
 import { useSelector } from 'react-redux';
+import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { setSettingsName, setSettingsBio, clearSettings } from '../redux/settings/settingsActions';
+import { updateUserData } from '../firebase/firebase';
+import ImageSettings from '../components/ImageSettings';
+import { handleUpdateUserDataSuccess } from '../auth-handler/successHandler';
+import { handleUpdateUserDataError } from '../auth-handler/errorHandler';
 
 const Settings = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const currentUser = useSelector(state => state.user.currentUser);
+  const settings = useSelector(state => state.settings);
+  const dispatch = useDispatch();
+
+  const handleSubmit = async event => {
+    event.preventDefault();
+    setIsLoading(true);
+    try {
+      await updateUserData(currentUser.id, settings);
+      dispatch(clearSettings());
+      handleUpdateUserDataSuccess();
+    } catch (error) {
+      handleUpdateUserDataError();
+    }
+    setIsLoading(false);
+  };
 
   return (
     <Flex justify="center">
       <Stack
+        as="form"
+        onSubmit={handleSubmit}
         spacing={4}
-        w={'full'}
-        maxW={'md'}
+        maxW="md"
         bg={useColorModeValue('white', 'gray.700')}
-        rounded={'xl'}
-        boxShadow={'lg'}
+        rounded="xl"
+        boxShadow="lg"
         p={6}
         my={12}
       >
         <Heading lineHeight={1.1} fontSize={{ base: '2xl', sm: '3xl' }}>
           Editar perfil
         </Heading>
-        <FormControl id="userName">
+        <FormControl id="profileImage">
           <FormLabel>Foto de perfil</FormLabel>
-          <Stack direction={['column', 'row']} spacing={6}>
-            <Center>
-              <Avatar size="xl" src={currentUser.profileImage}>
-                {currentUser.profileImage ? (
-                  <AvatarBadge
-                    as={IconButton}
-                    size="sm"
-                    rounded="full"
-                    top="-10px"
-                    colorScheme="red"
-                    aria-label="remove Image"
-                    icon={<SmallCloseIcon />}
-                  />
-                ) : null}
-              </Avatar>
-            </Center>
-            <Center w="full">
-              <ImagePicker buttonText="Cambiar foto" />
-            </Center>
-          </Stack>
+          <ImageSettings />
         </FormControl>
         <FormControl id="displayName">
           <FormLabel>Nombre</FormLabel>
-          <Input placeholder={currentUser.displayName} name="displayName" type="text" />
+          <Input
+            value={settings.displayName}
+            onChange={event => dispatch(setSettingsName(event.target.value))}
+            placeholder={currentUser.displayName}
+            name="displayName"
+            type="text"
+          />
         </FormControl>
         <FormControl id="biography">
           <FormLabel>Biografía</FormLabel>
-          <Textarea placeholder={currentUser.bio} name="biography" />
+          <Textarea
+            value={settings.bio}
+            onChange={event => dispatch(setSettingsBio(event.target.value))}
+            minH={100}
+            placeholder={currentUser.bio}
+            name="biography"
+          />
         </FormControl>
         <Stack spacing={6} direction={['column', 'row']}>
           <Button
+            isLoading={isLoading}
+            type="submit"
             bg={'blue.400'}
             color={'white'}
             w="full"

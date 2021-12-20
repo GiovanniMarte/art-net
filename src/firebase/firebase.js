@@ -123,7 +123,7 @@ export const updateFollow = async (followerId, followedId) => {
       return;
     }
 
-    firestore.collection(`/users/${followedId}/followers`).add({ id: followerId });
+    await firestore.collection(`/users/${followedId}/followers`).add({ id: followerId });
   } catch (error) {
     console.error(error.message);
   }
@@ -148,7 +148,7 @@ export const createCommentDoc = async (artworkId, user, body) => {
 
 export const deleteComment = async (artworkId, commentId) => {
   try {
-    firestore.doc(`/artworks/${artworkId}/comments/${commentId}`).delete();
+    await firestore.doc(`/artworks/${artworkId}/comments/${commentId}`).delete();
   } catch (error) {
     console.error(error);
   }
@@ -156,7 +156,7 @@ export const deleteComment = async (artworkId, commentId) => {
 
 export const increaseViewCounter = async artworkId => {
   try {
-    firestore
+    await firestore
       .collection('artworks')
       .doc(artworkId)
       .update('views', firebase.firestore.FieldValue.increment(1));
@@ -181,6 +181,46 @@ export const increaseCommunityArtworksCounter = async communities => {
     batch.commit();
   } catch (error) {
     console.error(error.message);
+  }
+};
+
+export const removeProfileImage = async userId => {
+  const imageRef = storage.ref(`profileImage/${userId}`);
+  try {
+    await imageRef.delete();
+    await firestore.doc(`/users/${userId}`).update('profileImage', '');
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const updateProfileImage = async (image, userId) => {
+  const imageRef = storage.ref(`profileImage/${userId}`);
+  try {
+    await imageRef.put(image);
+    const imageUrl = await imageRef.getDownloadURL();
+    await firestore.doc(`/users/${userId}`).update('profileImage', imageUrl);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const updateUserData = async (userId, settings) => {
+  const userRef = firestore.doc(`/users/${userId}`);
+  try {
+    const batch = firestore.batch();
+
+    if (settings.displayName) {
+      batch.update(userRef, 'displayName', settings.displayName);
+    }
+
+    if (settings.bio) {
+      batch.update(userRef, 'bio', settings.bio);
+    }
+  
+    batch.commit();
+  } catch (error) {
+    console.error(error)
   }
 };
 

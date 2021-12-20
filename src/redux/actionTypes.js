@@ -7,6 +7,12 @@ export const SET_DESCRIPTION = 'SET_DESCRIPTION';
 export const CHANGE_VISIBILITY = 'CHANGE_VISIBILITY';
 export const CLEAR_ARTWORK = 'CLEAR_ARTWORK';
 
+// Settings actions
+export const SET_SETTINGS_IMAGE_URL = 'CLEAR_ARTWORK';
+export const SET_SETTINGS_NAME = 'SET_SETTINGS_NAME';
+export const SET_SETTINGS_BIO = 'SET_SETTINGS_BIO';
+export const CLEAR_SETTINGS = 'CLEAR_SETTINGS';
+
 // Artworks actions
 export const SET_ARTWORKS = 'SET_ARTWORKS';
 export const REMOVE_ARTWORKS = 'REMOVE_ARTWORKS';

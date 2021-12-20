@@ -3,10 +3,10 @@ import { Link as RouterLink } from 'react-router-dom';
 import moment from 'moment';
 import 'moment/locale/es';
 import { useSelector } from 'react-redux';
-import DeleteButton from './DeleteButton';
 import { handleDeleteCommentError } from '../auth-handler/errorHandler';
 import { handleDeleteCommentSuccess } from '../auth-handler/successHandler';
 import { deleteComment } from '../firebase/firebase';
+import DeleteButton from './DeleteButton';
 
 const Comment = ({ artworkAuthor, artworkId, comment }) => {
   const currentUser = useSelector(state => state.user.currentUser);
@@ -37,11 +37,7 @@ const Comment = ({ artworkAuthor, artworkId, comment }) => {
           </Text>
           {currentUser ? (
             currentUser.id === comment.author.id ? (
-              <DeleteButton
-                deleteHandler={deleteArtworkComment}
-                title="Estas segur@?"
-                body={`Si pulsas Aceptar se eliminará el comentario para siempre`}
-              />
+              <DeleteButton actionHandler={deleteArtworkComment} />
             ) : null
           ) : null}
         </Stack>
