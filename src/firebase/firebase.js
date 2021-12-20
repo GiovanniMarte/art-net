@@ -46,7 +46,6 @@ export const createUserDocument = async (user, additionalData = {}) => {
       bio,
       createdAt,
       profileImage: '',
-      followers: [],
       ...additionalData,
     });
   } catch (err) {
