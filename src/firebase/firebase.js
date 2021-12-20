@@ -195,7 +195,7 @@ export const removeProfileImage = async userId => {
 
     batch.update(userRef, 'profileImage', '');
 
-    await updateUserImageInArtworks(userId, batch, '');
+    await updateUserImageEverywhere(userId, batch, '');
 
     batch.commit();
   } catch (error) {
@@ -216,7 +216,7 @@ export const updateProfileImage = async (userId, image) => {
 
     batch.update(userRef, 'profileImage', imageUrl);
 
-    await updateUserImageInArtworks(userId, batch, imageUrl);
+    await updateUserImageEverywhere(userId, batch, imageUrl);
 
     batch.commit();
   } catch (error) {
@@ -224,10 +224,12 @@ export const updateProfileImage = async (userId, image) => {
   }
 };
 
-const updateUserImageInArtworks = async (userId, batch, imageUrl) => {
+const updateUserImageEverywhere = async (userId, batch, imageUrl) => {
   const artworksRef = await firestore.collection('artworks').where('author.id', '==', userId).get();
 
-  artworksRef.forEach(snapshot => batch.update(snapshot.ref, 'author.profileImage', imageUrl));
+  artworksRef.forEach(async artworkSnap => {
+    batch.update(artworkSnap.ref, 'author.profileImage', imageUrl);
+  });
 };
 
 export const updateUserData = async (userId, settings) => {
