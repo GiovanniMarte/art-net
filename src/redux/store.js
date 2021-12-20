@@ -1,9 +1,13 @@
-import { createStore, applyMiddleware } from 'redux';
+import { configureStore } from '@reduxjs/toolkit';
 import logger from 'redux-logger';
 import rootReducer from './rootReducer';
 
-const middlewares = [logger];
+const middleware = [logger];
 
-const store = createStore(rootReducer, applyMiddleware(...middlewares));
+const store = configureStore({
+  reducer: rootReducer,
+  middleware,
+  devTools: process.env.NODE_ENV !== 'production',
+});
 
 export default store;
