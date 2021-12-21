@@ -246,7 +246,7 @@ export const updateUserData = async (userId, settings) => {
 const updateUserDataInArtworks = async (batch, userId, field, data) => {
   const artworksRef = await firestore.collection('artworks').where('author.id', '==', userId).get();
 
-  artworksRef.forEach(async artworkSnap => {
+  artworksRef.forEach(artworkSnap => {
     batch.update(artworkSnap.ref, field, data);
   });
 
@@ -255,7 +255,7 @@ const updateUserDataInArtworks = async (batch, userId, field, data) => {
     .where('author.id', '==', userId)
     .get();
 
-  commentsRef.forEach(async commentSnap => {
+  commentsRef.forEach(commentSnap => {
     batch.update(commentSnap.ref, field, data);
   });
 };
