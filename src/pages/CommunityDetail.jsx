@@ -2,7 +2,11 @@ import { SimpleGrid, Stack, Heading, Divider, IconButton } from '@chakra-ui/reac
 import Artwork from '../components/Artwork';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { listenArtworks, listenCommunity, listenScores } from '../firebase/listeners';
+import {
+  listenCommunity,
+  listenCommunityArtworks,
+  listenScoresByIds,
+} from '../firebase/listeners';
 import { useParams } from 'react-router-dom';
 import { ArrowBackIcon } from '@chakra-ui/icons';
 import { Link as RouterLink } from 'react-router-dom';
@@ -23,14 +27,22 @@ const CommunityDetail = () => {
   useEffect(() => {
     dispatch(removeCommunities());
     const unsubscribeCommunity = listenCommunity(communityId);
-    const unsubscribeArtworks = listenArtworks();
-    const unsubscribeScores = listenScores();
     return () => {
       unsubscribeCommunity();
-      unsubscribeArtworks();
-      unsubscribeScores();
     };
   }, [dispatch, communityId]);
+
+  useEffect(() => {
+    if (!community) return;
+    const unsubscribeArtworks = listenCommunityArtworks(community);
+    return () => unsubscribeArtworks();
+  }, [community]);
+
+  useEffect(() => {
+    if (!artworks) return;
+    const unsubscribeScores = listenScoresByIds(artworks.map(artwork => artwork.id));
+    return () => unsubscribeScores();
+  }, [artworks]);
 
   return (
     <>

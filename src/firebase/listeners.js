@@ -56,6 +56,18 @@ export const listenUserArtworks = userId => {
     });
 };
 
+export const listenCommunityArtworks = ({ id, name, badgeColor }) => {
+  return firestore
+    .collection('artworks')
+    .where('communities', 'array-contains', { id, name, badgeColor })
+    .orderBy('createdAt', 'desc')
+    .onSnapshot(snapshot => {
+      const data = [];
+      snapshot.forEach(doc => data.push({ ...doc.data(), id: doc.id }));
+      store.dispatch(setUserArtworks(data));
+    });
+};
+
 export const listenArtwork = artworkId => {
   return firestore.doc(`/artworks/${artworkId}`).onSnapshot(snapshot => {
     if (!snapshot.exists) return;
