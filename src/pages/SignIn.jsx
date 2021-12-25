@@ -69,7 +69,7 @@ const SignIn = () => {
           </Text>
         </Stack>
         <Box
-          minW="md"
+          w={{ base: 'xs', sm: 'md' }}
           rounded="lg"
           bg={useColorModeValue('white', 'gray.700')}
           boxShadow="lg"
