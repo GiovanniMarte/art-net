@@ -55,10 +55,10 @@ const SignUp = () => {
 
   return (
     <Flex align="center" justify="center">
-      <Stack spacing={8} mx="auto" maxW="lg" py={12} px={6}>
+      <Stack align="center" spacing={8} mx="auto" maxW="lg" py={12} px={6}>
         <Stack align="center">
           <Heading fontSize="4xl">Registrarse</Heading>
-          <Text fontSize="lg" color="gray.500">
+          <Text fontSize="lg" color="gray.500" align="center">
             Forma parte de nuestra gran comunidad de arte!
           </Text>
         </Stack>
