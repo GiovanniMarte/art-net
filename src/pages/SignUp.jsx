@@ -18,8 +18,8 @@ import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { Link as RouterLink } from 'react-router-dom';
 import { registerUser } from '../firebase/firebase';
 import Button from '../components/Button';
-import { handleSignUpError } from '../auth-handler/errorHandler';
-import { handleSignUpSuccess } from '../auth-handler/successHandler';
+import { handleSignUpError } from '../notifications/errorHandler';
+import { handleSignUpSuccess } from '../notifications/successHandler';
 import useForm from '../hooks/useForm';
 
 const INITIAL_STATE = {

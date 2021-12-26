@@ -8,8 +8,11 @@ import { removeProfileImage, updateProfileImage } from '../../firebase/firebase'
 import {
   handleRemoveImageSuccess,
   handleUpdateUserDataSuccess,
-} from '../../auth-handler/successHandler';
-import { handleRemoveImageError, handleUpdateUserDataError } from '../../auth-handler/errorHandler';
+} from '../../notifications/successHandler';
+import {
+  handleRemoveImageError,
+  handleUpdateUserDataError,
+} from '../../notifications/errorHandler';
 
 const ImageSettings = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();

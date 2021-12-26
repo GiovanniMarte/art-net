@@ -3,8 +3,8 @@ import { Link as RouterLink } from 'react-router-dom';
 import moment from 'moment';
 import 'moment/locale/es';
 import { useSelector } from 'react-redux';
-import { handleDeleteCommentError } from '../../auth-handler/errorHandler';
-import { handleDeleteCommentSuccess } from '../../auth-handler/successHandler';
+import { handleDeleteCommentError } from '../../notifications/errorHandler';
+import { handleDeleteCommentSuccess } from '../../notifications/successHandler';
 import { deleteComment } from '../../firebase/firebase';
 import DeleteButton from './DeleteButton';
 

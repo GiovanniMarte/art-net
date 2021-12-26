@@ -24,7 +24,7 @@ import ImagePicker from '../ImagePicker';
 import Button from '../Button';
 import { listenCommunities } from '../../firebase/listeners';
 import { useHistory } from 'react-router-dom';
-import { handleArtworkSubmitError } from '../../auth-handler/errorHandler';
+import { handleArtworkSubmitError } from '../../notifications/errorHandler';
 import { setImageUrl } from '../../redux/artwork/artworkActions';
 
 const UploadForm = () => {

@@ -18,7 +18,7 @@ import { auth, provider } from '../firebase/firebase';
 import { useState } from 'react';
 import { FcGoogle } from 'react-icons/fc';
 import Button from '../components/Button';
-import { handleSignInError } from '../auth-handler/errorHandler';
+import { handleSignInError } from '../notifications/errorHandler';
 import useForm from '../hooks/useForm';
 
 const INITIAL_STATE = {

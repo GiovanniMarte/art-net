@@ -12,7 +12,7 @@ import { auth } from '../../firebase/firebase';
 import { Link as RouterLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { SettingsIcon, ChatIcon, InfoIcon } from '@chakra-ui/icons';
-import { handleSignOutSuccess } from '../../auth-handler/successHandler';
+import { handleSignOutSuccess } from '../../notifications/successHandler';
 
 const UserMenu = () => {
   const currentUser = useSelector(state => state.user.currentUser);

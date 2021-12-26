@@ -16,8 +16,8 @@ import { useDispatch } from 'react-redux';
 import { setSettingsName, setSettingsBio, clearSettings } from '../redux/settings/settingsActions';
 import { updateUserData } from '../firebase/firebase';
 import ImageSettings from '../components/settings/ImageSettings';
-import { handleUpdateUserDataSuccess } from '../auth-handler/successHandler';
-import { handleUpdateUserDataError } from '../auth-handler/errorHandler';
+import { handleUpdateUserDataSuccess } from '../notifications/successHandler';
+import { handleUpdateUserDataError } from '../notifications/errorHandler';
 
 const Settings = () => {
   const [isLoading, setIsLoading] = useState(false);
