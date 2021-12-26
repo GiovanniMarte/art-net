@@ -14,7 +14,6 @@ import { setGalleryUser, setGalleryUserFollowers } from '../redux/galleryUser/ga
 export const listenCurrentUser = () => {
   return auth.onAuthStateChanged(async user => {
     if (user) {
-      console.log(user);
       firestore.doc(`/users/${user.uid}`).onSnapshot(snapshot => {
         store.dispatch(setCurrentUser({ ...snapshot.data(), id: snapshot.id }));
       });
