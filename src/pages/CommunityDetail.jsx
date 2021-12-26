@@ -2,11 +2,7 @@ import { SimpleGrid, Stack, Heading, Divider, IconButton } from '@chakra-ui/reac
 import Artwork from '../components/Artwork';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import {
-  listenCommunity,
-  listenCommunityArtworks,
-  listenScoresByIds,
-} from '../firebase/listeners';
+import { listenCommunity, listenCommunityArtworks, listenScoresByIds } from '../firebase/listeners';
 import { useParams } from 'react-router-dom';
 import { ArrowBackIcon } from '@chakra-ui/icons';
 import { Link as RouterLink } from 'react-router-dom';
@@ -17,7 +13,7 @@ const CommunityDetail = () => {
   const { communityId } = useParams();
   const artworks = useSelector(state => state.artworks.list);
   const scores = useSelector(state => state.scores.list);
-  const community = useSelector(state => state.communities.list[0]);
+  const community = useSelector(state => state.communities.list);
   const dispatch = useDispatch();
 
   const communityArtworks = artworks.filter(artwork =>
@@ -33,20 +29,20 @@ const CommunityDetail = () => {
   }, [dispatch, communityId]);
 
   useEffect(() => {
-    if (!community) return;
-    const unsubscribeArtworks = listenCommunityArtworks(community);
+    if (!community.length) return;
+    const unsubscribeArtworks = listenCommunityArtworks(community[0]);
     return () => unsubscribeArtworks();
   }, [community]);
 
   useEffect(() => {
-    if (!artworks) return;
+    if (!artworks.length) return;
     const unsubscribeScores = listenScoresByIds(artworks.map(artwork => artwork.id));
     return () => unsubscribeScores();
   }, [artworks]);
 
   return (
     <>
-      {community ? (
+      {community.length ? (
         <Stack spacing={3}>
           <Stack spacing={3} align="center" direction="row">
             <IconButton
@@ -57,7 +53,7 @@ const CommunityDetail = () => {
               aria-label="Back to communities"
             />
             <Heading as="h2" size="xl" mr={3}>
-              {community.name}
+              {community[0].name}
             </Heading>
           </Stack>
           <Divider />
