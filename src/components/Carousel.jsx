@@ -2,6 +2,9 @@ import { Flex, Text, Stack, Image, Box, HStack, Heading } from '@chakra-ui/react
 import { useState } from 'react';
 
 const Carousel = ({ artworks }) => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const slidesCount = artworks.length;
+
   const arrowStyles = {
     cursor: 'pointer',
     pos: 'absolute',
@@ -21,9 +24,10 @@ const Carousel = ({ artworks }) => {
     },
   };
 
-  const [currentSlide, setCurrentSlide] = useState(0);
-
-  const slidesCount = artworks.length;
+  const carouselStyle = {
+    transition: 'all .5s',
+    ml: `-${currentSlide * 100}%`,
+  };
 
   const prevSlide = () => {
     setCurrentSlide(s => (s === 0 ? slidesCount - 1 : s - 1));
@@ -35,11 +39,6 @@ const Carousel = ({ artworks }) => {
 
   const setSlide = slide => {
     setCurrentSlide(slide);
-  };
-
-  const carouselStyle = {
-    transition: 'all .5s',
-    ml: `-${currentSlide * 100}%`,
   };
 
   return (

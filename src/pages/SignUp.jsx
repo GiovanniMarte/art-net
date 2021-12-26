@@ -20,7 +20,7 @@ import { registerUser } from '../firebase/firebase';
 import Button from '../components/Button';
 import { handleSignUpError } from '../auth-handler/errorHandler';
 import { handleSignUpSuccess } from '../auth-handler/successHandler';
-import { useEffect } from 'react';
+import useForm from '../hooks/useForm';
 
 const INITIAL_STATE = {
   displayName: '',
@@ -31,7 +31,7 @@ const INITIAL_STATE = {
 const SignUp = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const [{ displayName, email, password }, setUserCredentials] = useState(INITIAL_STATE);
+  const [{ displayName, email, password }, handleChange] = useForm(INITIAL_STATE);
 
   const handleSubmit = async event => {
     event.preventDefault();
@@ -44,15 +44,6 @@ const SignUp = () => {
     }
     setIsLoading(false);
   };
-
-  const handleChange = event => {
-    const { name, value } = event.target;
-    setUserCredentials(currentCredentials => ({ ...currentCredentials, [name]: value }));
-  };
-
-  useEffect(() => {
-    return () => setUserCredentials({ ...INITIAL_STATE });
-  }, []);
 
   return (
     <Flex align="center" justify="center">

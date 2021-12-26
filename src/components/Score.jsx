@@ -8,12 +8,12 @@ const Score = ({ artworkId, scores = [] }) => {
   const history = useHistory();
   const currentUser = useSelector(state => state.user.currentUser);
 
-  const getCurrentScores = () => scores.filter(score => score.artworkId === artworkId);
+  const getArtworkScores = () => scores.filter(score => score.artworkId === artworkId);
 
-  const getArtworkScore = () => getCurrentScores().reduce((accum, score) => accum + score.value, 0);
+  const getTotalScore = () => getArtworkScores().reduce((accum, score) => accum + score.value, 0);
 
   const getUserScore = () => {
-    const score = getCurrentScores().find(score => score.userId === currentUser.id);
+    const score = getArtworkScores().find(score => score.userId === currentUser.id);
     return score ? score.value : 0;
   };
 
@@ -51,7 +51,7 @@ const Score = ({ artworkId, scores = [] }) => {
         }}
       />
       <Text fontSize="md" fontWeight={500}>
-        {getArtworkScore()}
+        {getTotalScore()}
       </Text>
       <ChevronDownIcon
         userSelect="none"

@@ -15,10 +15,11 @@ import {
 } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
 import { auth, provider } from '../firebase/firebase';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { FcGoogle } from 'react-icons/fc';
 import Button from '../components/Button';
 import { handleSignInError } from '../auth-handler/errorHandler';
+import useForm from '../hooks/useForm';
 
 const INITIAL_STATE = {
   email: '',
@@ -26,9 +27,9 @@ const INITIAL_STATE = {
 };
 
 const SignIn = () => {
+  const [{ email, password }, handleChange] = useForm(INITIAL_STATE);
   const [isLoading, setIsLoading] = useState(false);
   const [isGoogleLoading, setIsGoogleLoading] = useState(false);
-  const [{ email, password }, setUserCredentials] = useState(INITIAL_STATE);
 
   const handleSubmit = async event => {
     event.preventDefault();
@@ -41,7 +42,7 @@ const SignIn = () => {
     setIsLoading(false);
   };
 
-  const handleGoogle = async () => {
+  const handleGoogleClick = async () => {
     setIsGoogleLoading(true);
     try {
       await auth.signInWithPopup(provider);
@@ -50,15 +51,6 @@ const SignIn = () => {
     }
     setIsGoogleLoading(false);
   };
-
-  const handleChange = event => {
-    const { name, value } = event.target;
-    setUserCredentials(currentCredentials => ({ ...currentCredentials, [name]: value }));
-  };
-
-  useEffect(() => {
-    return () => setUserCredentials({ ...INITIAL_STATE });
-  }, []);
 
   return (
     <Flex align="center" justify="center">
@@ -98,7 +90,7 @@ const SignIn = () => {
                 Iniciar sesión
               </Button>
               <ChakraButton
-                onClick={handleGoogle}
+                onClick={handleGoogleClick}
                 isLoading={isGoogleLoading}
                 disabled={isGoogleLoading || isLoading}
                 w="full"
