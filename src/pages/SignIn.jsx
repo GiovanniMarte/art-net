@@ -15,7 +15,7 @@ import {
 } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
 import { auth, provider } from '../firebase/firebase';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FcGoogle } from 'react-icons/fc';
 import Button from '../components/Button';
 import { handleSignInError } from '../auth-handler/errorHandler';
@@ -35,7 +35,6 @@ const SignIn = () => {
     setIsLoading(true);
     try {
       await auth.signInWithEmailAndPassword(email, password);
-      clearCredentials();
     } catch (error) {
       handleSignInError(error)();
     }
@@ -57,7 +56,9 @@ const SignIn = () => {
     setUserCredentials(currentCredentials => ({ ...currentCredentials, [name]: value }));
   };
 
-  const clearCredentials = () => setUserCredentials({ ...INITIAL_STATE });
+  useEffect(() => {
+    return () => setUserCredentials({ ...INITIAL_STATE });
+  }, []);
 
   return (
     <Flex align="center" justify="center">
