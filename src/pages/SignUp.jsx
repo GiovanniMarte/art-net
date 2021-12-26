@@ -16,10 +16,11 @@ import {
 import { useState } from 'react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { Link as RouterLink } from 'react-router-dom';
-import { auth, createUserDocument } from '../firebase/firebase';
+import { registerUser } from '../firebase/firebase';
 import Button from '../components/Button';
 import { handleSignUpError } from '../auth-handler/errorHandler';
 import { handleSignUpSuccess } from '../auth-handler/successHandler';
+import { useEffect } from 'react';
 
 const INITIAL_STATE = {
   displayName: '',
@@ -36,9 +37,7 @@ const SignUp = () => {
     event.preventDefault();
     setIsLoading(true);
     try {
-      const { user } = await auth.createUserWithEmailAndPassword(email, password);
-      createUserDocument(user, { displayName });
-      clearCredentials();
+      await registerUser(displayName, email, password);
       handleSignUpSuccess();
     } catch (error) {
       handleSignUpError(error)();
@@ -51,7 +50,9 @@ const SignUp = () => {
     setUserCredentials(currentCredentials => ({ ...currentCredentials, [name]: value }));
   };
 
-  const clearCredentials = () => setUserCredentials({ ...INITIAL_STATE });
+  useEffect(() => {
+    return () => setUserCredentials({ ...INITIAL_STATE });
+  }, []);
 
   return (
     <Flex align="center" justify="center">

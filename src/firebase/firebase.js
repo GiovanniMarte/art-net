@@ -28,13 +28,16 @@ export const provider = new firebase.auth.GoogleAuthProvider();
 
 // Funciones de firebase
 
-export const createUserDocument = async (user, additionalData = {}) => {
+export const registerUser = async (displayName, email, password) => {
+  const { user } = await auth.createUserWithEmailAndPassword(email, password);
+  await user.updateProfile({ displayName });
+  await createUserDocument(user, displayName);
+};
+
+export const createUserDocument = async (user, displayName) => {
   const userRef = firestore.doc(`/users/${user.uid}`);
-  const userSnap = await userRef.get();
 
-  if (userSnap.exists) return userRef;
-
-  const { displayName, email } = user;
+  const { email } = user;
   const createdAt = new Date();
   const bio =
     'Bienvenido a mi galería. Si te gustan mis obras puedes seguirme y votar por las que más te gusten!';
@@ -46,7 +49,6 @@ export const createUserDocument = async (user, additionalData = {}) => {
       bio,
       createdAt,
       profileImage: '',
-      ...additionalData,
     });
   } catch (err) {
     console.error(err.message);

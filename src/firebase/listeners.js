@@ -1,6 +1,5 @@
 import store from '../redux/store';
 import { firestore, auth } from './firebase';
-import { createUserDocument } from './firebase';
 import { setArtworks, setUserArtworks } from '../redux/artworks/artworksActions';
 import { setScores } from '../redux/scores/scoresActions';
 import { setCommunities } from '../redux/communities/communitiesActions';
@@ -15,8 +14,8 @@ import { setGalleryUser, setGalleryUserFollowers } from '../redux/galleryUser/ga
 export const listenCurrentUser = () => {
   return auth.onAuthStateChanged(async user => {
     if (user) {
-      const userRef = await createUserDocument(user);
-      userRef.onSnapshot(snapshot => {
+      console.log(user);
+      firestore.doc(`/users/${user.uid}`).onSnapshot(snapshot => {
         store.dispatch(setCurrentUser({ ...snapshot.data(), id: snapshot.id }));
       });
     } else {
