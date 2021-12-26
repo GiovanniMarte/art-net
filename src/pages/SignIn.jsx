@@ -14,7 +14,8 @@ import {
   useColorModeValue,
 } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
-import { auth, provider } from '../firebase/firebase';
+import { auth } from '../firebase/firebase';
+import { provider } from '../firebase/firebase';
 import { useState } from 'react';
 import { FcGoogle } from 'react-icons/fc';
 import Button from '../components/Button';

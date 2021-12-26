@@ -7,7 +7,7 @@ import Comments from '../components/comments/Comments';
 import ArtworkInfo from '../components/artwork/ArtworkInfo';
 import { removeArtworkDetail } from '../redux/artwork-detail/artworkDetailActions';
 import { listenArtwork, listenScoresById } from '../firebase/listeners';
-import { increaseViewCounter } from '../firebase/firebase';
+import { increaseViewCounter } from '../firebase/functions';
 
 const ArtworkDetail = () => {
   const { artworkId } = useParams();

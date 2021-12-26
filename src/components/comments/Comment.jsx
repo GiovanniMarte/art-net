@@ -5,7 +5,7 @@ import 'moment/locale/es';
 import { useSelector } from 'react-redux';
 import { handleDeleteCommentError } from '../../notifications/errorHandler';
 import { handleDeleteCommentSuccess } from '../../notifications/successHandler';
-import { deleteComment } from '../../firebase/firebase';
+import { deleteComment } from '../../firebase/functions';
 import DeleteButton from './DeleteButton';
 
 const Comment = ({ artworkAuthor, artworkId, comment }) => {

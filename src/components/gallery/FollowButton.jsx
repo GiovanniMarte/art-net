@@ -1,4 +1,4 @@
-import { updateFollow } from '../../firebase/firebase';
+import { updateFollow } from '../../firebase/functions';
 import { Button as ChakraButton } from '@chakra-ui/react';
 
 const FollowButton = ({ followerId, followedId, isCommunity, isFollowing, ...restProps }) => {

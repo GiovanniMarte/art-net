@@ -16,7 +16,7 @@ import {
   createArtworkDocument,
   increaseCommunityArtworksCounter,
   uploadImage,
-} from '../../firebase/firebase';
+} from '../../firebase/functions';
 import { useSelector, useDispatch } from 'react-redux';
 import { setTitle, setDescription, clearArtwork } from '../../redux/artwork/artworkActions';
 import CheckboxGroup from './CheckboxGroup';

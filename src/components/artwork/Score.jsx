@@ -2,7 +2,7 @@ import { Text, HStack } from '@chakra-ui/react';
 import { ChevronUpIcon, ChevronDownIcon } from '@chakra-ui/icons';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { updateScore } from '../../firebase/firebase';
+import { updateScore } from '../../firebase/functions';
 
 const Score = ({ artworkId, scores = [] }) => {
   const history = useHistory();

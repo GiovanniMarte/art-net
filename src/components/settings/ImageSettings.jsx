@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import Modal from '../Modal';
 import ImagePicker from '../ImagePicker';
 import { SmallCloseIcon } from '@chakra-ui/icons';
-import { removeProfileImage, updateProfileImage } from '../../firebase/firebase';
+import { removeProfileImage, updateProfileImage } from '../../firebase/functions';
 import {
   handleRemoveImageSuccess,
   handleUpdateUserDataSuccess,

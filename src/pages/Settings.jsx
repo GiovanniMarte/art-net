@@ -14,7 +14,7 @@ import { useSelector } from 'react-redux';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { setSettingsName, setSettingsBio, clearSettings } from '../redux/settings/settingsActions';
-import { updateUserData } from '../firebase/firebase';
+import { updateUserData } from '../firebase/functions';
 import ImageSettings from '../components/settings/ImageSettings';
 import { handleUpdateUserDataSuccess } from '../notifications/successHandler';
 import { handleUpdateUserDataError } from '../notifications/errorHandler';
