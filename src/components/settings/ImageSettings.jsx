@@ -1,15 +1,15 @@
 import { Box, Stack, Avatar, AvatarBadge, IconButton, useDisclosure } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import Modal from '../components/Modal';
-import ImagePicker from '../components/ImagePicker';
+import Modal from '../Modal';
+import ImagePicker from '../ImagePicker';
 import { SmallCloseIcon } from '@chakra-ui/icons';
-import { removeProfileImage, updateProfileImage } from '../firebase/firebase';
+import { removeProfileImage, updateProfileImage } from '../../firebase/firebase';
 import {
   handleRemoveImageSuccess,
   handleUpdateUserDataSuccess,
-} from '../auth-handler/successHandler';
-import { handleRemoveImageError, handleUpdateUserDataError } from '../auth-handler/errorHandler';
+} from '../../auth-handler/successHandler';
+import { handleRemoveImageError, handleUpdateUserDataError } from '../../auth-handler/errorHandler';
 
 const ImageSettings = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();

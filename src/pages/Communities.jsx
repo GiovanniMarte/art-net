@@ -1,4 +1,4 @@
-import Community from '../components/Community';
+import Community from '../components/community/Community';
 import { SimpleGrid } from '@chakra-ui/react';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';

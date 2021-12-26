@@ -16,16 +16,16 @@ import {
   createArtworkDocument,
   increaseCommunityArtworksCounter,
   uploadImage,
-} from '../firebase/firebase';
+} from '../../firebase/firebase';
 import { useSelector, useDispatch } from 'react-redux';
-import { setTitle, setDescription, clearArtwork } from '../redux/artwork/artworkActions';
+import { setTitle, setDescription, clearArtwork } from '../../redux/artwork/artworkActions';
 import CheckboxGroup from './CheckboxGroup';
-import ImagePicker from './ImagePicker';
-import Button from './Button';
-import { listenCommunities } from '../firebase/listeners';
+import ImagePicker from '../ImagePicker';
+import Button from '../Button';
+import { listenCommunities } from '../../firebase/listeners';
 import { useHistory } from 'react-router-dom';
-import { handleArtworkSubmitError } from '../auth-handler/errorHandler';
-import { setImageUrl } from '../redux/artwork/artworkActions';
+import { handleArtworkSubmitError } from '../../auth-handler/errorHandler';
+import { setImageUrl } from '../../redux/artwork/artworkActions';
 
 const UploadForm = () => {
   const history = useHistory();

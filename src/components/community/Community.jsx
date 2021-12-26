@@ -1,5 +1,5 @@
 import { Heading, Box, Text, Stack, useColorModeValue } from '@chakra-ui/react';
-import ImageFade from './ImageFade';
+import ImageFade from '../ImageFade';
 import { Link } from 'react-router-dom';
 
 const Community = ({ community }) => {

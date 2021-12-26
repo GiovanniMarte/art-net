@@ -1,7 +1,7 @@
 import { Flex, Stack, Heading, Text } from '@chakra-ui/react';
 
-import Artwork from '../components/Artwork';
-import UploadForm from '../components/UploadForm';
+import Artwork from '../components/artwork/Artwork';
+import UploadForm from '../components/upload/UploadForm';
 import { useSelector } from 'react-redux';
 
 const Upload = () => {

@@ -1,5 +1,5 @@
 import { SimpleGrid } from '@chakra-ui/react';
-import Artwork from '../components/Artwork';
+import Artwork from '../components/artwork/Artwork';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { listenArtworks, listenScores } from '../firebase/listeners';

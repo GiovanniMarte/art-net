@@ -12,7 +12,7 @@ import FollowButton from './FollowButton';
 import 'moment/locale/es';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { listenFollowersById } from '../firebase/listeners';
+import { listenFollowersById } from '../../firebase/listeners';
 
 const UserProfile = ({ galleryUser, ...restProps }) => {
   const currentUser = useSelector(state => state.user.currentUser);

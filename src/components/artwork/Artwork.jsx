@@ -10,8 +10,8 @@ import {
 } from '@chakra-ui/react';
 import Score from './Score';
 import { Link } from 'react-router-dom';
-import ConditionalWrapper from './ConditionalWrapper';
-import ImageFade from './ImageFade';
+import ConditionalWrapper from '../ConditionalWrapper';
+import ImageFade from '../ImageFade';
 import moment from 'moment';
 import 'moment/locale/es';
 

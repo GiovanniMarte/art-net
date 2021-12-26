@@ -1,6 +1,6 @@
 import { IconButton, useDisclosure } from '@chakra-ui/react';
 import { DeleteIcon } from '@chakra-ui/icons';
-import Modal from './Modal';
+import Modal from '../Modal';
 
 const DeleteButton = ({ actionHandler }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();

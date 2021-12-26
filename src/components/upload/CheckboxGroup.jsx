@@ -1,5 +1,5 @@
 import { FormControl, FormLabel, Checkbox } from '@chakra-ui/react';
-import { addCommunity, removeCommunity } from '../redux/artwork/artworkActions';
+import { addCommunity, removeCommunity } from '../../redux/artwork/artworkActions';
 import { useSelector, useDispatch } from 'react-redux';
 
 const CheckboxGroup = () => {

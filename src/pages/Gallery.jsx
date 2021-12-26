@@ -1,10 +1,10 @@
 import { Stack, Box, Text, Flex } from '@chakra-ui/react';
 import { useEffect } from 'react';
 import { listenUserArtworks, listenGalleryUser, listenScoresByIds } from '../firebase/listeners';
-import UserProfile from '../components/UserProfile';
-import GallerySection from '../components/GallerySection';
+import UserProfile from '../components/gallery/UserProfile';
+import GallerySection from '../components/gallery/GallerySection';
 import { useDispatch, useSelector } from 'react-redux';
-import Carousel from '../components/Carousel';
+import Carousel from '../components/gallery/Carousel';
 import { useParams } from 'react-router-dom';
 import { removeGalleryUser } from '../redux/galleryUser/galleryUserActions';
 import { removeArtworks } from '../redux/artworks/artworksActions';

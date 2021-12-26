@@ -1,7 +1,7 @@
 import { FormControl, Heading, Stack, Textarea, Button as ChakraButton } from '@chakra-ui/react';
-import Button from './Button';
+import Button from '../Button';
 import { useState } from 'react';
-import { createCommentDoc } from '../firebase/firebase';
+import { createCommentDoc } from '../../firebase/firebase';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 

@@ -11,7 +11,7 @@ import {
   Button as ChakraButton,
 } from '@chakra-ui/react';
 import { ChevronDownIcon } from '@chakra-ui/icons';
-import Artwork from './Artwork';
+import Artwork from '../artwork/Artwork';
 import { useSelector } from 'react-redux';
 
 const GallerySection = ({ artworks, name = 'Section', hasMenu, gridColumns, ...restProps }) => {

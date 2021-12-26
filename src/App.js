@@ -1,7 +1,7 @@
 import './App.css';
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
-import Header from './components/Header';
-import Footer from './components/Footer';
+import Header from './components/header/Header';
+import Footer from './components/footer/Footer';
 import Homepage from './pages/Homepage';
 import Communities from './pages/Communities';
 import ArtworkDetail from './pages/ArtworkDetail';

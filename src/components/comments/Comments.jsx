@@ -2,7 +2,7 @@ import { Stack, Box, Divider, Text, useColorModeValue } from '@chakra-ui/react';
 import CommentsForm from './CommentsForm';
 import Comment from './Comment';
 import { useEffect } from 'react';
-import { listenComments } from '../firebase/listeners';
+import { listenComments } from '../../firebase/listeners';
 
 const Comments = ({ artwork }) => {
   useEffect(() => {
