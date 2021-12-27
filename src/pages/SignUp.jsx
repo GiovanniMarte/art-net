@@ -47,20 +47,14 @@ const SignUp = () => {
 
   return (
     <Flex align="center" justify="center">
-      <Stack align="center" spacing={8} mx="auto" maxW="lg" py={12} px={6}>
+      <Stack mx="auto" maxW="lg" spacing={8} py={10} px={{ base: 0, sm: 8 }}>
         <Stack align="center">
           <Heading fontSize="4xl">Registrarse</Heading>
           <Text fontSize="lg" color="gray.500" align="center">
-            Forma parte de nuestra gran comunidad de arte!
+            Regístrate ahora y forma parte de nuestra gran comunidad de arte!
           </Text>
         </Stack>
-        <Box
-          w={{ base: 'xs', sm: 'md' }}
-          rounded="lg"
-          bg={useColorModeValue('white', 'gray.700')}
-          boxShadow="lg"
-          p={8}
-        >
+        <Box rounded="lg" bg={useColorModeValue('white', 'gray.700')} boxShadow="lg" p={8}>
           <Stack as="form" onSubmit={handleSubmit} spacing={4}>
             <FormControl id="displayName" isRequired>
               <FormLabel>Nombre</FormLabel>

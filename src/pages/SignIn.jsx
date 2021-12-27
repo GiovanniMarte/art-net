@@ -55,20 +55,14 @@ const SignIn = () => {
 
   return (
     <Flex align="center" justify="center">
-      <Stack align="center" spacing={8} mx="auto" maxW="lg" py={12} px={6}>
+      <Stack mx="auto" maxW="lg" spacing={8} py={10} px={{ base: 0, sm: 8 }}>
         <Stack align="center">
           <Heading fontSize="4xl">Iniciar sesión </Heading>
           <Text fontSize="lg" color="gray.500" align="center">
             Introduce tu dirección de correo electrónico y contraseña para acceder a tu cuenta
           </Text>
         </Stack>
-        <Box
-          w={{ base: 'xs', sm: 'md' }}
-          rounded="lg"
-          bg={useColorModeValue('white', 'gray.700')}
-          boxShadow="lg"
-          p={8}
-        >
+        <Box rounded="lg" bg={useColorModeValue('white', 'gray.700')} boxShadow="lg" p={8}>
           <Stack as="form" onSubmit={handleSubmit} spacing={4}>
             <FormControl id="email" isRequired>
               <FormLabel>Correo electrónico</FormLabel>
