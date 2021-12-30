@@ -39,3 +39,4 @@ export const REMOVE_GALLERY_USER = 'REMOVE_GALLERY_USER';
 
 // Scores actions
 export const SET_SCORES = 'SET_SCORES';
+export const REMOVE_SCORES = 'REMOVE_SCORES';

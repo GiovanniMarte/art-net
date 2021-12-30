@@ -11,6 +11,7 @@ const CheckboxGroup = () => {
     const { checked, value } = event.target;
     const { id, name, badgeColor } = communities.find(community => community.id === value);
     const communityPreview = { id, name, badgeColor };
+
     if (checked) {
       dispatch(addCommunity(communityPreview));
     } else {

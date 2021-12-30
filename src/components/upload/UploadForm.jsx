@@ -26,6 +26,7 @@ import { listenCommunities } from '../../firebase/listeners';
 import { useHistory } from 'react-router-dom';
 import { handleArtworkSubmitError } from '../../notifications/errorHandler';
 import { setImageUrl } from '../../redux/artwork/artworkActions';
+import { removeCommunities } from '../../redux/communities/communitiesActions';
 
 const UploadForm = () => {
   const history = useHistory();
@@ -38,8 +39,11 @@ const UploadForm = () => {
 
   useEffect(() => {
     const unsubscribe = listenCommunities();
-    return () => unsubscribe();
-  }, []);
+    return () => {
+      dispatch(removeCommunities());
+      unsubscribe();
+    };
+  }, [dispatch]);
 
   const handleSubmit = async event => {
     event.preventDefault();

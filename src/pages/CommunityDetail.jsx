@@ -1,29 +1,32 @@
 import { SimpleGrid, Stack, Heading, Divider, IconButton } from '@chakra-ui/react';
 import Artwork from '../components/artwork/Artwork';
 import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { listenCommunity, listenCommunityArtworks, listenScoresByIds } from '../firebase/listeners';
 import { useParams } from 'react-router-dom';
 import { ArrowBackIcon } from '@chakra-ui/icons';
 import { Link as RouterLink } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 import { removeCommunities } from '../redux/communities/communitiesActions';
+import { removeArtworks } from '../redux/artworks/artworksActions';
+import { removeScores } from '../redux/scores/scoresActions';
 
 const CommunityDetail = () => {
   const { communityId } = useParams();
+  const dispatch = useDispatch();
   const artworks = useSelector(state => state.artworks.list);
   const scores = useSelector(state => state.scores.list);
   const community = useSelector(state => state.communities.list);
-  const dispatch = useDispatch();
 
   const communityArtworks = artworks.filter(artwork =>
     artwork.communities.find(community => community.id === communityId)
   );
 
   useEffect(() => {
-    dispatch(removeCommunities());
     const unsubscribeCommunity = listenCommunity(communityId);
     return () => {
+      dispatch(removeCommunities());
+      dispatch(removeArtworks());
+      dispatch(removeScores());
       unsubscribeCommunity();
     };
   }, [dispatch, communityId]);
@@ -31,12 +34,14 @@ const CommunityDetail = () => {
   useEffect(() => {
     if (!community.length) return;
     const unsubscribeArtworks = listenCommunityArtworks(community[0]);
+    console.log('Listening artworks');
     return () => unsubscribeArtworks();
   }, [community]);
 
   useEffect(() => {
     if (!artworks.length) return;
     const unsubscribeScores = listenScoresByIds(artworks.map(artwork => artwork.id));
+    console.log('Listening scores');
     return () => unsubscribeScores();
   }, [artworks]);
 

@@ -8,6 +8,7 @@ import Carousel from '../components/gallery/Carousel';
 import { useParams } from 'react-router-dom';
 import { removeGalleryUser } from '../redux/galleryUser/galleryUserActions';
 import { removeArtworks } from '../redux/artworks/artworksActions';
+import { removeScores } from '../redux/scores/scoresActions';
 
 const Gallery = () => {
   const { userId } = useParams();
@@ -21,6 +22,8 @@ const Gallery = () => {
     const unsubscribeUserArtworks = listenUserArtworks(userId);
     return () => {
       dispatch(removeGalleryUser());
+      dispatch(removeArtworks());
+      dispatch(removeScores());
       unsubscribeUser();
       unsubscribeUserArtworks();
     };

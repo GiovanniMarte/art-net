@@ -1,16 +1,21 @@
 import Community from '../components/community/Community';
 import { SimpleGrid } from '@chakra-ui/react';
 import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { listenCommunities } from '../firebase/listeners';
+import { removeCommunities } from '../redux/communities/communitiesActions';
 
 const Communities = () => {
   const communities = useSelector(state => state.communities.list);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const unsubscribe = listenCommunities();
-    return () => unsubscribe();
-  }, []);
+    return () => {
+      dispatch(removeCommunities());
+      unsubscribe();
+    };
+  }, [dispatch]);
 
   return (
     <SimpleGrid
