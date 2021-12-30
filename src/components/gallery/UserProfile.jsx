@@ -7,17 +7,16 @@ import {
   Text,
   useColorModeValue,
 } from '@chakra-ui/react';
-import moment from 'moment';
 import FollowButton from './FollowButton';
-import 'moment/locale/es';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { listenFollowersById } from '../../firebase/listeners';
+import formatDistanceToNow from 'date-fns/formatDistanceToNow';
+import es from 'date-fns/esm/locale/es';
 
 const UserProfile = ({ galleryUser, ...restProps }) => {
   const currentUser = useSelector(state => state.user.currentUser);
   const { user, followers } = galleryUser;
-  moment.locale('es');
 
   useEffect(() => {
     const unsubscribe = listenFollowersById(user.id);
@@ -52,7 +51,11 @@ const UserProfile = ({ galleryUser, ...restProps }) => {
             </Text>
           </Stack>
           <Text fontWeight={600} color="gray.600" size="sm" mb={4}>
-            Registrad@ desde {moment(user.createdAt.toDate()).fromNow()}
+            Registrad@ desde{' '}
+            {formatDistanceToNow(user.createdAt.toDate(), {
+              addSuffix: true,
+              locale: es,
+            })}
           </Text>
 
           <Text textAlign="center" color={useColorModeValue('gray.700', 'gray.400')} px={3}>

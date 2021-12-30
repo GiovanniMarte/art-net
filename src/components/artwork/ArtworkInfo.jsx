@@ -1,14 +1,13 @@
 import { Box, Stack, chakra, Flex, Avatar, Link, Badge } from '@chakra-ui/react';
 import { CalendarIcon, ViewIcon } from '@chakra-ui/icons';
 import { Link as RouterLink } from 'react-router-dom';
-import Score from './Score';
-import moment from 'moment';
-import 'moment/locale/es';
 import { useSelector } from 'react-redux';
+import Score from './Score';
+import { format } from 'date-fns';
+import es from 'date-fns/esm/locale/es';
 
 const ArtworkInfo = ({ artwork }) => {
   const scores = useSelector(state => state.artworkDetail.currentScores);
-  moment.locale('es');
 
   return (
     <Box width={{ base: 'full', md: 'full', lg: 'full', xl: 'md', '2xl': 'md' }} py={4} px={8}>
@@ -43,7 +42,7 @@ const ArtworkInfo = ({ artwork }) => {
         <Flex align="center">
           <CalendarIcon />
           <chakra.h1 fontWeight="600" px={2} fontSize="sm">
-            {moment(artwork.createdAt.toDate()).format('DD MMM YYYY')}
+            {format(artwork.createdAt.toDate(), 'dd LLL yyyy', { locale: es })}
           </chakra.h1>
         </Flex>
       </Stack>

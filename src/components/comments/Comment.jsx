@@ -1,16 +1,15 @@
 import { Stack, Text, Avatar, Badge, Link } from '@chakra-ui/react';
 import { Link as RouterLink } from 'react-router-dom';
-import moment from 'moment';
-import 'moment/locale/es';
 import { useSelector } from 'react-redux';
 import { handleDeleteCommentError } from '../../notifications/errorHandler';
 import { handleDeleteCommentSuccess } from '../../notifications/successHandler';
 import { deleteComment } from '../../firebase/functions';
 import DeleteButton from './DeleteButton';
+import formatDistanceToNow from 'date-fns/formatDistanceToNow/index';
+import es from 'date-fns/esm/locale/es';
 
 const Comment = ({ artworkAuthor, artworkId, comment }) => {
   const currentUser = useSelector(state => state.user.currentUser);
-  moment.locale('es');
 
   const deleteArtworkComment = async () => {
     try {
@@ -33,7 +32,10 @@ const Comment = ({ artworkAuthor, artworkId, comment }) => {
             <Badge colorScheme="red">Autor</Badge>
           ) : null}
           <Text color="gray.500" fontSize="sm">
-            {moment(comment.createdAt.toDate()).fromNow()}
+            {formatDistanceToNow(comment.createdAt.toDate(), {
+              addSuffix: true,
+              locale: es,
+            })}
           </Text>
           {currentUser ? (
             currentUser.id === comment.author.id ? (

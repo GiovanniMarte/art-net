@@ -12,12 +12,10 @@ import Score from './Score';
 import { Link } from 'react-router-dom';
 import ConditionalWrapper from '../ConditionalWrapper';
 import ImageFade from '../ImageFade';
-import moment from 'moment';
-import 'moment/locale/es';
+import formatDistanceToNow from 'date-fns/formatDistanceToNow';
+import es from 'date-fns/esm/locale/es';
 
 const Artwork = ({ artwork, currentUser, scores, isPreview }) => {
-  moment.locale('es');
-
   return (
     <Box
       bg={useColorModeValue('white', 'gray.900')}
@@ -68,8 +66,11 @@ const Artwork = ({ artwork, currentUser, scores, isPreview }) => {
               </Text>
               <Text color="gray.500">
                 {artwork.createdAt
-                  ? moment(artwork.createdAt.toDate()).fromNow()
-                  : moment(new Date()).fromNow()}
+                  ? formatDistanceToNow(artwork.createdAt.toDate(), {
+                      addSuffix: true,
+                      locale: es,
+                    })
+                  : formatDistanceToNow(new Date(), { addSuffix: true, locale: es })}
               </Text>
             </Stack>
           </HStack>
