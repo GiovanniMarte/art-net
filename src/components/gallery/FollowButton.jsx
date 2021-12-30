@@ -6,7 +6,7 @@ const FollowButton = ({ followerId, followedId, isCommunity, isFollowing, ...res
     try {
       await updateFollow(followerId, followedId, isCommunity);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 

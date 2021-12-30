@@ -34,14 +34,12 @@ const CommunityDetail = () => {
   useEffect(() => {
     if (!community.length) return;
     const unsubscribeArtworks = listenCommunityArtworks(community[0]);
-    console.log('Listening artworks');
     return () => unsubscribeArtworks();
   }, [community]);
 
   useEffect(() => {
     if (!artworks.length) return;
     const unsubscribeScores = listenScoresByIds(artworks.map(artwork => artwork.id));
-    console.log('Listening scores');
     return () => unsubscribeScores();
   }, [artworks]);
 
