@@ -51,6 +51,25 @@ export const createArtworkDocument = async (artwork, user) => {
   return artwork;
 };
 
+export const deleteArtwork = async artwork => {
+  const imageRef = storage.refFromURL(artwork.imageUrl);
+  try {
+    await imageRef.delete();
+
+    const batch = firestore.batch();
+
+    const artworkRef = firestore.doc(`/artworks/${artwork.id}`);
+    batch.delete(artworkRef);
+
+    const communities = artwork.communities.map(community => community.id);
+    await updateCommunityArtworksCounter(communities, 'artworkCount', -1, batch);
+
+    batch.commit();
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 export const uploadImage = async (route, image, name = uuidv4()) => {
   const imageRef = storage.ref(`${route}/${name}`);
   try {
@@ -140,17 +159,23 @@ export const increaseViewCounter = async artworkId => {
   }
 };
 
-export const increaseCommunityArtworksCounter = async communities => {
+export const updateCommunityArtworksCounter = async (
+  communities,
+  updateValue,
+  batch = firestore.batch()
+) => {
   try {
-    const response = await firestore
+    const communitiesRef = await firestore
       .collection('communities')
       .where(firebase.firestore.FieldPath.documentId(), 'in', communities)
       .get();
 
-    const batch = firestore.batch();
-
-    response.forEach(snapshot =>
-      batch.update(snapshot.ref, 'artworkCount', firebase.firestore.FieldValue.increment(1))
+    communitiesRef.forEach(snapshot =>
+      batch.update(
+        snapshot.ref,
+        'artworkCount',
+        firebase.firestore.FieldValue.increment(updateValue)
+      )
     );
 
     batch.commit();
@@ -167,7 +192,6 @@ export const removeProfileImage = async userId => {
     const batch = firestore.batch();
 
     const userRef = firestore.doc(`/users/${userId}`);
-
     batch.update(userRef, 'profileImage', '');
 
     await updateUserDataInArtworks(batch, userId, 'author.profileImage', '');
@@ -188,7 +212,6 @@ export const updateProfileImage = async (userId, image) => {
     const batch = firestore.batch();
 
     const userRef = firestore.doc(`/users/${userId}`);
-
     batch.update(userRef, 'profileImage', imageUrl);
 
     await updateUserDataInArtworks(batch, userId, 'author.profileImage', imageUrl);

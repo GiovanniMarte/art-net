@@ -14,7 +14,7 @@ import {
 import { useState, useEffect } from 'react';
 import {
   createArtworkDocument,
-  increaseCommunityArtworksCounter,
+  updateCommunityArtworksCounter,
   uploadImage,
 } from '../../firebase/functions';
 import { useSelector, useDispatch } from 'react-redux';
@@ -51,7 +51,10 @@ const UploadForm = () => {
     try {
       const imageUrl = await uploadImage('artworks', image);
       const artworkRef = await createArtworkDocument({ ...artwork, imageUrl }, currentUser);
-      increaseCommunityArtworksCounter(artwork.communities.map(artwork => artwork.id));
+
+      const communities = artwork.communities.map(community => community.id);
+      updateCommunityArtworksCounter(communities, 1);
+
       redirectArtwork(artworkRef.id);
       dispatch(clearArtwork());
     } catch (error) {
