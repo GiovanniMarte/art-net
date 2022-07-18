@@ -62,7 +62,7 @@ export const deleteArtwork = async artwork => {
     batch.delete(artworkRef);
 
     const communities = artwork.communities.map(community => community.id);
-    await updateCommunityArtworksCounter(communities, 'artworkCount', -1, batch);
+    await updateCommunityArtworksCounter(communities, -1, batch);
 
     batch.commit();
   } catch (error) {
