@@ -11,7 +11,7 @@ import es from 'date-fns/esm/locale/es';
 const Comment = ({ artworkAuthor, artworkId, comment }) => {
   const currentUser = useSelector(state => state.user.currentUser);
 
-  const deleteArtworkComment = async () => {
+  const deleteCommentHandler = async () => {
     try {
       await deleteComment(artworkId, comment.id);
       handleDeleteCommentSuccess();
@@ -28,20 +28,19 @@ const Comment = ({ artworkAuthor, artworkId, comment }) => {
           <Link as={RouterLink} to={`/gallery/${comment.author.id}`} fontWeight="600">
             {comment.author.displayName}
           </Link>
-          {artworkAuthor === comment.author.displayName ? (
-            <Badge colorScheme="red">Autor</Badge>
-          ) : null}
+          {artworkAuthor === comment.author.displayName && <Badge colorScheme="red">Autor</Badge>}
           <Text color="gray.500" fontSize="sm">
             {formatDistanceToNow(comment.createdAt.toDate(), {
               addSuffix: true,
               locale: es,
             })}
           </Text>
-          {currentUser ? (
-            currentUser.id === comment.author.id ? (
-              <DeleteButton actionHandler={deleteArtworkComment} />
-            ) : null
-          ) : null}
+          {currentUser && currentUser.id === comment.author.id && (
+            <DeleteButton
+              actionHandler={deleteCommentHandler}
+              message={`Si pulsas Aceptar se eliminará el comentario para siempre`}
+            />
+          )}
         </Stack>
         <Text>{comment.body}</Text>
       </Stack>

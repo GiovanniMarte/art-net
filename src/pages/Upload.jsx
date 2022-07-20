@@ -6,7 +6,6 @@ import { useSelector } from 'react-redux';
 
 const Upload = () => {
   const artwork = useSelector(state => state.artwork);
-  const currentUser = useSelector(state => state.user.currentUser);
 
   return (
     <Flex align="center" justify="center" direction="column">
@@ -23,7 +22,7 @@ const Upload = () => {
         align="center"
       >
         <UploadForm />
-        <Artwork isPreview artwork={artwork} currentUser={currentUser} />
+        <Artwork isPreview artwork={artwork} />
       </Stack>
     </Flex>
   );

@@ -20,6 +20,8 @@ export const handleSignUpSuccess = () =>
 
 export const handleDeleteCommentSuccess = () => toast(successConfig('Has eliminado tu comentario'));
 
+export const handleDeleteArtworkSuccess = () => toast(successConfig('Has eliminado tu obra'));
+
 export const handleUpdateUserDataSuccess = () =>
   toast(successConfig('Tus datos se han actualizado correctamente'));
 

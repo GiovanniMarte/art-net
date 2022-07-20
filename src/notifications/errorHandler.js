@@ -61,6 +61,9 @@ export const handleDeleteCommentError = () =>
     errorConfig('Se ha producido un error al eliminar tu comentario. Por favor inténtalo más tarde')
   );
 
+export const handleDeleteArtworkError = () =>
+  toast(errorConfig('Se ha producido un error al eliminar tu obra. Por favor inténtalo más tarde'));
+
 export const handleUpdateUserDataError = () =>
   toast(errorConfig('No se han podido actualizar tus datos. Por favor inténtalo más tarde'));
 

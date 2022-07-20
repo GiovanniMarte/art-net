@@ -54,8 +54,6 @@ export const createArtworkDocument = async (artwork, user) => {
 export const deleteArtwork = async artwork => {
   const imageRef = storage.refFromURL(artwork.imageUrl);
   try {
-    await imageRef.delete();
-
     const batch = firestore.batch();
 
     const artworkRef = firestore.doc(`/artworks/${artwork.id}`);
@@ -64,9 +62,9 @@ export const deleteArtwork = async artwork => {
     const communities = artwork.communities.map(community => community.id);
     await updateCommunityArtworksCounter(communities, -1, batch);
 
-    batch.commit();
+    await imageRef.delete();
   } catch (error) {
-    console.error(error);
+    console.error(error.message);
   }
 };
 
