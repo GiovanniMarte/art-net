@@ -2,9 +2,6 @@ import {
   Flex,
   Box,
   FormControl,
-  HStack,
-  Radio,
-  RadioGroup,
   FormLabel,
   Input,
   Stack,
@@ -17,15 +14,20 @@ import {
   updateCommunityArtworksCounter,
   uploadImage,
 } from '../../firebase/functions';
+import { listenCommunities } from '../../firebase/listeners';
 import { useSelector, useDispatch } from 'react-redux';
-import { setTitle, setDescription, clearArtwork } from '../../redux/artwork/artworkActions';
+import {
+  setTitle,
+  setDescription,
+  clearArtwork,
+  setImageUrl,
+} from '../../redux/artwork/artworkActions';
 import CheckboxGroup from './CheckboxGroup';
+import VisibilityControl from './VisibilityControl';
 import ImagePicker from '../ImagePicker';
 import Button from '../Button';
-import { listenCommunities } from '../../firebase/listeners';
 import { useHistory } from 'react-router-dom';
 import { handleArtworkSubmitError } from '../../notifications/errorHandler';
-import { setImageUrl } from '../../redux/artwork/artworkActions';
 import { removeCommunities } from '../../redux/communities/communitiesActions';
 
 const UploadForm = () => {
@@ -90,15 +92,7 @@ const UploadForm = () => {
                 placeholder="Introduce la descripción de la obra"
               />
             </FormControl>
-            <FormControl id="visibility" isRequired>
-              <FormLabel as="legend">Visibilidad</FormLabel>
-              <RadioGroup defaultValue="public">
-                <HStack spacing="24px">
-                  <Radio value="public">Público</Radio>
-                  <Radio value="private">Privado</Radio>
-                </HStack>
-              </RadioGroup>
-            </FormControl>
+            <VisibilityControl />
             <CheckboxGroup />
             <ImagePicker
               hasFileLabel

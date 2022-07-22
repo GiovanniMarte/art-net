@@ -22,10 +22,15 @@ const ImagePicker = ({
   return (
     <Stack>
       <Button {...restProps} leftIcon={<FiUpload />} cursor="pointer" as="label">
-        <Input type="file" accept="image/*" onChange={handleChange} isRequired={isRequired} />
+        <Input
+          hidden
+          type="file"
+          accept="image/*"
+          onChange={handleChange}
+          isRequired={isRequired}
+        />
         {buttonText}
       </Button>
-
       {hasFileLabel ? <Text>{selectedImage}</Text> : null}
     </Stack>
   );

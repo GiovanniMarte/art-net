@@ -20,7 +20,7 @@ const CheckboxGroup = () => {
   };
 
   return (
-    <FormControl id="visibility">
+    <FormControl id="visibility" isRequired>
       <FormLabel as="legend">Comunidades</FormLabel>
       {communities.map(community => (
         <Checkbox
